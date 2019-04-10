@@ -24,11 +24,12 @@ const provider = new firebase.auth.GoogleAuthProvider();
 auth.onAuthStateChanged(function (user) {
     if (user) {
         // User is signed in.
+        console.log('user logged in')
         // console.log(user)
 
     } else {
         // No user is signed in.
-        console.log('logged out');
+        console.log('user logged out');
     }
 });
 
@@ -56,7 +57,6 @@ function signInWithGoogle() {
 // Does not seem to signout??
 function signOutUser() {
     auth.signOut().then(function () {
-        console.log('Signed out successfully');
         // Sign-out successful.
     }).catch(function (error) {
         console.log(error);
@@ -104,7 +104,7 @@ function submitMessage(payload) {
 function _monitorChat() {
     chat.on('child_added', function(snap) {
         const message = snap.val()
-        addMessage(message);
+        _addMessage(message);
     }, function(error) {
         console.log(error)
     });
