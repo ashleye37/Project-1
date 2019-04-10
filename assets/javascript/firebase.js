@@ -11,7 +11,8 @@ const config = {
 firebase.initializeApp(config);
 
 const auth = firebase.auth();
-const database = firebase.database()
+const database = firebase.database();
+const users = database.ref('/users')
 let user;
 
 const provider = new firebase.auth.GoogleAuthProvider();
@@ -20,29 +21,38 @@ const provider = new firebase.auth.GoogleAuthProvider();
 auth.onAuthStateChanged(function(user) {
     if (user) {
       // User is signed in.
-    //   console.log('signed in', user)
+      users.child("78LeTE60xjRtlOM1iQ2KbiytMUm1").once('value', function(snap) {
+          console.log(snap.val())
+      })
+      users.child("iWYC9DWG57PhPG3WtceepzKN0O82").once('value', function(snap) {
+        console.log(snap.val())
+    })
+   
     } else {
+
       // No user is signed in.
     }
   });
+
+function createProfile() {
+    users.child(user.uid).update({
+        name: user.displayName,
+        id: user.uid
+    })
+}
 
 function signInWithGoogle() {
     auth.signInWithPopup(provider).then(function (result) {
         // This gives you a Google Access Token. You can use it to access the Google API.
         const token = result.credential.accessToken;
+
         // console.log(token)
         // The signed-in user info.
         user = result.user;
-        console.log(user)
-        // console.log(auth.currentUser)
-        user.updateProfile({
-            
-        })
-       
-
-
+        createProfile()
+        
     }).catch(function (error) {
-        console.log(eror)
+        console.log(error)
         // Handle Errors here.
         const errorCode = error.code;
         const errorMessage = error.message;
@@ -55,10 +65,13 @@ function signInWithGoogle() {
 }
 
 
+// Does not seem to signout??
 function signOutUser() {
     auth.signOut().then(function () {
+        console.log('Signed out successfully')
         // Sign-out successful.
     }).catch(function (error) {
+        console.log(error)
         // An error happened.
     });
 }
