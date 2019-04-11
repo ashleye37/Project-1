@@ -1,26 +1,207 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TripBot</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300" type="text/css" /> -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300" type="text/css" />
     <link rel="stylesheet" href="assets/css/style.css">
-
-    <title>Trip Bot</title>
 </head>
 
 <body>
-  <h1>Welcome to TripBot!</h1>
-    <div id = "logBtn">
-        <button type="button" class="btn btn-light">Register</button>
-        <button id="login" type="button" class="btn btn-info">Log in</button>
+
+    <div class="container" id="nav">
+        <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">TripBot</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only"></span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Dashboard</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Log Out</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
     </div>
+
+    <!--Initial Startup Page- requires user to login-->
+    <div class="container" id="startup">
+        <h1>Welcome to TripBot!</h1>
+        <div id="logBtn">
+            <button id="login" type="button" class="btn btn-light">Log in</button>
+            <button id="logout" type="button" class="btn btn-info">Log out</button>
+        </div>
+    </div>
+
+    <!-- Might need later, but only logging in now instead of signup -->
+    <!-- Login Page; where the user will input their log in information-->
+    <!-- <div class="container">
+        <div class="card">
+            <legend>Log In</legend>
+            <form>
+                <div class="form-group">
+                    <label for="frequency">Email</label>
+                    <input type="text" class="form-control" >
+                </div>
+                <div class="form-group">
+                    <label for="frequency">Password</label>
+                    <input type="text" class="form-control" >
+                </div>
+
+                <button type="submit" class="btn btn-dark">Submit</button>
+            </form>
+        </div>
+    </div> -->
+
+    <!--Know Your Destination Page- asks user if they know where they want to travel-->
+    <div class="container" id="knowDestination">
+
+        <div class="jumbotron">
+            <h3 class="display-4 text-center">Do you know where you want to travel?</h3>
+            <hr class="my-4">
+            <a id="know-where-yes" class="btn btn-primary btn-lg center-align" href="#" role="button">Yes</a>
+            <a id="know-where-no" class="btn btn-primary btn-lg center-align" href="#" role="button">No</a>
+        </div>
+
+    </div>
+
+    <!-- Questionaire Page -->
+    </div id="questionnaire">
+
+    <!-- div to store questions in -->
+    <div class="container" id="container">
+        <div class="title">Questions:</div>
+        <div id="questions"></div>
+        <button type="button" class="btn btn-dark">Submit</button>
+    </div>
+    <!-- submit button for questionnaire-->
+
+    </div>
+
+    <!--Page with trip suggestions where user can select-->
+    <div class="container" id="landing">
+
+        <!--recommended cards-->
+        <div id="suggestion">
+            <div id="row">
+                <div class="title">Suggested Places</div>
+                <div class="card" style="width: 10rem;">
+                    <img src="assets/images/1.jpg" class="card-img-top">
+                    <div class="card-body">
+                        <p class="card-text">Greece</p>
+                    </div>
+                </div>
+
+                <div class="card" style="width: 10rem;">
+                    <img src="assets/images/2.jpg" class="card-img-top">
+                    <div class="card-body">
+                        <p class="card-text">Places</p>
+                    </div>
+                </div>
+
+                <div class="card" style="width: 10rem;">
+                    <img src="assets/images/3.jpg" class="card-img-top">
+                    <div class="card-body">
+                        <p class="card-text">Places</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!--suggested activities and hotels-->
+        <div id="activities"></div>
+        <div id="hotels"></div>
+
+        <!--Users selected cards-->
+        <div id="selectedCard">
+            <div id="row">
+                <div class="title2">Your Choices</div>
+                <div class="card" style="width: 10rem;">
+
+                    <img src="assets/images/3.jpg" class="card-img-top">
+                    <div class="card-body">
+                        <p class="card-text">Places</p>
+                        <button class="remove">✘</button>
+                    </div>
+                </div>
+
+                <div class="card" style="width: 10rem;">
+                    <img src="assets/images/2.jpg" class="card-img-top">
+                    <div class="card-body">
+                        <p class="card-text">Places</p>
+                        <button class="remove">✘</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!--save buttons-->
+        <div class="btns">
+            <button type="button" class="btn btn-info" id="save">Save</button>
+        </div>
+    </div>
+
+    <!--User Dashboard - where their profile and itinerary is saved-->
+    <!--saved cards-->
+    <div class="container" id="dashboard">
+        <div id="suggestion">
+            <div id="row">
+                <div class="title">Your Itinerary</div>
+                <div class="card2" style="width: 15rem;">
+                    <img src="assets/images/1.jpg" class="card-img-top">
+                    <div class="card-body">
+                        <p class="card-text">Greece</p>
+                    </div>
+                </div>
+
+                <div class="card2" style="width: 15rem;">
+                    <img src="assets/images/2.jpg" class="card-img-top">
+                    <div class="card-body">
+                        <p class="card-text">Places</p>
+                        <p class="card-text">Seattle - Portland - San Francisco</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!--when user click the saved card, it will appear the itinerary-->
+        <div id="useritinerary">
+            <div class="title2">Details are here</div>
+        </div>
+    </div>
+
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -41,6 +222,7 @@
     <!-- Source JS -->
     <script src="./assets/javascript/app.js"></script>
     <script src="./assets/javascript/firebase.js"></script>
+
 </body>
 
 </html>

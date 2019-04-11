@@ -87,7 +87,7 @@ function _createProfile() {
 }
 
 // Update user profile
-function updateProfile(userId, payload) {
+function updateProfileInDB(userId, payload) {
     users.child(userId).once('value', function (snap) {
         if (snap.exists()) {
             users.child(userId).update(payload);
