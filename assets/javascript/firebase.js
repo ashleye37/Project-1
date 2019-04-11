@@ -19,6 +19,10 @@ const chat = database.ref('/chat');
 // Log in provider
 const provider = new firebase.auth.GoogleAuthProvider();
 
+// Allows user to select account on login
+provider.setCustomParameters({
+    prompt: 'select_account'
+});
 
 const userDecisionState = {
     UNDECIDED: 'UNDECIDED',
@@ -34,7 +38,9 @@ auth.onAuthStateChanged(function (user) {
 
         _displayLoggedInUI();
         _monitorChat();
-        
+        showLocationCards();
+
+        // Displays content based on user decision state
         users.child(user.uid).once('value', function (snap) {
             const userInfo = snap.val();
             if (userInfo.decision === userDecisionState.UNDECIDED) {
@@ -77,6 +83,7 @@ function signInWithGoogle() {
 function signOutUser() {
     auth.signOut().then(function () {
         // Sign-out successful.
+        console.log('logged out successfully')
     }).catch(function (error) {
         console.log(error);
         // An error happened.
@@ -87,7 +94,8 @@ function signOutUser() {
 function _createProfile() {
     users.child(auth.currentUser.uid).update({
         name: auth.currentUser.displayName,
-        id: auth.currentUser.uid
+        id: auth.currentUser.uid,
+        decision: userDecisionState.UNDECIDED,
     });
 }
 
@@ -107,18 +115,33 @@ function addLocationCardToDB(payload) {
     locationCards.push(
         {
             location: payload.location,
-            hotel: payload.hotel,
-            activity: payload.activity,
+            // hotel: payload.hotel,
+            // activity: payload.activity,
             name: auth.currentUser.displayName,
             userId: auth.currentUser.uid,
         },
         function (error) {
             console.log(error);
-        });
+        }
+    );
+}
+
+function showLocationCards() {
+    locationCards.orderByChild('userId').equalTo(auth.currentUser.uid).on('value', function (snapshot) {
+        let cards = snapshot.val();
+        if (!cards) {
+            cards = [];
+        }
+        _showLocationCards(Object.values(cards));
+    });
 }
 
 function deleteAllLocationCardsForUser() {
-
+    locationCards.orderByChild('userId').equalTo(auth.currentUser.uid).once('value', function (snapshot) {
+        const updates = {};
+        snapshot.forEach(child => updates[child.key] = null);
+        locationCards.update(updates);
+    });
 }
 
 // Add message to DB
@@ -134,7 +157,7 @@ function addMessageToDB(message) {
 
 // Observes changes in chat
 function _monitorChat() {
-    chat.on('child_added', function (snap) {
+    chat.limitToFirst(50).on('child_added', function (snap) {
         const message = snap.val();
         _displayMessage(message);
     }, function (error) {

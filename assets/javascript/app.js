@@ -40,12 +40,19 @@ function updateProfile(profileObj) {
     updateProfileInDB(profileObj)
 }
 
+// Retrieves all location cards for user and displays them. Automatically called on login
+function _showLocationCards(locationCards) {
+    locationCards.forEach(card => {
+        console.log(card)
+    })
+}
+
 // Create locationCard and send it to DB from client
 function createLocationCard() {
     // TODO get locationCard info from client
     // TODO know what info wil be on card
 
-    addLocationCardToDB(locationCard)
+    addLocationCardToDB(locationCard);
 }
 
 // Show initial decision (I know where I want to go / No idea) div
