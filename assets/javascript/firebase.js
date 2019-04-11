@@ -24,8 +24,18 @@ const provider = new firebase.auth.GoogleAuthProvider();
 auth.onAuthStateChanged(function (user) {
     if (user) {
         // User is signed in.
-        console.log('user logged in')
-        // console.log(user)
+        console.log('user logged in');
+        _monitorChat();
+
+
+        // redirectToHomePage()
+        users.child(user.uid).once('value', function(snap) {
+            if (snap.val().ready) {
+                console.log('ready')
+            }
+        })
+
+
 
     } else {
         // No user is signed in.
@@ -71,6 +81,7 @@ function _createProfile() {
     });
 }
 
+// Update user profile
 function updateProfile(userId, payload) {
     users.child(userId).once('value', function (snap) {
         if (snap.exists()) {
@@ -81,7 +92,8 @@ function updateProfile(userId, payload) {
     });
 }
 
-function updateLocationCard(payload) {
+// Create new LocationCard
+function createLocationCard(payload) {
     locationCards.push({
         location: payload.location,
         name: payload.name,
@@ -91,6 +103,7 @@ function updateLocationCard(payload) {
     });
 }
 
+// Add message to DB
 function submitMessage(payload) {
     chat.push({
         name: payload.name,
@@ -103,11 +116,10 @@ function submitMessage(payload) {
 // Observes changes in chat
 function _monitorChat() {
     chat.on('child_added', function(snap) {
-        const message = snap.val()
+        const message = snap.val();
         _addMessage(message);
     }, function(error) {
         console.log(error)
     });
 }
 
-_monitorChat()

@@ -1,3 +1,6 @@
+const HomePageUrl = "/landingpage.html";
+
+
 // Login
 $("#login").click(function() {
     signInWithGoogle();
@@ -12,4 +15,8 @@ $("#logout").click(function() {
 function _addMessage(message) {
     const messageElem = $('<ul><strong>' + message.name + ': </strong>' + message.message)
     $('#messages').append(messageElem)
+}
+
+function redirectToHomePage() {    
+    $(location).attr('href',HomePageUrl);
 }
