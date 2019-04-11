@@ -30,11 +30,17 @@ auth.onAuthStateChanged(function (user) {
 
         // redirectToHomePage()
         users.child(user.uid).once('value', function(snap) {
+<<<<<<< HEAD
             const userInfo = snap.val();
 
             if (userInfo.undecided) {
                 // redirectTo
             } 
+=======
+            if (snap.val().ready) {
+                console.log('ready')
+            }
+>>>>>>> 2b68fe5fa9f02bcc387ab3d29526a498a8713d7c
         })
 
 
@@ -95,7 +101,11 @@ function updateProfile(userId, payload) {
 }
 
 // Create new LocationCard
+<<<<<<< HEAD
 function addLocationCardToDB(payload) {
+=======
+function createLocationCard(payload) {
+>>>>>>> 2b68fe5fa9f02bcc387ab3d29526a498a8713d7c
     locationCards.push({
         location: payload.location,
         name: payload.name,
@@ -106,10 +116,17 @@ function addLocationCardToDB(payload) {
 }
 
 // Add message to DB
+<<<<<<< HEAD
 function addMessageToDB(message) {
     chat.push({
         name: user.displayName,
         message: message
+=======
+function submitMessage(payload) {
+    chat.push({
+        name: payload.name,
+        message: payload.message
+>>>>>>> 2b68fe5fa9f02bcc387ab3d29526a498a8713d7c
     }, function(error) {
         console.log(error);
     });
@@ -119,7 +136,11 @@ function addMessageToDB(message) {
 function _monitorChat() {
     chat.on('child_added', function(snap) {
         const message = snap.val();
+<<<<<<< HEAD
         _displayMessage(message);
+=======
+        _addMessage(message);
+>>>>>>> 2b68fe5fa9f02bcc387ab3d29526a498a8713d7c
     }, function(error) {
         console.log(error)
     });
