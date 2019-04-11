@@ -95,7 +95,7 @@ function updateProfile(userId, payload) {
 }
 
 // Create new LocationCard
-function createLocationCard(payload) {
+function addLocationCardToDB(payload) {
     locationCards.push({
         location: payload.location,
         name: payload.name,
@@ -106,10 +106,10 @@ function createLocationCard(payload) {
 }
 
 // Add message to DB
-function submitMessage(payload) {
+function addMessageToDB(message) {
     chat.push({
-        name: payload.name,
-        message: payload.message
+        name: user.displayName,
+        message: message
     }, function(error) {
         console.log(error);
     });
@@ -119,7 +119,7 @@ function submitMessage(payload) {
 function _monitorChat() {
     chat.on('child_added', function(snap) {
         const message = snap.val();
-        _addMessage(message);
+        _displayMessage(message);
     }, function(error) {
         console.log(error)
     });
