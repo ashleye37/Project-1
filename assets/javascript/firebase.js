@@ -20,27 +20,22 @@ let user;
 // Log in provider
 const provider = new firebase.auth.GoogleAuthProvider();
 
+
+const userDecisionState = {
+    UNDECIDED: 'UNDECIDED',
+}
+
 // Observer on authentication change (ex. login, logout)
 auth.onAuthStateChanged(function (user) {
     if (user) {
         // User is signed in.
         console.log('user logged in');
         _monitorChat();
-
-
-        // redirectToHomePage()
-        users.child(user.uid).once('value', function(snap) {
-<<<<<<< HEAD
+        users.child(user.uid).once('value', function (snap) {
             const userInfo = snap.val();
-
-            if (userInfo.undecided) {
-                // redirectTo
-            } 
-=======
-            if (snap.val().ready) {
-                console.log('ready')
+            if (userInfo.decision === userDecisionState.UNDECIDED) {
+                showDecisionDiv()
             }
->>>>>>> 2b68fe5fa9f02bcc387ab3d29526a498a8713d7c
         })
 
 
@@ -48,6 +43,7 @@ auth.onAuthStateChanged(function (user) {
     } else {
         // No user is signed in.
         console.log('user logged out');
+        showLogin()
     }
 });
 
@@ -61,7 +57,7 @@ function signInWithGoogle() {
         _createProfile();
 
     }).catch(function (error) {
-        console.log(error)
+        console.log('error', error)
         // Handle Errors here.
         const errorCode = error.code;
         const errorMessage = error.message;
@@ -82,6 +78,7 @@ function signOutUser() {
     });
 }
 
+// Internal function to create user profile
 function _createProfile() {
     users.child(user.uid).update({
         name: user.displayName,
@@ -101,47 +98,32 @@ function updateProfile(userId, payload) {
 }
 
 // Create new LocationCard
-<<<<<<< HEAD
 function addLocationCardToDB(payload) {
-=======
-function createLocationCard(payload) {
->>>>>>> 2b68fe5fa9f02bcc387ab3d29526a498a8713d7c
     locationCards.push({
         location: payload.location,
         name: payload.name,
         userId: payload.userId,
-    }, function(error) {
+    }, function (error) {
         console.log(error);
     });
 }
 
 // Add message to DB
-<<<<<<< HEAD
 function addMessageToDB(message) {
     chat.push({
         name: user.displayName,
         message: message
-=======
-function submitMessage(payload) {
-    chat.push({
-        name: payload.name,
-        message: payload.message
->>>>>>> 2b68fe5fa9f02bcc387ab3d29526a498a8713d7c
-    }, function(error) {
+    }, function (error) {
         console.log(error);
     });
 }
 
 // Observes changes in chat
 function _monitorChat() {
-    chat.on('child_added', function(snap) {
+    chat.on('child_added', function (snap) {
         const message = snap.val();
-<<<<<<< HEAD
         _displayMessage(message);
-=======
-        _addMessage(message);
->>>>>>> 2b68fe5fa9f02bcc387ab3d29526a498a8713d7c
-    }, function(error) {
+    }, function (error) {
         console.log(error)
     });
 }
