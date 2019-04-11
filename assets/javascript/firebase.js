@@ -20,18 +20,21 @@ let user;
 // Log in provider
 const provider = new firebase.auth.GoogleAuthProvider();
 
+
+const userDecisionState = {
+    UNDECIDED: 'UNDECIDED',
+}
+
 // Observer on authentication change (ex. login, logout)
 auth.onAuthStateChanged(function (user) {
     if (user) {
         // User is signed in.
         console.log('user logged in');
         _monitorChat();
-
-
-        // redirectToHomePage()
-        users.child(user.uid).once('value', function(snap) {
-            if (snap.val().ready) {
-                console.log('ready')
+        users.child(user.uid).once('value', function (snap) {
+            const userInfo = snap.val();
+            if (userInfo.decision === userDecisionState.UNDECIDED) {
+                showDecisionDiv()
             }
         })
 
@@ -40,6 +43,7 @@ auth.onAuthStateChanged(function (user) {
     } else {
         // No user is signed in.
         console.log('user logged out');
+        showLogin()
     }
 });
 
@@ -53,7 +57,7 @@ function signInWithGoogle() {
         _createProfile();
 
     }).catch(function (error) {
-        console.log(error)
+        console.log('error', error)
         // Handle Errors here.
         const errorCode = error.code;
         const errorMessage = error.message;
@@ -74,6 +78,7 @@ function signOutUser() {
     });
 }
 
+// Internal function to create user profile
 function _createProfile() {
     users.child(user.uid).update({
         name: user.displayName,
@@ -82,7 +87,7 @@ function _createProfile() {
 }
 
 // Update user profile
-function updateProfile(userId, payload) {
+function updateProfileInDB(userId, payload) {
     users.child(userId).once('value', function (snap) {
         if (snap.exists()) {
             users.child(userId).update(payload);
@@ -93,32 +98,32 @@ function updateProfile(userId, payload) {
 }
 
 // Create new LocationCard
-function createLocationCard(payload) {
+function addLocationCardToDB(payload) {
     locationCards.push({
         location: payload.location,
         name: payload.name,
         userId: payload.userId,
-    }, function(error) {
+    }, function (error) {
         console.log(error);
     });
 }
 
 // Add message to DB
-function submitMessage(payload) {
+function addMessageToDB(message) {
     chat.push({
-        name: payload.name,
-        message: payload.message
-    }, function(error) {
+        name: user.displayName,
+        message: message
+    }, function (error) {
         console.log(error);
     });
 }
 
 // Observes changes in chat
 function _monitorChat() {
-    chat.on('child_added', function(snap) {
+    chat.on('child_added', function (snap) {
         const message = snap.val();
-        _addMessage(message);
-    }, function(error) {
+        _displayMessage(message);
+    }, function (error) {
         console.log(error)
     });
 }
