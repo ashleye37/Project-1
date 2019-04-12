@@ -95,15 +95,15 @@
     </div>
 
     <!-- Questionaire Page -->
-    </div id="questionnaire">
+    <div id="questionnaire">
 
-    <!-- div to store questions in -->
-    <div class="container" id="container">
-        <div class="title">Questions:</div>
-        <div id="questions"></div>
-        <button type="button" class="btn btn-dark">Submit</button>
-    </div>
-    <!-- submit button for questionnaire-->
+        <!-- div to store questions in -->
+        <div class="container" id="container">
+            <div class="title">Questions:</div>
+            <div id="questions"></div>
+            <button type="button" class="btn btn-dark">Submit</button>
+        </div>
+        <!-- submit button for questionnaire-->
 
     </div>
 
@@ -164,7 +164,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!--save buttons-->
         <div class="btns">
             <button type="button" class="btn btn-info" id="save">Save</button>
@@ -201,6 +201,32 @@
             <div class="title2">Details are here</div>
         </div>
     </div>
+
+    <!-- Chat-->
+    <div class="container">
+        <div id="chatbox" class="card">
+            <div class="card-header text-center">Chat</div>
+            <div class="card-body">
+
+                <!-- Messages will be dynamically inserted -->
+                <ul id="messages" class="list-group"></ul>
+                <hr>
+                <form id="sendMessage" method="post">
+                    <div class='input-group'>
+                        <input id="message-input" type='text' name='message' class="form-control"
+                            placeholder="Your message will be seen by everyone.">
+                        <div class='input-group-append'>
+                            <button id="send-message" class='btn btn-primary'>Send</button>
+                        </div>
+                    </div>
+                </form>
+                <div id="message-empty" class="alert alert-warning" role="alert" style="display: none">
+                    Message must contain characters.
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

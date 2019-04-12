@@ -1,10 +1,20 @@
+
+
+// **************************
+// PLEASE READ!
+// **************************
+// Helper functions for UI
+// Feel free to edit the body of the functions, but let me know if you want to change their names since they interact with Firebase. 
+// The functions prepended with an underscore are automatically called, and should not be called elsewhere
+
+
 // Login
-$("#login").click(function() {
+$("#login").click(function () {
     signInWithGoogle();
 });
 
 // Logout
-$("#logout").click(function() {
+$("#logout").click(function () {
     signOutUser();
 });
 
@@ -24,14 +34,27 @@ function _displayLoggedOutUI() {
 
 // Adds new chat messages to DOM. Automatically called after submitting message
 function _displayMessage(message) {
-    const messageElem = $('<ul><strong>' + message.name + ': </strong>' + message.message);
-    $('#messages').append(messageElem);
+    const messageElem = $('<li class="list-group-item">')
+        .append('<p class="message"><strong>' + message.name + ': </strong>' + message.message + '</p>');
+    const allMessagesElem = $('#messages');
+    allMessagesElem.append(messageElem);
+    allMessagesElem.scrollTop($('#messages').prop("scrollHeight"));
 }
 
 // Send message to DB from client
-$('#send-message').click(function() {
-    const message = $('#message-input').val().trim();
-    addMessageToDB(message);
+$('#send-message').click(function (event) {
+    event.preventDefault();
+
+    const messageText = $('#message-input').val().trim();
+    if (!messageText.length) { // Handle empty message
+        $('#message-empty').show();
+        event.stopPropagation();
+        return;
+    }
+    // Message has characters. Add to DB
+    addMessageToDB(messageText);
+    $('#message-input').val('');
+    $('#message-empty').hide();
 })
 
 // Update user profile. 
@@ -71,5 +94,5 @@ function _showQuestionnaire() {
 // Show itinerary div
 function _showItinerary() {
     console.log('Showing itinerary')
-    
+
 }
