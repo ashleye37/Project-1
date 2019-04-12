@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -11,16 +10,6 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300" type="text/css" />
     <link rel="stylesheet" href="assets/css/style.css">
-
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Where Do You Want to Travel</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-  <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
-
 </head>
 
 <body>
@@ -68,8 +57,8 @@
     <div class="container" id="startup">
         <h1>Welcome to TripBot!</h1>
         <div id="logBtn">
-            <button id="login" type="button" class="btn btn-light">Log in</button>
-            <button id="logout" type="button" class="btn btn-info">Log out</button>
+            <button id="login" type="button" class="btn btn-light logged-out">Log in</button>
+            <button id="logout" type="button" class="btn btn-info logged-in">Log out</button>
         </div>
     </div>
 
@@ -106,26 +95,15 @@
     </div>
 
     <!-- Questionaire Page -->
-    </div id="questionnaire">
+    <div id="questionnaire">
 
-
-    <!-- div to store questions in -->
-    <div class="container" id="container">
-        <div class="title">Questions:</div>
-        <div id="questions"></div>
-        <button type="button" class="btn btn-dark">Submit</button>
-    </div>
-    <!-- submit button for questionnaire-->
-
-    <!--Link to JQuery-->
-    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300" type="text/css" />
-    <link rel="stylesheet" href="assets/css/style.css">
-
+        <!-- div to store questions in -->
+        <div class="container" id="container">
+            <div class="title">Questions:</div>
+            <div id="questions"></div>
+            <button type="button" class="btn btn-dark">Submit</button>
+        </div>
+        <!-- submit button for questionnaire-->
 
     </div>
 
@@ -186,7 +164,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!--save buttons-->
         <div class="btns">
             <button type="button" class="btn btn-info" id="save">Save</button>
@@ -223,6 +201,32 @@
             <div class="title2">Details are here</div>
         </div>
     </div>
+
+    <!-- Chat-->
+    <div class="container">
+        <div id="chatbox" class="card">
+            <div class="card-header text-center">Chat</div>
+            <div class="card-body">
+
+                <!-- Messages will be dynamically inserted -->
+                <ul id="messages" class="list-group"></ul>
+                <hr>
+                <form id="sendMessage" method="post">
+                    <div class='input-group'>
+                        <input id="message-input" type='text' name='message' class="form-control"
+                            placeholder="Your message will be seen by everyone.">
+                        <div class='input-group-append'>
+                            <button id="send-message" class='btn btn-primary'>Send</button>
+                        </div>
+                    </div>
+                </form>
+                <div id="message-empty" class="alert alert-warning" role="alert" style="display: none">
+                    Message must contain characters.
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
