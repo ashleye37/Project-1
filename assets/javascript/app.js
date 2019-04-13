@@ -161,6 +161,7 @@ _showQuestionnaire();
 
 // Show itinerary div
 function _showItinerary() {
+
     console.log('Showing itinerary')
 
 }
