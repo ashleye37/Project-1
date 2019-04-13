@@ -13,8 +13,8 @@
 </head>
 
 <body>
-
-    <div class="container" id="nav">
+<!--nav bar-->
+    <div id="nav">
         <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
             <a class="navbar-brand" href="#">TripBot</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -27,40 +27,30 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="#">Home <span class="sr-only"></span></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Dashboard</a>
-                    </li>
+                
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown
+                            Settings
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Log Out</a>
+                            <a id="login" class="dropdown-item" href="#">Log in</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                            <a id="logout" class="dropdown-item" href="#">Log out</a>
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                    </li>
+                    
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
+                
             </div>
         </nav>
     </div>
 
     <!--Initial Startup Page- requires user to login-->
-    <div class="container" id="startup">
+    <div id="startup">
         <h1>Welcome to TripBot!</h1>
-        <div id="logBtn">
-            <button id="login" type="button" class="btn btn-light logged-out">Log in</button>
-            <button id="logout" type="button" class="btn btn-info logged-in">Log out</button>
-        </div>
     </div>
+
 
     <!-- Might need later, but only logging in now instead of signup -->
     <!-- Login Page; where the user will input their log in information-->
@@ -76,34 +66,27 @@
                     <label for="frequency">Password</label>
                     <input type="text" class="form-control" >
                 </div>
-
                 <button type="submit" class="btn btn-dark">Submit</button>
             </form>
         </div>
     </div> -->
 
     <!--Know Your Destination Page- asks user if they know where they want to travel-->
-    <div class="container" id="knowDestination">
-
-        <div class="jumbotron">
-            <h3 class="display-4 text-center">Do you know where you want to travel?</h3>
-            <hr class="my-4">
-            <a id="know-where-yes" class="btn btn-primary btn-lg center-align" href="#" role="button">Yes</a>
-            <a id="know-where-no" class="btn btn-primary btn-lg center-align" href="#" role="button">No</a>
-        </div>
-
-    </div>
+ 
 
     <!-- Questionaire Page -->
-    <div id="questionnaire">
-
-        <!-- div to store questions in -->
-        <div class="container" id="container">
+    <div id="questionnaire"> 
+        <div class="container">
             <div class="title">Questions:</div>
-            <div id="questions"></div>
-            <button type="button" class="btn btn-dark">Submit</button>
+            <!-- div to store questions in -->
+            <div id="questions">
+                <p>Which country or city do you want to travel to ?</p>
+            </div>
+            <!-- submit button for questionnaire-->
+            <br><br>
+            <button type="button" class="btn btn-dark" id = "submit-questions">Submit</button>
         </div>
-        <!-- submit button for questionnaire-->
+        
 
     </div>
 
@@ -112,35 +95,56 @@
 
         <!--recommended cards-->
         <div id="suggestion">
+            <!--hotels-->
             <div id="row">
-                <div class="title">Suggested Places</div>
+                <div class="title">Suggested Hotels</div>
                 <div class="card" style="width: 10rem;">
                     <img src="assets/images/1.jpg" class="card-img-top">
                     <div class="card-body">
-                        <p class="card-text">Greece</p>
+                        <p class="card-text">Hotel 1</p>
                     </div>
                 </div>
 
                 <div class="card" style="width: 10rem;">
                     <img src="assets/images/2.jpg" class="card-img-top">
                     <div class="card-body">
-                        <p class="card-text">Places</p>
+                        <p class="card-text">Hotel 2</p>
                     </div>
                 </div>
 
                 <div class="card" style="width: 10rem;">
                     <img src="assets/images/3.jpg" class="card-img-top">
                     <div class="card-body">
-                        <p class="card-text">Places</p>
+                        <p class="card-text">Hotel 3</p>
                     </div>
                 </div>
             </div>
+            <!--activities-->
+            <div id="row">
+                    <div class="title">Suggested Activities</div>
+                    <div class="card" style="width: 10rem;">
+                        <img src="assets/images/1.jpg" class="card-img-top">
+                        <div class="card-body">
+                            <p class="card-text">activity 1</p>
+                        </div>
+                    </div>
+    
+                    <div class="card" style="width: 10rem;">
+                        <img src="assets/images/2.jpg" class="card-img-top">
+                        <div class="card-body">
+                            <p class="card-text">activity 2</p>
+                        </div>
+                    </div>
+    
+                    <div class="card" style="width: 10rem;">
+                        <img src="assets/images/3.jpg" class="card-img-top">
+                        <div class="card-body">
+                            <p class="card-text">activity 3</p>
+                        </div>
+                    </div>
+                </div>
 
         </div>
-
-        <!--suggested activities and hotels-->
-        <div id="activities"></div>
-        <div id="hotels"></div>
 
         <!--Users selected cards-->
         <div id="selectedCard">
@@ -162,6 +166,22 @@
                         <button class="remove">✘</button>
                     </div>
                 </div>
+
+                <div class="card" style="width: 10rem;">
+                        <img src="assets/images/2.jpg" class="card-img-top">
+                        <div class="card-body">
+                            <p class="card-text">Places</p>
+                            <button class="remove">✘</button>
+                        </div>
+                    </div>
+
+                <div class="card" style="width: 10rem;">
+                        <img src="assets/images/2.jpg" class="card-img-top">
+                        <div class="card-body">
+                            <p class="card-text">Places</p>
+                            <button class="remove">✘</button>
+                        </div>
+                    </div>
             </div>
         </div>
 
@@ -171,41 +191,10 @@
         </div>
     </div>
 
-    <!--User Dashboard - where their profile and itinerary is saved-->
-    <!--saved cards-->
-    <div class="container" id="dashboard">
-        <div id="suggestion">
-            <div id="row">
-                <div class="title">Your Itinerary</div>
-                <div class="card2" style="width: 15rem;">
-                    <img src="assets/images/1.jpg" class="card-img-top">
-                    <div class="card-body">
-                        <p class="card-text">Greece</p>
-                    </div>
-                </div>
-
-                <div class="card2" style="width: 15rem;">
-                    <img src="assets/images/2.jpg" class="card-img-top">
-                    <div class="card-body">
-                        <p class="card-text">Places</p>
-                        <p class="card-text">Seattle - Portland - San Francisco</p>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-        <!--when user click the saved card, it will appear the itinerary-->
-        <div id="useritinerary">
-            <div class="title2">Details are here</div>
-        </div>
-    </div>
-
     <!-- Chat-->
     <div class="container">
-        <div id="chatbox" class="card">
-            <div class="card-header text-center">Chat</div>
+        <div id="chatbox" class="chat">
+            <div class="title">Chat</div>
             <div class="card-body">
 
                 <!-- Messages will be dynamically inserted -->
@@ -233,6 +222,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
+<<<<<<< HEAD
 
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -240,6 +230,12 @@
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script> -->
 
+=======
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>-->
+>>>>>>> bc22e3e9099e1c4c385e4fe47de6097ea8a371a0
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
