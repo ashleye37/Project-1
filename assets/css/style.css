@@ -46,6 +46,10 @@ body {
 	}
 }
 
+#startup{
+    height:700px;
+}
+
 h1{
 	font-family: 'Open Sans';
 	font-weight: 400;
@@ -67,7 +71,7 @@ h1{
     margin-left:40%;
 }
 
-.card{
+#login{
   width:400px;
   background-color: rgb(66, 66, 66, 0.6);
   border-radius: 7px;
@@ -86,6 +90,93 @@ legend{
 .btn-dark{
     margin-top:30px;
 }
+
+nav{
+    height:50px;
+    background-color: rgb(66, 66, 66, 0.8);
+    width:100%;
+}
+
+a{
+    color:white;
+    line-height:30px;    
+}
+
+
+.container{
+    padding:0;
+    width:80%;
+    margin:50px auto;
+    background-color:rgb(66, 66, 66, 0.6);
+    border-radius: 7px;
+    position: relative;
+    
+}
+
+.card-text{
+    color:rgb(59, 59, 59);
+}
+
+.card{   
+    margin:15px;
+    float:left;
+    height:160px;
+    position: relative;
+    background-color:white;
+}
+
+.card2{
+    margin:15px;
+    float:left;
+    height:280px;
+    position: relative;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.title{
+    background-color: rgb(66, 66, 66, 0.5);
+    color:white;
+    padding:8px;
+    border-radius: 7px 7px 0 0;
+    clear:both;
+}
+
+.title2{
+    background-color: rgb(66, 66, 66, 0.5);
+    color:white;
+    padding:8px;
+    clear:both;
+}
+
+#save{
+    position: absolute;
+    bottom:10px;
+    right:0;
+}
+
+.remove{
+    position: absolute;
+    top:0;
+    right:0;
+    color:white;
+    background-color: rgb(175, 66, 66);
+    border-radius: 50%;
+    border:none;
+    height:20px;
+    width:20px;
+}
+
+#submit-questions{
+    position: absolute;
+    bottom:10px;
+    left:45%;  
+}
+
+#landing{
+    height:1000px;
+}
+
 
 /* Messages */
 #chatbox {
