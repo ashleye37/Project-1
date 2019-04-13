@@ -66,17 +66,6 @@ h1{
     opacity:0.9; 
 }
 
-#logBtn{
-    margin-top:31%;
-    margin-left:40%;
-}
-
-#login{
-  width:400px;
-  background-color: rgb(66, 66, 66, 0.6);
-  border-radius: 7px;
-  margin:10% auto;  
-}
 form{
     width:80%;
     margin:20px 0 20px 20px;
