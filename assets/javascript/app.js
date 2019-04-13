@@ -87,6 +87,58 @@ function _showDecisionDiv() {
 
 // Show questionnaire div
 function _showQuestionnaire() {
+     // array of objects with the questions and possible answers
+     var quizQuestions = [
+        {
+            question: "Who will you be traveling with?",
+            choices: ["Solo travel!", "With my gals or guys!", "With my main squeeze!", "Family get away with the kids!"],
+        },
+        {
+            question: "What is your favorite weather for vacation?",
+            choices: ["HOT! 85 degrees or more!", "Warm! 70-84 degrees", "Mild - 50-69 degrees", "Freeze me! Below 50 degrees"],
+        },
+        {
+            question: "How long would you like your trip to last?",
+            choices: ["Less than 1 week", "1-2 weeks", "2 weeks - 1 month", "More than a month"],
+        },
+        {
+            question: "Trip Budget?",
+            choices: ["Under $2,500", "$3,500 - $5,000", "$5,000-$7,000", "Over $7,000"],
+        },
+        {
+            question: "Are you interested in seeing attraction suggestions?",
+            choices: ["Yes", "No"],
+        },
+        {
+            question: "Are you interested in seeing hotel suggestions?",
+            choices: ["Yes", "No"],
+        },
+        {
+            question: "Are you interested in seeing restaurant suggestions?",
+            choices: ["Yes", "No"],
+        }
+
+    ];
+
+
+    // pull questions from the array of questions, loop through them, and append to UI
+    var questionContainer = $("#questions");
+    questionContainer.append("<h2>Please answer the following questions to help us customize your trip planning experience.</h2>");
+
+    for(var i=0; i<quizQuestions.length; i++){
+        questionContainer.append(quizQuestions[i].question);
+        
+    };
+
+    for (var i=0; i<quizQuestions.choices.length;i++){
+        questionContainer.choices.prepend($("<div class='form-check form-check-inline'><input class='form-check-input' type='radio' name='inlineRadioOptions'+i+'' id='radio'+i+'><label class='form-check-label' id + choices '</label></div>'"));
+        questionContainer.choices.attr({"data-index":i});
+        questionContainer.choices.addClass("thisChoice");
+        $("#questions").append(questionContainer.choices);
+    };
+    //on submit click, takes user's answers uses data to make api call to get relevant itinerary information. 
+    $("#questionBtn").on("click")
+
     console.log('Showing questionnaire')
 
 }
