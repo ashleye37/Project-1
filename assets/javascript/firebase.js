@@ -38,16 +38,16 @@ auth.onAuthStateChanged(function (user) {
 
         _displayLoggedInUI();
         _monitorChat();
-        showLocationCards();
+        _getLocationCards();
 
         // Displays content based on user decision state
-        users.child(user.uid).once('value', function (snap) {
+        users.child(auth.currentUser.uid).once('value', function (snap) {
             const userInfo = snap.val();
             if (userInfo.decision === userDecisionState.UNDECIDED) {
                 _showDecisionDiv()
-            } else if (user.decision === userDecisionState.QUESTIONNAIRE) {
+            } else if (userInfo.decision === userDecisionState.QUESTIONNAIRE) {
                 _showQuestionnaire();
-            } else if (user.decision === userDecisionState.ITINERARY) {
+            } else if (userInfo.decision === userDecisionState.ITINERARY) {
                 _showItinerary();
             } else {
                 console.log("User does not have a decision. Problem in user profile. Check Firebase")
@@ -60,12 +60,12 @@ auth.onAuthStateChanged(function (user) {
     }
 });
 
-function signInWithGoogle() {
+function _signInWithGoogle() {
     auth.signInWithPopup(provider).then(function (result) {
         // This gives you a Google Access Token. You can use it to access the Google API.
         const token = result.credential.accessToken;
         // The signed-in user info.
-        console.log(result.user)
+        // console.log(result.user)
         _createProfile();
 
     }).catch(function (error) {
@@ -80,7 +80,7 @@ function signInWithGoogle() {
     });
 }
 
-function signOutUser() {
+function _signOutUser() {
     auth.signOut().then(function () {
         // Sign-out successful.
         console.log('logged out successfully')
@@ -92,15 +92,19 @@ function signOutUser() {
 
 // Internal function to create user profile
 function _createProfile() {
-    users.child(auth.currentUser.uid).update({
-        name: auth.currentUser.displayName,
-        id: auth.currentUser.uid,
-        decision: userDecisionState.UNDECIDED,
+    users.child(auth.currentUser.uid).once('value', function (snap) {
+        if (!snap.val) {
+            users.child(auth.currentUser.uid).update({
+                name: auth.currentUser.displayName,
+                id: auth.currentUser.uid,
+                decision: userDecisionState.UNDECIDED,
+            });
+        }
     });
 }
 
 // Update user profile in DB
-function updateProfileInDB(payload) {
+function _updateProfileInDB(payload) {
     users.child(auth.currentUser).once('value', function (snap) {
         if (snap.exists()) {
             users.child(auth.currentUser).update(payload);
@@ -111,7 +115,7 @@ function updateProfileInDB(payload) {
 }
 
 // Create new LocationCard in DB
-function addLocationCardToDB(payload) {
+function _addLocationCardToDB(payload) {
     locationCards.push(
         {
             location: payload.location,
@@ -126,7 +130,7 @@ function addLocationCardToDB(payload) {
     );
 }
 
-function showLocationCards() {
+function _getLocationCards() {
     locationCards.orderByChild('userId').equalTo(auth.currentUser.uid).on('value', function (snapshot) {
         let cards = snapshot.val();
         if (!cards) {
@@ -136,7 +140,7 @@ function showLocationCards() {
     });
 }
 
-function deleteAllLocationCardsForUser() {
+function _deleteAllLocationCardsForUser() {
     locationCards.orderByChild('userId').equalTo(auth.currentUser.uid).once('value', function (snapshot) {
         const updates = {};
         snapshot.forEach(child => updates[child.key] = null);
@@ -145,7 +149,11 @@ function deleteAllLocationCardsForUser() {
 }
 
 // Add message to DB
-function addMessageToDB(message) {
+function _addMessageToDB(message) {
+    if (!auth.currentUser) {
+        console.log('You must log in to comment');
+        return;
+    }
     chat.push({
         name: auth.currentUser.displayName,
         userId: auth.currentUser.uid,
@@ -163,5 +171,10 @@ function _monitorChat() {
     }, function (error) {
         console.log(error)
     });
+}
+
+// Switches user decision state in profile. Decision is a string
+function _switchDecisionInDB(decision) {
+    _updateProfileInDB({decision: decision})
 }
 
