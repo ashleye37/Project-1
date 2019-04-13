@@ -10,12 +10,12 @@
 
 // Login
 $("#login").click(function () {
-    signInWithGoogle();
+    _signInWithGoogle();
 });
 
 // Logout
 $("#logout").click(function () {
-    signOutUser();
+    _signOutUser();
 });
 
 // Displays only .logged-in elements to logged in users. Automatically called on login
@@ -52,7 +52,7 @@ $('#send-message').click(function (event) {
         return;
     }
     // Message has characters. Add to DB
-    addMessageToDB(messageText);
+    _addMessageToDB(messageText);
     $('#message-input').val('');
     $('#message-empty').hide();
 })
@@ -60,7 +60,7 @@ $('#send-message').click(function (event) {
 // Update user profile. 
 // profileObj is an object. Ex profileObj = {location: 'Seattle', hotel: '<hotel id>'}
 function updateProfile(profileObj) {
-    updateProfileInDB(profileObj)
+    _updateProfileInDB(profileObj);
 }
 
 // Retrieves all location cards for user and displays them. Automatically called on login
@@ -75,7 +75,12 @@ function createLocationCard() {
     // TODO get locationCard info from client
     // TODO know what info wil be on card
 
-    addLocationCardToDB(locationCard);
+    _addLocationCardToDB(locationCard);
+    
+}
+
+function deleteAllLocationCardsForUser() {
+    _deleteAllLocationCardsForUser();
 }
 
 // Show initial decision (I know where I want to go / No idea) div
@@ -149,4 +154,16 @@ _showQuestionnaire();
 function _showItinerary() {
     console.log('Showing itinerary')
 
+}
+
+function switchDecisionToUndecided() {
+    _switchDecisionInDB(userDecisionState.UNDECIDED)
+}
+
+function switchDecisionToQuestionnaire() {
+    _switchDecisionInDB(userDecisionState.QUESTIONNAIRE)
+}
+
+function switchDecisionToItinerary() {
+    _switchDecisionInDB(userDecisionState.ITINERARY)
 }
