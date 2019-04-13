@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-
+    <title>TripBot</title>
     <!--Link to JQuery-->
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-        crossorigin="anonymous">
+    <!--Link to bootstrap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> 
+    <!--Link to css-->
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
@@ -55,21 +53,18 @@
         </div>
     </nav>
 
-    <!-- div to store questions in -->
-    <div class="container">
-        <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-10">
-                <h3>Questions:</h3>
-                <!--Store questions here-->
-            </div>
-            <div class="col-md-1"></div>
-        </div>
-    </div>
-    <!-- submit button for questionnaire-->
-
-    <button type="button" class="btn btn-dark">Dark</button>
-
+    <div id = "container">
+            <!--questions are here-->
+                
+            <div class= "title">Questionnare:</div> 
+            <div id = "questions">
+            
+            </div>  
+            
+            <!--Submit button-->
+            <button type="submit" class="btn btn-dark" id = "submit-questions">Submit</button> 
+    </div> 
+    
     <script src="assets/javascript/app.js"></script>
     <script src="assets/javascript/firebase.js"></script>
     <script src="assets/javascript/js.js"></script>
