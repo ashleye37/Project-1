@@ -20,8 +20,9 @@ $(document).ready(function() {
       console.log("Activity ID: " + response.response.venues[3].id);
       console.log("Activity Address: " + response.response.venues[3].location.crossStreet + ", " + response.response.venues[3].location.city);
   });
-
+ 
   var queryURLExplore = "https://api.foursquare.com/v2/venues/4beb4ca661aca59393ef8400?&client_id=" + ashleyClientID + "&client_secret=" + ashleySecretID;
+  
   $.ajax({
     url: queryURLExplore,
     method: "GET"
