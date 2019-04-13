@@ -75,6 +75,8 @@ function createLocationCard() {
     // TODO get locationCard info from client
     // TODO know what info wil be on card
 
+    const locationCard = 5
+
     _addLocationCardToDB(locationCard);
     
 }
@@ -113,3 +115,4 @@ function switchDecisionToQuestionnaire() {
 function switchDecisionToItinerary() {
     _switchDecisionInDB(userDecisionState.ITINERARY)
 }
+

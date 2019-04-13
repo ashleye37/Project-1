@@ -105,26 +105,79 @@ function _createProfile() {
 
 // Update user profile in DB
 function _updateProfileInDB(payload) {
-    users.child(auth.currentUser).once('value', function (snap) {
+    users.child(auth.currentUser.uid).once('value', function (snap) {
         if (snap.exists()) {
-            users.child(auth.currentUser).update(payload);
+            users.child(auth.currentUser.uid).update(payload);
         } else {
-            console.log('user with userId ' + auth.currentUser + ' does not exist.');
+            console.log('user with userId ' + auth.currentUser.uid + ' does not exist.');
         }
     });
 }
 
 // Create new LocationCard in DB
-function _addLocationCardToDB(payload) {
-    locationCards.push(
+const testPayload = {
+    city: 'Seattle',
+    hotels: [
         {
-            location: payload.location,
-            // hotel: payload.hotel,
-            // activity: payload.activity,
-            name: auth.currentUser.displayName,
-            userId: auth.currentUser.uid,
+            name: 'Mariott',
+            id: 'Whatever unique id this is'
+        }
+    ],
+    venues: [
+        {
+            name: "Clementine cupcake truck",
+            id: "4ce3e678b8df548177c9b09b"
         },
-        function (error) {
+        {
+            name: "Mr Brown’s Attic",
+            id: "5b3fa3038c35dc0039217315"
+        },
+        {
+            name: "blarg",
+            id: 'asdfaskdjfj'
+        }
+    ]
+}
+const testDBPayload = {
+    city: 'Seattle',
+    hotels: {
+        key: {
+            name: 'Mariott',
+            id: '<unique id>'
+        }
+    },
+    venues: {
+        key: {
+            name: "Clementine cupcake truck",
+            id: "4ce3e678b8df548177c9b09b"
+        },
+        key: {
+            name: "Mr Brown’s Attic",
+            id: "5b3fa3038c35dc0039217315"
+        }
+    }
+}
+
+function _addLocationCardToDB(payload) {
+    // const addition = {
+    //     name: auth.currentUser.displayName,
+    //     userId: auth.currentUser.uid,
+    // };
+    // const entries = Object.entries(payload)
+    // console.log(entries)
+    payload['name'] = auth.currentUser.displayName;
+    payload['userId'] = auth.currentUser.uid
+    locationCards.push(
+        payload
+
+        // {
+        //     city: payload.city,
+        //     // hotel: payload.hotel,
+        //     // activity: payload.activity,
+        //     name: auth.currentUser.displayName,
+        //     userId: auth.currentUser.uid,
+        // },
+        , function (error) {
             console.log(error);
         }
     );

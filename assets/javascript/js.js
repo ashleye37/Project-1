@@ -19,13 +19,14 @@ $(document).ready(function() {
   });
 
   var queryURLExplore = "https://api.foursquare.com/v2/venues/4da335bcbf22a1434a0ac3f8?&client_id=T1KSAH00ROFWYZ4BOX100RYZHDRKPO1W3THOQRQLGPC5FOF0&client_secret=5FKKM5UQM4HNNSDWE3GAJBXYWYIJUFYJNULALZAC0VDAH3YV&v=20190411"
+  var queryURLExplore = "https://api.foursquare.com/v2/venues/4ce3e678b8df548177c9b09b?&client_id=T1KSAH00ROFWYZ4BOX100RYZHDRKPO1W3THOQRQLGPC5FOF0&client_secret=5FKKM5UQM4HNNSDWE3GAJBXYWYIJUFYJNULALZAC0VDAH3YV&v=20190411"
   
   $.ajax({
     url: queryURLExplore,
     method: "GET"
   }).then(function(response) {
     //Entire object pulled.
-      console.log(response);
+      console.log('queryURLEXPLORE', response);
       
   });
 });
