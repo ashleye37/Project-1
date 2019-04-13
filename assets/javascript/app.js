@@ -147,7 +147,11 @@ function _showQuestionnaire() {
     questionContainer.append("<div>"+ "<div class='form-check form-check-inline'><input class='form-check-input' type='radio' name='inlineRadioOptions'+i+'' id='radio'+i+'><label class='form-check-label' id + choices '</label></div>"+ quizQuestions[5].choices[0]+ "<br>"+ "<div class='form-check form-check-inline'><input class='form-check-input' type='radio' name='inlineRadioOptions'+i+'' id='radio'+i+'><label class='form-check-label' id + choices '</label></div>"+ quizQuestions[5].choices[1]+"</div");
    
     //on submit click, takes user's answers uses data to make api call to get relevant itinerary information. 
-    $("#questionBtn").on("click")
+    $("#questionBtn").on("click",function(){
+        $("input type='text'").val();
+        $( "input[type=radio][name=baz]:checked" ).val();
+        return val.attr()
+    })
 
     console.log('Showing questionnaire')
 
