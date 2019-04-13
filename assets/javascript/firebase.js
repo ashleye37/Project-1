@@ -159,24 +159,10 @@ const testDBPayload = {
 }
 
 function _addLocationCardToDB(payload) {
-    // const addition = {
-    //     name: auth.currentUser.displayName,
-    //     userId: auth.currentUser.uid,
-    // };
-    // const entries = Object.entries(payload)
-    // console.log(entries)
     payload['name'] = auth.currentUser.displayName;
     payload['userId'] = auth.currentUser.uid
     locationCards.push(
         payload
-
-        // {
-        //     city: payload.city,
-        //     // hotel: payload.hotel,
-        //     // activity: payload.activity,
-        //     name: auth.currentUser.displayName,
-        //     userId: auth.currentUser.uid,
-        // },
         , function (error) {
             console.log(error);
         }
