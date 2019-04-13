@@ -123,10 +123,10 @@ function _showQuestionnaire() {
 
     // pull questions from the array of questions, loop through them, and append to UI
     var questionContainer = $("#questions");
-    questionContainer.append("<h2>Please answer the following questions to help us customize your trip planning experience.</h2>");
+    questionContainer.append("<h4>Please answer the following questions to help us customize your trip planning experience.</h4>");
 
     for(var i=0; i<quizQuestions.length; i++){
-        questionContainer.append(quizQuestions[i].question);
+        questionContainer.append("<div>"+quizQuestions[i].question+"</div>");
         
     };
 
@@ -141,7 +141,9 @@ function _showQuestionnaire() {
 
     console.log('Showing questionnaire')
 
-}
+};
+//call questions function for testing
+_showQuestionnaire();
 
 // Show itinerary div
 function _showItinerary() {
