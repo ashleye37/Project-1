@@ -67,7 +67,7 @@ h1{
     margin-left:40%;
 }
 
-.card{
+#login{
   width:400px;
   background-color: rgb(66, 66, 66, 0.6);
   border-radius: 7px;
@@ -168,4 +168,16 @@ a{
     bottom:0;
     left:45%;
     margin:15px;
+}
+
+/* Messages */
+#chatbox {
+    width: 100%;
+    color: black;
+    overflow: hidden;
+}
+
+#messages {
+    height: 200px;
+    overflow: auto;
 }
