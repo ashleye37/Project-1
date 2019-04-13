@@ -150,7 +150,7 @@ function _showQuestionnaire() {
     $("#questionBtn").on("click",function(){
         $("input type='text'").val();
         $( "input[type=radio][name=baz]:checked" ).val();
-        return val.attr()
+        return val()
     })
 
     console.log('Showing questionnaire')
@@ -161,7 +161,6 @@ _showQuestionnaire();
 
 // Show itinerary div
 function _showItinerary() {
-
     console.log('Showing itinerary')
 
 }

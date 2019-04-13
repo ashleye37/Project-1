@@ -4,6 +4,8 @@ $(document).ready(function() {
   //var placeInput = [];
   var queryURL= "https://api.foursquare.com/v2/venues/search?near=denver&client_id=T1KSAH00ROFWYZ4BOX100RYZHDRKPO1W3THOQRQLGPC5FOF0&client_secret=5FKKM5UQM4HNNSDWE3GAJBXYWYIJUFYJNULALZAC0VDAH3YV&v=20190411"
   
+  var cassieClientId = WWORN0T13UI1GGQEKQBJFN00ZJFMBX3VNDSMBFAM0XAYKBC1
+  var cassieClientSecret = FC12V4O13KN54N0XVXCDBGJ55ABVRVYB541OWDB02CIIZGMW
   $.ajax({
     url: queryURL,
     method: "GET"
