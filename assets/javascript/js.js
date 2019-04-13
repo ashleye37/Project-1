@@ -1,3 +1,6 @@
+var ashleyClientID = "T1KSAH00ROFWYZ4BOX100RYZHDRKPO1W3THOQRQLGPC5FOF0"
+var ashleySecretID = "5FKKM5UQM4HNNSDWE3GAJBXYWYIJUFYJNULALZAC0VDAH3YV&v=20190411"
+  
 const TristansSecret = 'LSJFCAMRVOWLM2A1JJGMLTG51PPYTCQ1231HW3NX503HSBBU';
 const TristansId = 'VZJ2VR0WXOHFHHYGCBCE5L1XMY2KG5G0OS3UK4PDYHAJ2CM1';
 const TristansAuth = "client_id=" + TristansId + "&client_secret=" + TristansSecret + '&v=20190411'
@@ -25,7 +28,8 @@ $(document).ready(function () {
       console.log("Activity ID: " + response.response.venues[3].id);
       console.log("Activity Address: " + response.response.venues[3].location.crossStreet + ", " + response.response.venues[3].location.city);
     });
-  }
+  });
+  
 
   function getInfoForOneLocation(venueId) {
     var queryURLExplore = "https://api.foursquare.com/v2/venues/" + venueId + "?&" + currentAuth;
@@ -36,19 +40,12 @@ $(document).ready(function () {
     }).then(function (response) {
       //Entire object pulled.
       console.log('queryURLEXPLORE', response);
-
+      //Entire object pulled.
+      console.log(response);
+      //console.log(response.response.venue.photos.groups[1].items[0].prefix + "200x200" + response.response.venue.photos.groups[1].items[0].suffix);
+      //console.log(response.response.venue.bestphoto.prefix + "200x200" + response.response.venue.bestphoto.source.suffix);
     });
-  }
-
-
-  // showVenuesNearLocation('denver')
-  // getInfoForOneLocation("4c7d40c2b33a224b957ed781")
-
-
-
-
-
-
-
 });
 
+
+ 
