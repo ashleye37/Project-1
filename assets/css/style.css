@@ -46,6 +46,10 @@ body {
 	}
 }
 
+#startup{
+    height:700px;
+}
+
 h1{
 	font-family: 'Open Sans';
 	font-weight: 400;
@@ -99,9 +103,9 @@ a{
 }
 
 
-#container{
-    width:85%;
-    height:100%;
+.container{
+    padding:0;
+    width:80%;
     margin:50px auto;
     background-color:rgb(66, 66, 66, 0.6);
     border-radius: 7px;
@@ -145,11 +149,10 @@ a{
     clear:both;
 }
 
-.btns{
+#save{
     position: absolute;
-    bottom:0;
+    bottom:10px;
     right:0;
-    padding: 10px;
 }
 
 .remove{
@@ -166,10 +169,14 @@ a{
 
 #submit-questions{
     position: absolute;
-    bottom:0;
-    left:45%;
-    margin:15px;
+    bottom:10px;
+    left:45%;  
 }
+
+#landing{
+    height:1000px;
+}
+
 
 /* Messages */
 #chatbox {
