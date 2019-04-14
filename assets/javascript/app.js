@@ -94,9 +94,11 @@ function _showDecisionDiv() {
 
 // Show questionnaire div
 function _showQuestionnaire() {
-    console.log('Showing questionnaire')
 
-}
+   console.log('Showing questionnaire')
+
+};
+
 
 // Show itinerary div
 function _showItinerary() {
