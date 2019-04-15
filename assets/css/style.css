@@ -84,6 +84,7 @@ nav{
     height:50px;
     background-color: rgb(66, 66, 66, 0.8);
     width:100%;
+    opacity: 0.7;
 }
 
 a{
@@ -168,6 +169,15 @@ a{
     left:45%;  
 }
 
+#questions{
+    padding: 30px;
+}
+
+#qs{
+    margin-bottom: -1px;
+    font-size: 20px;
+}
+
 /* Landing Page */
 #landing {
     height: 1000px;
@@ -189,8 +199,9 @@ a{
     height: 400px;
 }
 
-
-
+#radio{
+    margin-right: 3px;
+}
 
 /* Messages */
 #chatbox {
