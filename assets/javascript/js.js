@@ -11,18 +11,6 @@ const venueId = "4ce3e678b8df548177c9b09b";
 $(document).ready(function () {
 
   //This API query will help us with pulling trending activities or restaurants.
-<<<<<<< HEAD
-  //var placeInput = [];
-  var queryURL= "https://api.foursquare.com/v2/venues/search?near=denver&client_id=T1KSAH00ROFWYZ4BOX100RYZHDRKPO1W3THOQRQLGPC5FOF0&client_secret=5FKKM5UQM4HNNSDWE3GAJBXYWYIJUFYJNULALZAC0VDAH3YV&v=20190411"
-  
-  var cassieClientId = WWORN0T13UI1GGQEKQBJFN00ZJFMBX3VNDSMBFAM0XAYKBC1
-  var cassieClientSecret = FC12V4O13KN54N0XVXCDBGJ55ABVRVYB541OWDB02CIIZGMW
-  $.ajax({
-    url: queryURL,
-    method: "GET"
-  }).then(function(response) {
-    //Entire object pulled.
-=======
   function showVenuesNearLocation(location) {
     //var placeInput = [];
     var queryURL = "https://api.foursquare.com/v2/venues/search?near=" + location + "&" + currentAuth
@@ -32,7 +20,6 @@ $(document).ready(function () {
       method: "GET"
     }).then(function (response) {
       //Entire object pulled.
->>>>>>> origin/master
       console.log(response);
       //Pulling display name of place where venue is located. Organization in Firebase?
       console.log(response.response.geocode.feature.displayName);
@@ -41,7 +28,7 @@ $(document).ready(function () {
       console.log("Activity ID: " + response.response.venues[3].id);
       console.log("Activity Address: " + response.response.venues[3].location.crossStreet + ", " + response.response.venues[3].location.city);
     });
-  });
+  };
   
 
   function getInfoForOneLocation(venueId) {
@@ -58,6 +45,7 @@ $(document).ready(function () {
       //console.log(response.response.venue.photos.groups[1].items[0].prefix + "200x200" + response.response.venue.photos.groups[1].items[0].suffix);
       //console.log(response.response.venue.bestphoto.prefix + "200x200" + response.response.venue.bestphoto.source.suffix);
     });
+  }
 });
 
 

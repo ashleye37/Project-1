@@ -58,7 +58,7 @@ $('#send-message').click(function (event) {
 })
 
 // Update user profile. 
-// profileObj is an object. Ex profileObj = {location: 'Seattle', hotel: '<hotel id>'}
+// profileObj is an object. Ex profileObj = {name: 'Donkey Kong', location: 'Seattle'}
 function updateProfile(profileObj) {
     _updateProfileInDB(profileObj);
 }
@@ -71,11 +71,38 @@ function _showLocationCards(locationCards) {
 }
 
 // Create locationCard and send it to DB from client
-function createLocationCard() {
-    // TODO get locationCard info from client
-    // TODO know what info wil be on card
+function saveLocationCard() {
+    // locationCard must be in this shape for DB to accept
+    // {
+    //     city: 'Seattle',
+    //     hotels: [
+    //         {
+    //             name: 'Mariott',
+    //             id: 'Whatever unique id this is'
+    //         }
+    //     ],
+    //     venues: [
+    //         {
+    //             name: "Clementine cupcake truck",
+    //             id: "4ce3e678b8df548177c9b09b"
+    //         },
+    //         {
+    //             name: "Mr Brown’s Attic",
+    //             id: "5b3fa3038c35dc0039217315"
+    //         },
+    //         {
+    //             name: "blarg",
+    //             id: 'asdfaskdjfj'
+    //         }
+    //     ]
+    // }
 
-    const locationCard = 5
+    // TODO get locationCard info from client
+    // TODO add key/value pairs to locationCard object
+    const locationCard = {};
+
+
+
 
     _addLocationCardToDB(locationCard);
     

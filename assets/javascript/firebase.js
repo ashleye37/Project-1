@@ -115,49 +115,6 @@ function _updateProfileInDB(payload) {
 }
 
 // Create new LocationCard in DB
-const testPayload = {
-    city: 'Seattle',
-    hotels: [
-        {
-            name: 'Mariott',
-            id: 'Whatever unique id this is'
-        }
-    ],
-    venues: [
-        {
-            name: "Clementine cupcake truck",
-            id: "4ce3e678b8df548177c9b09b"
-        },
-        {
-            name: "Mr Brown’s Attic",
-            id: "5b3fa3038c35dc0039217315"
-        },
-        {
-            name: "blarg",
-            id: 'asdfaskdjfj'
-        }
-    ]
-}
-const testDBPayload = {
-    city: 'Seattle',
-    hotels: {
-        key: {
-            name: 'Mariott',
-            id: '<unique id>'
-        }
-    },
-    venues: {
-        key: {
-            name: "Clementine cupcake truck",
-            id: "4ce3e678b8df548177c9b09b"
-        },
-        key: {
-            name: "Mr Brown’s Attic",
-            id: "5b3fa3038c35dc0039217315"
-        }
-    }
-}
-
 function _addLocationCardToDB(payload) {
     payload['name'] = auth.currentUser.displayName;
     payload['userId'] = auth.currentUser.uid
