@@ -24,9 +24,6 @@ $("#logout").click(function () {
 
 $("#submit-questions").click(function(){
     $("#questionnaire").hide();
-   // location = $("#location").val().trim();
-    //We need to write this location to somewhere on the landing page but not sure where that should be. 
-   // $("#location").val("");
     $("#landing").show();
 });
 
