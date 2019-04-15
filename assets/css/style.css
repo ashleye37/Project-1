@@ -162,6 +162,10 @@ a{
     left:45%;  
 }
 
+#questions{
+    padding: 30px;
+}
+
 #landing{
     height:1000px;
 }
