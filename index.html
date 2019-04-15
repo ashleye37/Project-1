@@ -28,18 +28,10 @@
                         <a class="nav-link" href="#">Home <span class="sr-only"></span></a>
                     </li>
                 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Settings
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a id="login" class="dropdown-item" href="#">Log in</a>
-                            <div class="dropdown-divider"></div>
-                            <a id="logout" class="dropdown-item" href="#">Log out</a>
-                        </div>
+                    <li class="nav-item active">
+                        <a id="login" class="nav-link logged-out" href="#">Log in</a>
+                        <a id="logout" class="nav-link logged-in" href="#">Log out</a>
                     </li>
-                    
                 </ul>
                 
             </div>
@@ -80,19 +72,56 @@
             <div class="title">Questions:</div>
             <!-- div to store questions in -->
             <div id="questions">
-                <p>Which country or city do you want to travel to ?</p>
+                <h4>Please answer the following questions to help us customize your trip planning experience.</h4>
+                
+                <div id= 'question1'>
+                    <p>Which city would you like to travel to?</p>
+                    <div class='input-group mb-3'><input type='text' class='form-control' placeholder='City' aria-label='city' aria-describedby='button-addon2'></div>
+                </div>
+
+                <div id = "question2">
+                    <p>Who will you be traveling with?</p>
+                    <input type = "radio" name = "1" value = "Solo">Solo Travel!</input><br>
+                    <input type = "radio" name = "1" value = "Friends">With my gals or my guys!</input><br>
+                    <input type = "radio" name = "1" value = "Couples">With my main squeeze!</input><br>
+                    <input type = "radio" name = "1" value = "Family">Family get away with the kids!</input><br>
+                </div>
+                
+                <div id ="question3">
+                    <p>How long would you like your trip to last?</p>
+                    <input type = "radio" name = "2" value = "week">Less than a week</input><br>
+                    <input type = "radio" name = "2" value = "1-2weeks">1-2 weeks</input><br>
+                    <input type = "radio" name = "2" value = "2wk-1mo">2 weeks - 1 month</input><br>
+                    <input type = "radio" name = "2" value = "months">More than a month</input><br>
+                </div>
+                
+                <div id = "question4">
+                    <p>Are you interested in seeing attraction suggestions?</p>
+                    <input type = "radio" name = "3" value = "Y">Yes</input><br>
+                    <input type = "radio" name = "3" value = "N">No</input><br>
+                </div>
+                
+                <div id = "question5">
+                    <p>Are you interested in hotel suggestions?</p>
+                    <input type = "radio" name = "4" value = "Y">Yes</input><br>
+                    <input type = "radio" name = "4" value = "N">No</input><br>
+                </div>
+                
+                <div id = "question6">
+                    <p>Are you interested in seeing restaurant suggestions?</p>
+                    <input type = "radio" name = "5" value = "Y">Yes</input><br>
+                    <input type = "radio" name = "5" value = "N">No</input><br>
+                </div>
+
             </div>
             <!-- submit button for questionnaire-->
             <br><br>
             <button type="button" class="btn btn-dark" id = "submit-questions">Submit</button>
         </div>
-        
-
     </div>
 
     <!--Page with trip suggestions where user can select-->
     <div class="container" id="landing">
-
         <!--recommended cards-->
         <div id="suggestion">
             <!--hotels-->
@@ -121,29 +150,28 @@
             </div>
             <!--activities-->
             <div id="row">
-                    <div class="title">Suggested Activities</div>
-                    <div class="card" style="width: 10rem;">
-                        <img src="assets/images/1.jpg" class="card-img-top">
-                        <div class="card-body">
-                            <p class="card-text">activity 1</p>
-                        </div>
-                    </div>
-    
-                    <div class="card" style="width: 10rem;">
-                        <img src="assets/images/2.jpg" class="card-img-top">
-                        <div class="card-body">
-                            <p class="card-text">activity 2</p>
-                        </div>
-                    </div>
-    
-                    <div class="card" style="width: 10rem;">
-                        <img src="assets/images/3.jpg" class="card-img-top">
-                        <div class="card-body">
-                            <p class="card-text">activity 3</p>
-                        </div>
+                <div class="title">Suggested Activities</div>
+                <div class="card" style="width: 10rem;">
+                    <img src="assets/images/1.jpg" class="card-img-top">
+                    <div class="card-body">
+                        <p class="card-text">activity 1</p>
                     </div>
                 </div>
 
+                <div class="card" style="width: 10rem;">
+                    <img src="assets/images/2.jpg" class="card-img-top">
+                    <div class="card-body">
+                        <p class="card-text">activity 2</p>
+                    </div>
+                </div>
+
+                <div class="card" style="width: 10rem;">
+                    <img src="assets/images/3.jpg" class="card-img-top">
+                    <div class="card-body">
+                        <p class="card-text">activity 3</p>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!--Users selected cards-->
@@ -151,7 +179,6 @@
             <div id="row">
                 <div class="title2">Your Choices</div>
                 <div class="card" style="width: 10rem;">
-
                     <img src="assets/images/3.jpg" class="card-img-top">
                     <div class="card-body">
                         <p class="card-text">Places</p>
@@ -168,26 +195,26 @@
                 </div>
 
                 <div class="card" style="width: 10rem;">
-                        <img src="assets/images/2.jpg" class="card-img-top">
-                        <div class="card-body">
-                            <p class="card-text">Places</p>
-                            <button class="remove">✘</button>
-                        </div>
+                    <img src="assets/images/2.jpg" class="card-img-top">
+                    <div class="card-body">
+                        <p class="card-text">Places</p>
+                        <button class="remove">✘</button>
                     </div>
+                </div>
 
                 <div class="card" style="width: 10rem;">
-                        <img src="assets/images/2.jpg" class="card-img-top">
-                        <div class="card-body">
-                            <p class="card-text">Places</p>
-                            <button class="remove">✘</button>
-                        </div>
+                    <img src="assets/images/2.jpg" class="card-img-top">
+                    <div class="card-body">
+                        <p class="card-text">Places</p>
+                        <button class="remove">✘</button>
                     </div>
+                </div>
             </div>
         </div>
 
         <!--save buttons-->
-        <div class="btns">
-            <button type="button" class="btn btn-info" id="save">Save</button>
+        <button type="button" class="btn btn-info" id="save">Save</button>
+        <div id="saveDiv">
         </div>
     </div>
 

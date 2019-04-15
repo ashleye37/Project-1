@@ -7,6 +7,8 @@
 // Feel free to edit the body of the functions, but let me know if you want to change their names since they interact with Firebase. 
 // The functions prepended with an underscore are automatically called, and should not be called elsewhere
 
+$("#questionnaire").hide();
+$("#landing").hide();
 
 // Login
 $("#login").click(function () {
@@ -18,10 +20,22 @@ $("#logout").click(function () {
     _signOutUser();
 });
 
+$("#submit-questions").click(function(){
+    $("#questionnaire").hide();
+    $("#landing").show();
+});
+
+$("#save").click(function(){
+    $("#suggestion").hide();
+});
+
 // Displays only .logged-in elements to logged in users. Automatically called on login
 function _displayLoggedInUI() {
     $('.logged-in').show();
     $('.logged-out').hide();
+
+    $("#startup").hide();
+    $("#questionnaire").show();
     console.log('_displayLoggedInUI')
 }
 
@@ -58,7 +72,7 @@ $('#send-message').click(function (event) {
 })
 
 // Update user profile. 
-// profileObj is an object. Ex profileObj = {location: 'Seattle', hotel: '<hotel id>'}
+// profileObj is an object. Ex profileObj = {name: 'Donkey Kong', location: 'Seattle'}
 function updateProfile(profileObj) {
     _updateProfileInDB(profileObj);
 }
@@ -71,11 +85,38 @@ function _showLocationCards(locationCards) {
 }
 
 // Create locationCard and send it to DB from client
-function createLocationCard() {
-    // TODO get locationCard info from client
-    // TODO know what info wil be on card
+function saveLocationCard() {
+    // locationCard must be in this shape for DB to accept
+    // {
+    //     city: 'Seattle',
+    //     hotels: [
+    //         {
+    //             name: 'Mariott',
+    //             id: 'Whatever unique id this is'
+    //         }
+    //     ],
+    //     venues: [
+    //         {
+    //             name: "Clementine cupcake truck",
+    //             id: "4ce3e678b8df548177c9b09b"
+    //         },
+    //         {
+    //             name: "Mr Brown’s Attic",
+    //             id: "5b3fa3038c35dc0039217315"
+    //         },
+    //         {
+    //             name: "blarg",
+    //             id: 'asdfaskdjfj'
+    //         }
+    //     ]
+    // }
 
-    const locationCard = 5
+    // TODO get locationCard info from client
+    // TODO add key/value pairs to locationCard object
+    const locationCard = {};
+
+
+
 
     _addLocationCardToDB(locationCard);
     
@@ -94,9 +135,11 @@ function _showDecisionDiv() {
 
 // Show questionnaire div
 function _showQuestionnaire() {
-    console.log('Showing questionnaire')
 
-}
+   console.log('Showing questionnaire')
+
+};
+
 
 // Show itinerary div
 function _showItinerary() {

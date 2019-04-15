@@ -52,4 +52,8 @@ $(document).ready(function () {
       //console.log(response.response.venue.photos.groups[1].items[0].prefix + "200x200" + response.response.venue.photos.groups[1].items[0].suffix);
       //console.log(response.response.venue.bestphoto.prefix + "200x200" + response.response.venue.bestphoto.source.suffix);
     });
-  };
+  }
+});
+
+
+ 
