@@ -13,7 +13,7 @@
 </head>
 
 <body>
-<!--nav bar-->
+    <!--nav bar-->
     <div id="nav">
         <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
             <a class="navbar-brand" href="#">TripBot</a>
@@ -27,13 +27,13 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="#">Home <span class="sr-only"></span></a>
                     </li>
-                
+
                     <li class="nav-item active">
                         <a id="login" class="nav-link logged-out" href="#">Log in</a>
                         <a id="logout" class="nav-link logged-in" href="#">Log out</a>
                     </li>
                 </ul>
-                
+
             </div>
         </nav>
     </div>
@@ -64,59 +64,60 @@
     </div> -->
 
     <!--Know Your Destination Page- asks user if they know where they want to travel-->
- 
+
 
     <!-- Questionaire Page -->
-    <div id="questionnaire"> 
+    <div id="questionnaire">
         <div class="container">
             <div class="title">Questions:</div>
             <!-- div to store questions in -->
             <div id="questions">
                 <h4>Please answer the following questions to help us customize your trip planning experience.</h4>
-                
-                <div id= 'question1'>
+
+                <div id='question1'>
                     <p>Which city would you like to travel to?</p>
-                    <div class='input-group mb-3'><input type='text' class='form-control' placeholder='City' aria-label='city' aria-describedby='button-addon2'></div>
+                    <div class='input-group mb-3'><input type='text' class='form-control' placeholder='City'
+                            aria-label='city' aria-describedby='button-addon2'></div>
                 </div>
 
-                <div id = "question2">
+                <div id="question2">
                     <p>Who will you be traveling with?</p>
-                    <input type = "radio" name = "1" value = "Solo">Solo Travel!</input><br>
-                    <input type = "radio" name = "1" value = "Friends">With my gals or my guys!</input><br>
-                    <input type = "radio" name = "1" value = "Couples">With my main squeeze!</input><br>
-                    <input type = "radio" name = "1" value = "Family">Family get away with the kids!</input><br>
+                    <input type="radio" name="1" value="Solo">Solo Travel!</input><br>
+                    <input type="radio" name="1" value="Friends">With my gals or my guys!</input><br>
+                    <input type="radio" name="1" value="Couples">With my main squeeze!</input><br>
+                    <input type="radio" name="1" value="Family">Family get away with the kids!</input><br>
                 </div>
-                
-                <div id ="question3">
+
+                <div id="question3">
                     <p>How long would you like your trip to last?</p>
-                    <input type = "radio" name = "2" value = "week">Less than a week</input><br>
-                    <input type = "radio" name = "2" value = "1-2weeks">1-2 weeks</input><br>
-                    <input type = "radio" name = "2" value = "2wk-1mo">2 weeks - 1 month</input><br>
-                    <input type = "radio" name = "2" value = "months">More than a month</input><br>
+                    <input type="radio" name="2" value="week">Less than a week</input><br>
+                    <input type="radio" name="2" value="1-2weeks">1-2 weeks</input><br>
+                    <input type="radio" name="2" value="2wk-1mo">2 weeks - 1 month</input><br>
+                    <input type="radio" name="2" value="months">More than a month</input><br>
                 </div>
-                
-                <div id = "question4">
+
+                <div id="question4">
                     <p>Are you interested in seeing attraction suggestions?</p>
-                    <input type = "radio" name = "3" value = "Y">Yes</input><br>
-                    <input type = "radio" name = "3" value = "N">No</input><br>
+                    <input type="radio" name="3" value="Y">Yes</input><br>
+                    <input type="radio" name="3" value="N">No</input><br>
                 </div>
-                
-                <div id = "question5">
+
+                <div id="question5">
                     <p>Are you interested in hotel suggestions?</p>
-                    <input type = "radio" name = "4" value = "Y">Yes</input><br>
-                    <input type = "radio" name = "4" value = "N">No</input><br>
+                    <input type="radio" name="4" value="Y">Yes</input><br>
+                    <input type="radio" name="4" value="N">No</input><br>
                 </div>
-                
-                <div id = "question6">
+
+                <div id="question6">
                     <p>Are you interested in seeing restaurant suggestions?</p>
-                    <input type = "radio" name = "5" value = "Y">Yes</input><br>
-                    <input type = "radio" name = "5" value = "N">No</input><br>
+                    <input type="radio" name="5" value="Y">Yes</input><br>
+                    <input type="radio" name="5" value="N">No</input><br>
                 </div>
 
             </div>
             <!-- submit button for questionnaire-->
             <br><br>
-            <button type="button" class="btn btn-dark" id = "submit-questions">Submit</button>
+            <button type="button" class="btn btn-dark" id="submit-questions">Submit</button>
         </div>
     </div>
 
@@ -243,22 +244,84 @@
         </div>
     </div>
 
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script> -->
-    
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <div id="content" style="height: 500px;">
+        <div id="start" style="height: 250px;">
+            <div class="draggable">
+                <p>Draggable 1</p>
+            </div>
+            <div class="draggable">
+                <p>Draggable 2</p>
+            </div>
+            <div class="draggable">
+                <p>Draggable 3</p>
+            </div>
+        </div>
+        <div id="end" style="height: 250px;"></div>
+    </div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>-->
+    <!-- Full jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
 
+    <!-- Original slim jQuery -->
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+       crossorigin="anonymous">
+   </script> -->
+
+    <!-- jQuery UI full -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <script>
+        $('.draggable').draggable({
+            containment: '#landing',
+            cursor: 'move',
+            snap: '#end',
+        });
+        $('#start').droppable({
+            drop: handleStartDropEvent
+        });
+        $('#end').droppable({
+            drop: handleEndDropEvent
+        });
+        function handleStartDropEvent(event, ui) {
+            var draggable = ui.draggable;
+            draggable.removeClass('saved')
+            console.log($(this).attr('id'))
+            console.log('The square with ID "' + draggable.attr('id') + '" was dropped onto me!');
+        }
+        function handleEndDropEvent(event, ui) {
+            var draggable = ui.draggable;
+            draggable.addClass('saved')
+            console.log($(this).attr('id'))
+            console.log('The square with ID "' + draggable.attr('id') + '" was dropped onto me!');
+        }
+    </script>
+
+    <style>
+        .draggable {
+            border: 1px solid black;
+            width: 100px;
+            display: inline-block;
+        }
+
+        .saved {
+            background-color: yellow;
+        }
+
+        #start {
+            background: green;
+        }
+
+        #end {
+            /* background: yellow; */
+        }
+    </style>
+
+
+    <!-- Ajax -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Bootstrap -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
