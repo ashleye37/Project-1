@@ -7,6 +7,8 @@
 // Feel free to edit the body of the functions, but let me know if you want to change their names since they interact with Firebase. 
 // The functions prepended with an underscore are automatically called, and should not be called elsewhere
 
+$("#questionnaire").hide();
+$("#landing").hide();
 
 // Login
 $("#login").click(function () {
@@ -18,10 +20,22 @@ $("#logout").click(function () {
     _signOutUser();
 });
 
+$("#submit-questions").click(function(){
+    $("#questionnaire").hide();
+    $("#landing").show();
+});
+
+$("#save").click(function(){
+    $("#suggestion").hide();
+});
+
 // Displays only .logged-in elements to logged in users. Automatically called on login
 function _displayLoggedInUI() {
     $('.logged-in').show();
     $('.logged-out').hide();
+
+    $("#startup").hide();
+    $("#questionnaire").show();
     console.log('_displayLoggedInUI')
 }
 

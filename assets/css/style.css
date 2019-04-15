@@ -95,11 +95,11 @@ a{
 .container{
     padding:0;
     width:80%;
+    height: auto;
     margin:50px auto;
     background-color:rgb(66, 66, 66, 0.6);
     border-radius: 7px;
     position: relative;
-    
 }
 
 .card-text{
@@ -139,9 +139,15 @@ a{
 }
 
 #save{
-    position: absolute;
+    position: relative;
     bottom:10px;
-    right:0;
+    right:0px;
+    clear:both;
+    float: right;
+}
+
+#saveDiv{
+    clear:both;
 }
 
 .remove{
@@ -162,13 +168,6 @@ a{
     left:45%;  
 }
 
-#questions{
-    padding: 30px;
-}
-
-#landing{
-    height:1000px;
-}
 
 
 /* Messages */
