@@ -29,8 +29,8 @@
                     </li>
 
                     <li class="nav-item active">
-                        <a id="login" class="nav-link logged-out" href="#">Log in</a>
-                        <a id="logout" class="nav-link logged-in" href="#">Log out</a>
+                        <button id="login" class="nav-link logged-out" href="#">Log in</button>
+                        <button id="logout" class="nav-link logged-in" href="#">Log out</button>
                     </li>
                 </ul>
 
@@ -123,104 +123,111 @@
 
     <!--Page with trip suggestions where user can select-->
     <div class="container" id="landing">
+
         <!--recommended cards-->
-        <div id="suggestion">
+
+        <div id="suggestions">
+
             <!--hotels-->
-            <div id="row">
+            <div id="hotels">
                 <div class="title">Suggested Hotels</div>
-                <div class="card" style="width: 10rem;">
+
+                <div class="card draggable" style="width: 10rem;" data-hotel-name="Marriot" data-hotel-id="12345">
                     <img src="assets/images/1.jpg" class="card-img-top">
                     <div class="card-body">
                         <p class="card-text">Hotel 1</p>
                     </div>
                 </div>
 
-                <div class="card" style="width: 10rem;">
+                <!-- <div class="card draggable" style="width: 10rem;">
                     <img src="assets/images/2.jpg" class="card-img-top">
                     <div class="card-body">
                         <p class="card-text">Hotel 2</p>
                     </div>
                 </div>
 
-                <div class="card" style="width: 10rem;">
+                <div class="card draggable" style="width: 10rem;">
                     <img src="assets/images/3.jpg" class="card-img-top">
                     <div class="card-body">
                         <p class="card-text">Hotel 3</p>
                     </div>
-                </div>
+                </div> -->
+
             </div>
+
             <!--activities-->
-            <div id="row">
+            <div id="activities">
                 <div class="title">Suggested Activities</div>
-                <div class="card" style="width: 10rem;">
+
+                <div class="card draggable" style="width: 10rem;" data-activity-name="fun-stuff" data-activity-id="56789">
                     <img src="assets/images/1.jpg" class="card-img-top">
                     <div class="card-body">
                         <p class="card-text">activity 1</p>
                     </div>
                 </div>
 
-                <div class="card" style="width: 10rem;">
+                <!-- <div class="card draggable" style="width: 10rem;">
                     <img src="assets/images/2.jpg" class="card-img-top">
                     <div class="card-body">
                         <p class="card-text">activity 2</p>
                     </div>
                 </div>
 
-                <div class="card" style="width: 10rem;">
+                <div class="card draggable" style="width: 10rem;">
                     <img src="assets/images/3.jpg" class="card-img-top">
                     <div class="card-body">
                         <p class="card-text">activity 3</p>
                     </div>
-                </div>
+                </div> -->
+
             </div>
         </div>
 
         <!--Users selected cards-->
-        <div id="selectedCard">
-            <div id="row">
-                <div class="title2">Your Choices</div>
-                <div class="card" style="width: 10rem;">
-                    <img src="assets/images/3.jpg" class="card-img-top">
-                    <div class="card-body">
-                        <p class="card-text">Places</p>
-                        <button class="remove">✘</button>
-                    </div>
-                </div>
+        <div id="selectedCards">
+            <div class="title2">Your Choices</div>
 
-                <div class="card" style="width: 10rem;">
-                    <img src="assets/images/2.jpg" class="card-img-top">
-                    <div class="card-body">
-                        <p class="card-text">Places</p>
-                        <button class="remove">✘</button>
-                    </div>
-                </div>
-
-                <div class="card" style="width: 10rem;">
-                    <img src="assets/images/2.jpg" class="card-img-top">
-                    <div class="card-body">
-                        <p class="card-text">Places</p>
-                        <button class="remove">✘</button>
-                    </div>
-                </div>
-
-                <div class="card" style="width: 10rem;">
-                    <img src="assets/images/2.jpg" class="card-img-top">
-                    <div class="card-body">
-                        <p class="card-text">Places</p>
-                        <button class="remove">✘</button>
-                    </div>
+            <!-- <div class="card draggable" style="width: 10rem;">
+                <img src="assets/images/3.jpg" class="card-img-top">
+                <div class="card-body">
+                    <p class="card-text">Places</p>
+                    <button class="remove">✘</button>
                 </div>
             </div>
+
+            <div class="card draggable" style="width: 10rem;">
+                <img src="assets/images/2.jpg" class="card-img-top">
+                <div class="card-body">
+                    <p class="card-text">Places</p>
+                    <button class="remove">✘</button>
+                </div>
+            </div>
+
+            <div class="card draggable" style="width: 10rem;">
+                <img src="assets/images/2.jpg" class="card-img-top">
+                <div class="card-body">
+                    <p class="card-text">Places</p>
+                    <button class="remove">✘</button>
+                </div>
+            </div>
+
+            <div class="card draggable" style="width: 10rem;">
+                <img src="assets/images/2.jpg" class="card-img-top">
+                <div class="card-body">
+                    <p class="card-text">Places</p>
+                    <button class="remove">✘</button>
+                </div>
+            </div> -->
+
         </div>
 
-        <!--save buttons-->
-        <button type="button" class="btn btn-info" id="save">Save</button>
-        <div id="saveDiv">
-        </div>
+        <!--save button-->
+        <button type="button" class="btn btn-info" id="save-itinerary">Save</button>
+
     </div>
 
     <!-- Chat-->
-    <div class="container">
+    <div id="chat" class="container">
         <div id="chatbox" class="chat">
             <div class="title">Chat</div>
             <div class="card-body">
@@ -244,20 +251,7 @@
         </div>
     </div>
 
-    <div id="content" style="height: 500px;">
-        <div id="start" style="height: 250px;">
-            <div class="draggable">
-                <p>Draggable 1</p>
-            </div>
-            <div class="draggable">
-                <p>Draggable 2</p>
-            </div>
-            <div class="draggable">
-                <p>Draggable 3</p>
-            </div>
-        </div>
-        <div id="end" style="height: 250px;"></div>
-    </div>
+
 
     <!-- Full jQuery library -->
     <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
@@ -272,48 +266,66 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
     <script>
+        $('#save-itinerary').click(function () {
+            let cityName = 'asdf';
+            const locationCard = {
+                city: cityName,
+                hotels: [],
+                venues: []
+            };
+
+            $('.selected-card').each(function(index) {
+                // Add hotel info if any
+                const hotelName = $(this).attr('data-hotel-name')
+                const activityName = $(this).attr('data-activity-name')
+                if (hotelName) {
+                    locationCard.hotels.push({
+                        name: hotelName,
+                        id: $(this).attr('data-hotel-id')
+                    })
+                } else if (activityName) { // Add activity info if any
+                    locationCard.venues.push({
+                        name: activityName,
+                        id: $(this).attr('data-activity-id')
+                    })
+                }    
+            })
+            console.log(locationCard)
+            _addLocationCardToDB(locationCard)
+        });
+
         $('.draggable').draggable({
             containment: '#landing',
             cursor: 'move',
-            snap: '#end',
+            snap: '#selectedCards',
         });
-        $('#start').droppable({
-            drop: handleStartDropEvent
+        $('#suggestions').droppable({
+            drop: removeClassOnDrop
         });
-        $('#end').droppable({
-            drop: handleEndDropEvent
+        $('#selectedCards').droppable({
+            drop: addClassOnDrop
         });
-        function handleStartDropEvent(event, ui) {
+        function removeClassOnDrop(event, ui) {
             var draggable = ui.draggable;
-            draggable.removeClass('saved')
-            console.log($(this).attr('id'))
-            console.log('The square with ID "' + draggable.attr('id') + '" was dropped onto me!');
+            draggable.removeClass('selected-card')
         }
-        function handleEndDropEvent(event, ui) {
+        function addClassOnDrop(event, ui) {
             var draggable = ui.draggable;
-            draggable.addClass('saved')
-            console.log($(this).attr('id'))
-            console.log('The square with ID "' + draggable.attr('id') + '" was dropped onto me!');
+            draggable.addClass('selected-card')
+            // console.log($(this).attr('id'))
+            // console.log('The square with ID "' + draggable.attr('id') + '" was dropped onto me!');
         }
     </script>
 
     <style>
         .draggable {
-            border: 1px solid black;
+            /* border: 1px solid black;
             width: 100px;
-            display: inline-block;
+            display: inline-block; */
         }
 
-        .saved {
+        .selected-card {
             background-color: yellow;
-        }
-
-        #start {
-            background: green;
-        }
-
-        #end {
-            /* background: yellow; */
         }
     </style>
 

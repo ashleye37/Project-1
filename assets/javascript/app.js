@@ -10,6 +10,7 @@
 $("#questionnaire").hide();
 $("#landing").hide();
 
+
 // Login
 $("#login").click(function () {
     _signInWithGoogle();
@@ -36,6 +37,7 @@ function _displayLoggedInUI() {
 
     $("#startup").hide();
     $("#questionnaire").show();
+    $('#chat').show();
     console.log('_displayLoggedInUI')
 }
 
@@ -43,6 +45,7 @@ function _displayLoggedInUI() {
 function _displayLoggedOutUI() {
     $('.logged-in').hide();
     $('.logged-out').show();
+    $('#chat').hide();
     console.log('_displayLoggedOutUI')
 }
 
@@ -110,16 +113,7 @@ function saveLocationCard() {
     //         }
     //     ]
     // }
-
-    // TODO get locationCard info from client
-    // TODO add key/value pairs to locationCard object
-    const locationCard = {};
-
-
-
-
     _addLocationCardToDB(locationCard);
-    
 }
 
 function deleteAllLocationCardsForUser() {
