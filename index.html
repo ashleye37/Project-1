@@ -28,18 +28,10 @@
                         <a class="nav-link" href="#">Home <span class="sr-only"></span></a>
                     </li>
                 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Settings
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a id="login" class="dropdown-item" href="#">Log in</a>
-                            <div class="dropdown-divider"></div>
-                            <a id="logout" class="dropdown-item" href="#">Log out</a>
-                        </div>
+                    <li class="nav-item active">
+                        <a id="login" class="nav-link logged-out" href="#">Log in</a>
+                        <a id="logout" class="nav-link logged-in" href="#">Log out</a>
                     </li>
-                    
                 </ul>
                 
             </div>
@@ -126,13 +118,10 @@
             <br><br>
             <button type="button" class="btn btn-dark" id = "submit-questions">Submit</button>
         </div>
-        
-
     </div>
 
     <!--Page with trip suggestions where user can select-->
     <div class="container" id="landing">
-
         <!--recommended cards-->
         <div id="suggestion">
             <!--hotels-->
@@ -161,29 +150,28 @@
             </div>
             <!--activities-->
             <div id="row">
-                    <div class="title">Suggested Activities</div>
-                    <div class="card" style="width: 10rem;">
-                        <img src="assets/images/1.jpg" class="card-img-top">
-                        <div class="card-body">
-                            <p class="card-text">activity 1</p>
-                        </div>
-                    </div>
-    
-                    <div class="card" style="width: 10rem;">
-                        <img src="assets/images/2.jpg" class="card-img-top">
-                        <div class="card-body">
-                            <p class="card-text">activity 2</p>
-                        </div>
-                    </div>
-    
-                    <div class="card" style="width: 10rem;">
-                        <img src="assets/images/3.jpg" class="card-img-top">
-                        <div class="card-body">
-                            <p class="card-text">activity 3</p>
-                        </div>
+                <div class="title">Suggested Activities</div>
+                <div class="card" style="width: 10rem;">
+                    <img src="assets/images/1.jpg" class="card-img-top">
+                    <div class="card-body">
+                        <p class="card-text">activity 1</p>
                     </div>
                 </div>
 
+                <div class="card" style="width: 10rem;">
+                    <img src="assets/images/2.jpg" class="card-img-top">
+                    <div class="card-body">
+                        <p class="card-text">activity 2</p>
+                    </div>
+                </div>
+
+                <div class="card" style="width: 10rem;">
+                    <img src="assets/images/3.jpg" class="card-img-top">
+                    <div class="card-body">
+                        <p class="card-text">activity 3</p>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!--Users selected cards-->
@@ -191,7 +179,6 @@
             <div id="row">
                 <div class="title2">Your Choices</div>
                 <div class="card" style="width: 10rem;">
-
                     <img src="assets/images/3.jpg" class="card-img-top">
                     <div class="card-body">
                         <p class="card-text">Places</p>
@@ -208,26 +195,26 @@
                 </div>
 
                 <div class="card" style="width: 10rem;">
-                        <img src="assets/images/2.jpg" class="card-img-top">
-                        <div class="card-body">
-                            <p class="card-text">Places</p>
-                            <button class="remove">✘</button>
-                        </div>
+                    <img src="assets/images/2.jpg" class="card-img-top">
+                    <div class="card-body">
+                        <p class="card-text">Places</p>
+                        <button class="remove">✘</button>
                     </div>
+                </div>
 
                 <div class="card" style="width: 10rem;">
-                        <img src="assets/images/2.jpg" class="card-img-top">
-                        <div class="card-body">
-                            <p class="card-text">Places</p>
-                            <button class="remove">✘</button>
-                        </div>
+                    <img src="assets/images/2.jpg" class="card-img-top">
+                    <div class="card-body">
+                        <p class="card-text">Places</p>
+                        <button class="remove">✘</button>
                     </div>
+                </div>
             </div>
         </div>
 
         <!--save buttons-->
-        <div class="btns">
-            <button type="button" class="btn btn-info" id="save">Save</button>
+        <button type="button" class="btn btn-info" id="save">Save</button>
+        <div id="saveDiv">
         </div>
     </div>
 
