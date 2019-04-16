@@ -82,9 +82,9 @@ legend{
 
 nav{
     height:50px;
-    background-color: rgb(66, 66, 66, 0.8);
+    background-color: rgb(66, 66, 66);
     width:100%;
-    opacity: 0.7;
+    opacity: 0.8;
 }
 
 a{
@@ -103,6 +103,10 @@ a{
     position: relative;
 }
 
+#landing{
+    height:100%;
+}
+
 .card-text{
     color:rgb(59, 59, 59);
 }
@@ -110,7 +114,6 @@ a{
 .card{   
     margin:15px;
     float:left;
-    height:160px;
     position: relative;
     background-color:white;
 }
@@ -139,8 +142,8 @@ a{
     clear:both;
 }
 
-#save{
-    position: relative;
+#save-itinerary{
+    position: absolute;
     bottom:10px;
     right:0px;
     clear:both;
@@ -173,14 +176,14 @@ a{
     padding: 30px;
 }
 
-#qs{
-    margin-bottom: -1px;
-    font-size: 20px;
+.q{
+    padding-bottom:10px;
 }
+
 
 /* Landing Page */
 #landing {
-    height: 1000px;
+    height: 1200px;
 }
 
 #suggestions {
@@ -192,15 +195,23 @@ a{
 }
 
 #activities {
-    height: 250px;
+    height: 350px;
 }
 
 #selectedCards {
-    height: 400px;
+    height: 350px;
 }
 
 #radio{
     margin-right: 3px;
+}
+
+
+/*login out buttons*/
+#login, #logout{
+ background-color: rgb(66, 66, 66, 0.7);
+ color:white;
+ border: none;
 }
 
 /* Messages */

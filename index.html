@@ -25,10 +25,6 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only"></span></a>
-                    </li>
-
-                    <li class="nav-item active">
                         <button id="login" class="nav-link logged-out" href="#">Log in</button>
                         <button id="logout" class="nav-link logged-in" href="#">Log out</button>
                     </li>
@@ -69,18 +65,16 @@
     <!-- Questionaire Page -->
     <div id="questionnaire">
         <div class="container">
-            <div class="title">Questions:</div>
+            <div class="title">Please answer the following questions to help us customize your trip planning experience：</div>
             <!-- div to store questions in -->
             <div id="questions">
-                <h4>Please answer the following questions to help us customize your trip planning experience.</h4>
-
-                <div id='question1'>
+                <div id='question1' class = "q">
                     <p>Which city would you like to travel to?</p>
                     <div class='input-group mb-3'><input type='text' class='form-control' placeholder='City'
                             aria-label='city' aria-describedby='button-addon2' id="location"></div>
                 </div>
 
-                <div id="question2">
+                <div id="question2" class = "q">
                     <p>Who will you be traveling with?</p>
                     <input type="radio" name="1" value="Solo">Solo Travel!</input><br>
                     <input type="radio" name="1" value="Friends">With my gals or my guys!</input><br>
@@ -88,7 +82,7 @@
                     <input type="radio" name="1" value="Family">Family get away with the kids!</input><br>
                 </div>
 
-                <div id="question3">
+                <div id="question3" class = "q">
                     <p>How long would you like your trip to last?</p>
                     <input type="radio" name="2" value="week">Less than a week</input><br>
                     <input type="radio" name="2" value="1-2weeks">1-2 weeks</input><br>
@@ -96,19 +90,19 @@
                     <input type="radio" name="2" value="months">More than a month</input><br>
                 </div>
 
-                <div id="question4">
+                <div id="question4" class = "q">
                     <p>Are you interested in seeing attraction suggestions?</p>
                     <input type="radio" name="3" value="Y">Yes</input><br>
                     <input type="radio" name="3" value="N">No</input><br>
                 </div>
 
-                <div id="question5">
+                <div id="question5" class = "q">
                     <p>Are you interested in hotel suggestions?</p>
                     <input type="radio" name="4" value="Y">Yes</input><br>
                     <input type="radio" name="4" value="N">No</input><br>
                 </div>
 
-                <div id="question6">
+                <div id="question6" class = "q">
                     <p>Are you interested in seeing restaurant suggestions?</p>
                     <input type="radio" name="5" value="Y">Yes</input><br>
                     <input type="radio" name="5" value="N">No</input><br>
@@ -123,6 +117,7 @@
 
     <!--Page with trip suggestions where user can select-->
     <div class="container" id="landing">
+    <div class="title">Your City:</div>
 
         <!--recommended cards-->
 
@@ -130,7 +125,7 @@
 
             <!--hotels-->
             <div id="hotels">
-                <div class="title">Suggested Hotels</div>
+                <div class="title2">Suggested Hotels</div>
 
                 <div class="card draggable" style="width: 10rem;" data-hotel-name="Marriot" data-hotel-id="12345">
                     <img src="assets/images/1.jpg" class="card-img-top" id="hotel1Pic">
@@ -161,16 +156,8 @@
             </div>
 
             <!--activities-->
-            <div id="activities">
-                <div class="title">Suggested Activities</div>
-
-                <div class="card draggable" style="width: 10rem;" data-activity-name="fun-stuff"
-                    data-activity-id="56789">
-                    <img src="assets/images/1.jpg" class="card-img-top">
-                    <div class="card-body">
-                        <p class="card-text">Activity1</p>
-                    </div>
-                </div>
+           
+                
 
                 <!-- Restaurants -->
                 <div id="row">
@@ -203,11 +190,11 @@
                     </div> -->
 
                 </div>
-            </div>
+            
         </div>
 
         <!--Users selected cards-->
-        <div id="selectedCards">
+        <div id="selectedCards" class = "ui-droppable">
             <div class="title2">Your Choices</div>
 
             <!-- <div class="card draggable" style="width: 10rem;">
@@ -263,7 +250,7 @@
                         <input id="message-input" type='text' name='message' class="form-control"
                             placeholder="Your message will be seen by everyone.">
                         <div class='input-group-append'>
-                            <button id="send-message" class='btn btn-primary'>Send</button>
+                            <button id="send-message" class="btn btn-info">Send</button>
                         </div>
                     </div>
                 </form>
@@ -374,6 +361,7 @@
     <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase-auth.js"></script>
 
     <!-- Source JS -->
+    
     <script src="./assets/javascript/app.js"></script>
     <script src="./assets/javascript/firebase.js"></script>
     <script src="./assets/javascript/js.js"></script>
