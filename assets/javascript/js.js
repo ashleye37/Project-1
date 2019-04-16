@@ -35,7 +35,7 @@ function buildLocationCards(location, tripDuration) {
   }).then(function (response) {
     const hotels = response.response.venues;
     for (var i = 0; i < numVenues; i++) {
-      makeHotelLocationCard(hotels[i], i);
+      makeHotelLocationCard(hotels[i], i, '#hotels');
     }
   });
 

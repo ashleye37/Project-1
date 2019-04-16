@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300" type="text/css" />
     <link rel="stylesheet" href="assets/css/style.css">
 
-    <link rel="stylesheet" href="assets/javascript/jquery-ui-1.12.1/jquery-ui.css">
+   
 </head>
 
 <body>
@@ -54,6 +54,9 @@
             <div id="questions">
 
                 <div id='question1'>
+                    <div id="location-empty" class="alert alert-warning" role="alert" style="display: none">
+                                Location input empty. Please enter the city you would like to travel to!
+                    </div>
                     <p id="qs">Which city would you like to travel to?</p>
                     <div class='input-group mb-3'>
                         <input id="location" type='text' class='form-control' placeholder='City' aria-label='city'
@@ -62,6 +65,9 @@
                 </div>
 
                 <div id="question2">
+                    <div id="tripLength-empty" class="alert alert-warning" role="alert" style="display: none">
+                                Trip length not selected. Please select how long you would like to travel!
+                    </div>
                     <p id="trip-length">How long would you like your trip to last?</p>
                     <input type="radio" name="trip-length" value="short-trip">Less than a week</input><br>
                     <input type="radio" name="trip-length" value="long-trip"> More than a week</input><br>
@@ -106,15 +112,6 @@
         </div>
     </div>
 
-    <div class="card draggable" style="width: 10rem;"> -->
-            <button class="remove-button">✘</button>
-        <img src="assets/images/2.jpg" class="card-img-top">
-        <div class="card-body">
-            <p class="card-text">Places</p>
-            
-        </div>
-    </div>
-
     <!-- Chat-->
     <div id="chat" class="container">
         <div id="chatbox" class="chat">
@@ -151,25 +148,6 @@
        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
        crossorigin="anonymous">
    </script> -->
-
-    <!-- jQuery UI full -->
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> -->
-    <script src="assets/javascript/jquery-ui-1.12.1/jquery-ui.js"></script>
-
-    <script>
-       // $('.draggable').draggable()
-
-        // $('body').on("click", ".draggable", function () {
-        //     console.log($(this))
-        //     $('.draggable').draggable()
-
-            // draggable({
-            // containment: '#landing',
-            // cursor: 'move',
-            // snap: '#selectedCards',
-        // });
-
-    </script>
 
     <!-- Ajax -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

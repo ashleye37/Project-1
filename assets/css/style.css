@@ -151,7 +151,7 @@ a{
     clear:both;
 }
 
-.remove-button{
+.remove-card{
     position: absolute;
     top:0;
     right:0;
@@ -224,9 +224,6 @@ a{
 }
 
 /* Messages */
-#chat {
-    height: 800px
-}
 #chatbox {
     width: 100%;
     color: black;
