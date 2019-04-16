@@ -7,7 +7,7 @@
 // Feel free to edit the body of the functions, but let me know if you want to change their names since they interact with Firebase. 
 // The functions prepended with an underscore are automatically called, and should not be called elsewhere
 
-//var location = [];
+
 
 $("#questionnaire").hide();
 $("#landing").hide();
@@ -25,9 +25,8 @@ $("#logout").click(function () {
 
 $("#submit-questions").click(function(){
     $("#questionnaire").hide();
-   // location = $("#location").val().trim();
-    //We need to write this location to somewhere on the landing page but not sure where that should be. 
-   // $("#location").val("");
+    location = $("#location").val().trim();
+
     $("#landing").show();
 });
 
