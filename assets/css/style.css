@@ -110,7 +110,7 @@ a{
 .card{   
     margin:15px;
     float:left;
-    height:160px;
+    /* height:160px; */
     position: relative;
     background-color:white;
 }
@@ -151,7 +151,7 @@ a{
     clear:both;
 }
 
-.remove{
+.remove-card{
     position: absolute;
     top:0;
     right:0;
@@ -200,7 +200,7 @@ a{
 
 /* Landing Page */
 #landing {
-    height: 1000px;
+    height: 1500px;
 }
 
 #suggestions {

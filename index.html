@@ -10,6 +10,8 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300" type="text/css" />
     <link rel="stylesheet" href="assets/css/style.css">
+
+   
 </head>
 
 <body>
@@ -46,39 +48,35 @@
     <!-- Questionaire Page -->
     <div id="questionnaire">
         <div class="container">
-            <div class="title">Please answer the following questions to help us customize your trip planning experience.</div>
+            <div class="title">Please answer the following questions to help us customize your trip planning experience.
+            </div>
             <!-- div to store questions in -->
             <div id="questions">
- 
-                
-                <div id= 'question1'>
-                    <p id="qs" >Which city would you like to travel to?</p>
+
+                <div id='question1'>
+                    <div id="location-empty" class="alert alert-warning" role="alert" style="display: none">
+                                Location input empty. Please enter the city you would like to travel to!
+                    </div>
+                    <p id="qs">Which city would you like to travel to?</p>
                     <div class='input-group mb-3'>
-                        <input id="location" type='text' class='form-control' placeholder='City' aria-label='city' aria-describedby='button-addon2'>
+                        <input id="location" type='text' class='form-control' placeholder='City' aria-label='city'
+                            aria-describedby='button-addon2'>
                     </div>
                 </div>
-              
-                <div id ="question2">
-                    <p id= "trip-length">How long would you like your trip to last?</p>
-                    <input type = "radio" name="trip-length" value="short-trip">Less than a week</input><br>
-                    <input type = "radio" name="trip-length" value="long-trip"> More than a week</input><br>
-                </div>
-      
-                <!-- <div id = "question3">
-                    <p id = "qs">Are you interested in hotel suggestions?</p>
-                    <input type = "radio" name = "4" value = "Y" id="radioHotelY">Yes</input><br>
-                    <input type = "radio" name = "4" value = "N" id="radioHotelN">No</input><br>
-                </div>
-                
-                <div id = "question4">
-                    <p id = "qs">Are you interested in seeing restaurant suggestions?</p>
-                    <input type = "radio" name = "5" value = "Y" id="radioRestaurantY">Yes</input><br>
-                    <input type = "radio" name = "5" value = "N" id="radioRestaurantN">No</input><br>
-                </div> -->
 
-            <!-- submit button for questionnaire-->
-            <br><br>
-            <button type="button" class="btn btn-dark" id="submit-questions">Submit</button>
+                <div id="question2">
+                    <div id="tripLength-empty" class="alert alert-warning" role="alert" style="display: none">
+                                Trip length not selected. Please select how long you would like to travel!
+                    </div>
+                    <p id="trip-length">How long would you like your trip to last?</p>
+                    <input type="radio" name="trip-length" value="short-trip">Less than a week</input><br>
+                    <input type="radio" name="trip-length" value="long-trip"> More than a week</input><br>
+                </div>
+
+                <!-- submit button for questionnaire-->
+                <br><br>
+                <button type="button" class="btn btn-dark" id="submit-questions">Submit</button>
+            </div>
         </div>
     </div>
 
@@ -94,104 +92,24 @@
                 <div class="title">Suggested Hotels</div>
             </div>
 
+            <!-- Restaurants -->
+            <div id="restaurants">
+                <div class="title">Suggested Restaurants</div>
+            </div>
+
             <!--activities-->
             <div id="activities">
                 <div class="title">Suggested Activities</div>
-
-                <div class="card draggable" style="width: 10rem;" data-activity-name="fun-stuff"
-                    data-activity-id="56789">
-                    <img src="assets/images/1.jpg" class="card-img-top">
-                    <div class="card-body">
-                        <p class="card-text">Activity1</p>
-                    </div>
-                </div>
-
-                <!-- Restaurants -->
-                <div id="row">
-
-                    <div class="title">Suggested Restaurants</div>
-
-                    <div class="card draggable" style="width: 10rem;">
-                        <img src="assets/images/1.jpg" class="card-img-top" id="restaurant1Pic"
-                        data-restaurant-name="fun-stuff" data-restaurant-id="56789">
-                        <div class="card-body">
-                            <p class="card-text" id="restaurant1"></p>
-                            <p class="card-text" id="restaurant1Address"></p>
-                        </div>
-                    </div>
-
-                </div>
             </div>
-            <!--Activities-->
-            <div id="row">
-                <div class="title">Suggested Activities</div>
-                <div class="card" style="width: 10rem;">
-                    <img src="assets/images/1.jpg" class="card-img-top" id="activitypic1">
-                    <div class="card-body">
-                        <p class="card-text" id="activity1"></p>
-                        <p class="card-text" id="activity1Address"></p>
-                    </div>
-                </div>
 
-                <div class="card" style="width: 10rem;">
-                    <img src="assets/images/2.jpg" class="card-img-top" id="activitypic2">
-                    <div class="card-body">
-                        <p class="card-text" id="activity2"></p>
-                        <p class="card-text" id="activity2Address"></p>
-                    </div>
-                </div>
-
-                <div class="card" style="width: 10rem;">
-                    <img src="assets/images/3.jpg" class="card-img-top" id="activitypic3">
-                    <div class="card-body">
-                        <p class="card-text" id="activity3"></p>
-                        <p class="card-text" id="activity3Address"></p>
-                    </div>
-                </div>
+            <!--Choices-->
+            <div id="selectedCards">
+                <div class="title">Your Choices</div>
             </div>
+
+            <!--Save Button-->
+            <button type="button" class="btn btn-info" id="save-itinerary">Save</button>
         </div>
-
-        <!--Users selected cards-->
-        <div id="selectedCards">
-            <div class="title2">Your Choices</div>
-
-            <!-- <div class="card draggable" style="width: 10rem;">
-                <img src="assets/images/3.jpg" class="card-img-top">
-                <div class="card-body">
-                    <p class="card-text">Places</p>
-                    <button class="remove">✘</button>
-                </div>
-                </div>
-
-                <div class="card draggable" style="width: 10rem;">
-                    <img src="assets/images/2.jpg" class="card-img-top">
-                    <div class="card-body">
-                        <p class="card-text">Places</p>
-                        <button class="remove">✘</button>
-                    </div>
-                </div>
-
-                <div class="card draggable" style="width: 10rem;">
-                    <img src="assets/images/2.jpg" class="card-img-top">
-                    <div class="card-body">
-                        <p class="card-text">Places</p>
-                        <button class="remove">✘</button>
-                    </div>
-                </div>
-
-                <div class="card draggable" style="width: 10rem;">
-                    <img src="assets/images/2.jpg" class="card-img-top">
-                    <div class="card-body">
-                        <p class="card-text">Places</p>
-                        <button class="remove">✘</button>
-                    </div>
-                </div> -->
-
-        </div>
-
-        <!--save button-->
-        <button type="button" class="btn btn-info" id="save-itinerary">Save</button>
-
     </div>
 
     <!-- Chat-->
@@ -221,6 +139,7 @@
 
 
 
+
     <!-- Full jQuery library -->
     <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
 
@@ -229,9 +148,6 @@
        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
        crossorigin="anonymous">
    </script> -->
-
-    <!-- jQuery UI full -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
     <!-- Ajax -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

@@ -132,7 +132,7 @@ function _getLocationCards() {
         if (!cards) {
             cards = [];
         }
-        _showLocationCards(Object.values(cards));
+        _showLocationCards(Object.values(cards)[0]);
     });
 }
 
