@@ -10,6 +10,8 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300" type="text/css" />
     <link rel="stylesheet" href="assets/css/style.css">
+
+   
 </head>
 
 <body>
@@ -39,201 +41,79 @@
         <h1>Welcome to TripBot!</h1>
     </div>
 
-
-    <!-- Might need later, but only logging in now instead of signup -->
-    <!-- Login Page; where the user will input their log in information-->
-    <!-- <div class="container">
-        <div class="card">
-            <legend>Log In</legend>
-            <form>
-                <div class="form-group">
-                    <label for="frequency">Email</label>
-                    <input type="text" class="form-control" >
-                </div>
-                <div class="form-group">
-                    <label for="frequency">Password</label>
-                    <input type="text" class="form-control" >
-                </div>
-                <button type="submit" class="btn btn-dark">Submit</button>
-            </form>
-        </div>
-    </div> -->
-
-    <!--Know Your Destination Page- asks user if they know where they want to travel-->
-
-
     <!-- Questionaire Page -->
     <div id="questionnaire">
         <div class="container">
-            <div class="title">Please answer the following questions to help us customize your trip planning experience：</div>
+            <div class="title">Please answer the following questions to help us customize your trip planning experience.
+            </div>
             <!-- div to store questions in -->
             <div id="questions">
-                <div id='question1' class = "q">
-                    <p>Which city would you like to travel to?</p>
-                    <div class='input-group mb-3'><input type='text' class='form-control' placeholder='City'
-                            aria-label='city' aria-describedby='button-addon2' id="location"></div>
+
+                <div id='question1'>
+                    <div id="location-empty" class="alert alert-warning" role="alert" style="display: none">
+                                Location input empty. Please enter the city you would like to travel to!
+                    </div>
+                    <div id="location-invalid" class="alert alert-warning" role="alert" style="display: none">
+                                The location you entered is not a city. Please update your travel location.
+                </div>
+                    <p id="qs">Which city would you like to travel to?</p>
+                    <div class='input-group mb-3'>
+                        <input id="location" type='text' class='form-control' placeholder='City' aria-label='city'
+                            aria-describedby='button-addon2'>
+                    </div>
                 </div>
 
-                <div id="question2" class = "q">
-                    <p>Who will you be traveling with?</p>
-                    <input type="radio" name="1" value="Solo">Solo Travel!</input><br>
-                    <input type="radio" name="1" value="Friends">With my gals or my guys!</input><br>
-                    <input type="radio" name="1" value="Couples">With my main squeeze!</input><br>
-                    <input type="radio" name="1" value="Family">Family get away with the kids!</input><br>
+                <div id="question2">
+                    <div id="tripLength-empty" class="alert alert-warning" role="alert" style="display: none">
+                                Trip length not selected. Please select how long you would like to travel!
+                    </div>
+                    <p id="trip-length">How long would you like your trip to last?</p>
+                    <input type="radio" name="trip-length" value="short-trip">Less than a week</input><br>
+                    <input type="radio" name="trip-length" value="long-trip"> More than a week</input><br>
                 </div>
 
-                <div id="question3" class = "q">
-                    <p>How long would you like your trip to last?</p>
-                    <input type="radio" name="2" value="week">Less than a week</input><br>
-                    <input type="radio" name="2" value="1-2weeks">1-2 weeks</input><br>
-                    <input type="radio" name="2" value="2wk-1mo">2 weeks - 1 month</input><br>
-                    <input type="radio" name="2" value="months">More than a month</input><br>
-                </div>
-
-                <div id="question4" class = "q">
-                    <p>Are you interested in seeing attraction suggestions?</p>
-                    <input type="radio" name="3" value="Y">Yes</input><br>
-                    <input type="radio" name="3" value="N">No</input><br>
-                </div>
-
-                <div id="question5" class = "q">
-                    <p>Are you interested in hotel suggestions?</p>
-                    <input type="radio" name="4" value="Y">Yes</input><br>
-                    <input type="radio" name="4" value="N">No</input><br>
-                </div>
-
-                <div id="question6" class = "q">
-                    <p>Are you interested in seeing restaurant suggestions?</p>
-                    <input type="radio" name="5" value="Y">Yes</input><br>
-                    <input type="radio" name="5" value="N">No</input><br>
-                </div>
-
+                <!-- submit button for questionnaire-->
+                <br><br>
+                <button type="button" class="btn btn-dark" id="submit-questions">Submit</button>
             </div>
-            <!-- submit button for questionnaire-->
-            <br><br>
-            <button type="button" class="btn btn-dark" id="submit-questions">Submit</button>
         </div>
     </div>
 
     <!--Page with trip suggestions where user can select-->
-    <div class="container" id="landing">
-    <div class="title">Your City:</div>
+    <div class="container logged-in" id="landing">
 
+        <!--Display selected City-->
+            <div id="selectedCity">
+                <div></div>
+            </div>
         <!--recommended cards-->
 
         <div id="suggestions">
 
             <!--hotels-->
             <div id="hotels">
-                <div class="title2">Suggested Hotels</div>
+                <div class="title">Suggested Hotels</div>
+            </div>
 
-                <div class="card draggable" style="width: 10rem;" data-hotel-name="Marriot" data-hotel-id="12345">
-                    <img src="assets/images/1.jpg" class="card-img-top" id="hotel1Pic">
-                    <div class="card-body">
-                        <p class="card-text" id="hotel1"></p>
-                        <p class="card-text" id="hotel1Address"></p>
-                    </div>
-                </div>
-
-                <!-- <div class="card" style="width: 10rem;">
-                    <img src="assets/images/2.jpg" class="card-img-top" id="hotel2Pic">
-                    <div class="card-body">
-                        <p class="card-text" id="hotel2"></p>
-                        <p class="card-text" id="hotel2Address"></p>
-                    </div>
-                </div> -->
-
-                <!-- <div class="card draggable" style="width: 10rem;">
-                    <img src="assets/images/3.jpg" class="card-img-top">
-                <div class="card" style="width: 10rem;">
-                    <img src="assets/images/3.jpg" class="card-img-top" id="hotel3Pic">
-                    <div class="card-body">
-                        <p class="card-text" id="hotel3"></p>
-                        <p class="card-text" id="hotel3Address"></p>
-                    </div>
-                </div>  -->
-
+            <!-- Restaurants -->
+            <div id="restaurants">
+                <div class="title">Suggested Restaurants</div>
             </div>
 
             <!--activities-->
-           
-                
+            <div id="activities">
+                <div class="title">Suggested Activities</div>
+            </div>
 
-                <!-- Restaurants -->
-                <div id="row">
+            <!--Choices-->
+            <div id="selectedCards">
+                <div class="title">Your Choices</div>
+            </div>
 
-                    <div class="title">Suggested Restaurants</div>
-
-                    <div class="card draggable" style="width: 10rem;">
-                        <img src="assets/images/1.jpg" class="card-img-top" id="restaurant1Pic"
-                        data-restaurant-name="fun-stuff" data-restaurant-id="56789">
-                        <div class="card-body">
-                            <p class="card-text" id="restaurant1"></p>
-                            <p class="card-text" id="restaurant1Address"></p>
-                        </div>
-                    </div>
-
-                    <!-- <div class="card" style="width: 10rem;">
-                        <img src="assets/images/2.jpg" class="card-img-top" id="restaurant2Pic">
-                        <div class="card-body">
-                            <p class="card-text" id="restaurant2"></p>
-                            <p class="card-text" id="restaurant2Address"></p>
-                        </div>
-                    </div>
-
-                    <div class="card" style="width: 10rem;">
-                        <img src="assets/images/3.jpg" class="card-img-top" id="restaurant3Pic">
-                        <div class="card-body">
-                            <p class="card-text" id="restaurant3"></p>
-                            <p class="card-text" id="restaurant3Address"></p>
-                        </div>
-                    </div> -->
-
-                </div>
-            
+            <!--Save Button-->
+            <button type="button" class="btn btn-info" id="save-itinerary">Save</button>
+            <button type="button" class="btn btn-dark" id="reset-trip">Start a new trip!</button>
         </div>
-
-        <!--Users selected cards-->
-        <div id="selectedCards" class = "ui-droppable">
-            <div class="title2">Your Choices</div>
-
-            <!-- <div class="card draggable" style="width: 10rem;">
-                <img src="assets/images/3.jpg" class="card-img-top">
-                <div class="card-body">
-                    <p class="card-text">Places</p>
-                    <button class="remove">✘</button>
-                </div>
-                </div>
-
-                <div class="card draggable" style="width: 10rem;">
-                    <img src="assets/images/2.jpg" class="card-img-top">
-                    <div class="card-body">
-                        <p class="card-text">Places</p>
-                        <button class="remove">✘</button>
-                    </div>
-                </div>
-
-                <div class="card draggable" style="width: 10rem;">
-                    <img src="assets/images/2.jpg" class="card-img-top">
-                    <div class="card-body">
-                        <p class="card-text">Places</p>
-                        <button class="remove">✘</button>
-                    </div>
-                </div>
-
-                <div class="card draggable" style="width: 10rem;">
-                    <img src="assets/images/2.jpg" class="card-img-top">
-                    <div class="card-body">
-                        <p class="card-text">Places</p>
-                        <button class="remove">✘</button>
-                    </div>
-                </div> -->
-
-        </div>
-
-        <!--save button-->
-        <button type="button" class="btn btn-info" id="save-itinerary">Save</button>
-
     </div>
 
     <!-- Chat-->
@@ -263,6 +143,7 @@
 
 
 
+
     <!-- Full jQuery library -->
     <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
 
@@ -271,81 +152,6 @@
        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
        crossorigin="anonymous">
    </script> -->
-
-    <!-- jQuery UI full -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-
-    <script>
-        $('#save-itinerary').click(function () {
-            let cityName = 'asdf';
-            const locationCard = {
-                city: cityName,
-                hotels: [],
-                restaurants: [],
-                venues: []
-            };
-
-            $('.selected-card').each(function (index) {
-                // Add hotel info if any
-                const hotelName = $(this).attr('data-hotel-name')
-                const activityName = $(this).attr('data-activity-name')
-                const restaurantName = $(this).attr('data-restaurant-name')
-                if (hotelName) {
-                    locationCard.hotels.push({
-                        name: hotelName,
-                        id: $(this).attr('data-hotel-id')
-                    })
-                } else if (activityName) { // Add activity info if any
-                    locationCard.venues.push({
-                        name: activityName,
-                        id: $(this).attr('data-activity-id')
-                    })
-                } else if (restaurantName) {
-                    locationCard.restaurants.push({
-                        name: restaurant,
-                        id: $(this).attr('data-restaurant-id')
-                    })
-                }
-            })
-            console.log(locationCard)
-            _addLocationCardToDB(locationCard)
-        });
-
-        $('.draggable').draggable({
-            containment: '#landing',
-            cursor: 'move',
-            snap: '#selectedCards',
-        });
-        $('#suggestions').droppable({
-            drop: removeClassOnDrop
-        });
-        $('#selectedCards').droppable({
-            drop: addClassOnDrop
-        });
-        function removeClassOnDrop(event, ui) {
-            var draggable = ui.draggable;
-            draggable.removeClass('selected-card')
-        }
-        function addClassOnDrop(event, ui) {
-            var draggable = ui.draggable;
-            draggable.addClass('selected-card')
-            // console.log($(this).attr('id'))
-            // console.log('The square with ID "' + draggable.attr('id') + '" was dropped onto me!');
-        }
-    </script>
-
-    <style>
-        .draggable {
-            /* border: 1px solid black;
-            width: 100px;
-            display: inline-block; */
-        }
-
-        .selected-card {
-            background-color: yellow;
-        }
-    </style>
-
 
     <!-- Ajax -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

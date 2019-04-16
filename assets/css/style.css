@@ -114,6 +114,7 @@ a{
 .card{   
     margin:15px;
     float:left;
+    /* height:160px; */
     position: relative;
     background-color:white;
 }
@@ -154,7 +155,7 @@ a{
     clear:both;
 }
 
-.remove{
+.remove-card{
     position: absolute;
     top:0;
     right:0;
@@ -180,10 +181,29 @@ a{
     padding-bottom:10px;
 }
 
+#radio{
+    margin-right: 2px;
+}
+
+#radioHotelY{
+    margin-right: 2px;
+}
+
+#radioHotelN{
+    margin-right: 2px;
+}
+
+#radioRestaurantY{
+    margin-right: 2px;
+}
+
+#radioRestaurantN{
+    margin-right: 2px;
+}
 
 /* Landing Page */
 #landing {
-    height: 1200px;
+    height: 1500px;
 }
 
 #suggestions {
@@ -196,6 +216,10 @@ a{
 
 #activities {
     height: 350px;
+}
+
+#restaurants {
+    height: 250px;
 }
 
 #selectedCards {
