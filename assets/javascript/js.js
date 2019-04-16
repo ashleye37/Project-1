@@ -12,8 +12,6 @@ const TristansId = 'VZJ2VR0WXOHFHHYGCBCE5L1XMY2KG5G0OS3UK4PDYHAJ2CM1';
 const TristansAuth = "client_id=" + TristansId + "&client_secret=" + TristansSecret + '&v=20190411'
 
 const currentAuth = TristansAuth;
-var hotelVenueId = [];
-var restaurantVenueId = [];
 var location;
 
 // $(document).ready(function () {
@@ -49,7 +47,7 @@ function buildLocationCards(location, tripDuration) {
 
     const restaurants = response.response.venues;
     for (var i = 0; i < numVenues; i++) {
-      makeRestaurantLocationCard(restaurants[i], i);
+      makeRestaurantLocationCard(restaurants[i], i,  '#restaurants');
     }
   });
 
@@ -63,7 +61,7 @@ function buildLocationCards(location, tripDuration) {
 
     const activities = response.response.venues;
     for (var i = 0; i < numVenues; i++) {
-      makeActivityLocationCard(activities[i]);
+      makeActivityLocationCard(activities[i], i, '#activities');
     }
   });
 };

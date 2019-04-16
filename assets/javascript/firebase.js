@@ -43,9 +43,9 @@ auth.onAuthStateChanged(function (user) {
         // Displays content based on user decision state
         users.child(auth.currentUser.uid).once('value', function (snap) {
             const userInfo = snap.val();
-            if (userInfo.decision === userDecisionState.UNDECIDED) {
-                _showDecisionDiv()
-            } else if (userInfo.decision === userDecisionState.QUESTIONNAIRE) {
+
+            if (userInfo.decision === userDecisionState.QUESTIONNAIRE) {
+
                 _showQuestionnaire();
             } else if (userInfo.decision === userDecisionState.ITINERARY) {
                 _showItinerary();
@@ -127,7 +127,7 @@ function _addLocationCardToDB(payload) {
 }
 
 function _getLocationCards() {
-    locationCards.orderByChild('userId').equalTo(auth.currentUser.uid).on('value', function (snapshot) {
+    locationCards.orderByChild('userId').limitToLast(1).equalTo(auth.currentUser.uid).once('value', function (snapshot) {
         let cards = snapshot.val();
         if (!cards) {
             cards = [];
@@ -171,6 +171,6 @@ function _monitorChat() {
 
 // Switches user decision state in profile. Decision is a string
 function _switchDecisionInDB(decision) {
-    _updateProfileInDB({decision: decision})
+    _updateProfileInDB({ decision: decision })
 }
 

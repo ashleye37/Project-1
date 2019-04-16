@@ -6,6 +6,7 @@
 // Helper functions for UI
 // Feel free to edit the body of the functions, but let me know if you want to change their names since they interact with Firebase. 
 // The functions prepended with an underscore are automatically called, and should not be called elsewhere
+
 let cityLocation;
 
 var hotelImgs = [
@@ -45,31 +46,57 @@ $("#logout").click(function () {
 //Click event that will submit the questionnaire and build out the location cards for them to then be able to select.
 $("#submit-questions").click(function (event) {
     event.preventDefault()
-    const locationMessage = $('#location').val().trim();
-    if (!locationMessage.length) { // Handle empty message
+
+
+    const location = $('#location').val().trim();
+    var hotelQueryURL = "https://api.foursquare.com/v2/venues/search?client_id=" + TristansId + "&client_secret=" + TristansSecret + "&near=" + location + "&query=hotel&v=20190415"
+    $.ajax({
+        url: hotelQueryURL,
+        method: "GET"
+    }).then(function (response) {
+
+    }).catch(error => {
+        $('#location-invalid').show();
+        $("#tripLength-empty").hide();
+        event.stopPropagation();
+        return;
+    })
+    if (!location.length) { // Handle empty message
         $('#location-empty').show();
         event.stopPropagation();
         return;
-    } 
+    }
     $('#location-empty').hide();
-    cityLocation = locationMessage;
+    cityLocation = location;
     const tripDuration = $("input[name='trip-length']:checked").val();  // short-trip, long-trip
     if (!tripDuration) {
         $('#tripLength-empty').show();
         event.stopPropagation();
         return;
     }
-    buildLocationCards(locationMessage, tripDuration)
+    $('#location-invalid').hide();
+    $('#tripLength-empty').hide();
+    $('#location-empty').hide();
+
+    buildLocationCards(location, tripDuration)
     $("#tripLength-empty").hide();
     $("#landing").show();
     $("#questionnaire").hide();
     switchDecisionToItinerary()
 });
 
+$('#reset-trip').click(function() {
+    deleteAllLocationCardsForUser()
+    $('.card-clear').remove();
+    $('#location').val("");
+    _showQuestionnaire()
+
+})
+
+
 //Function to build out hotel location cards.
 function makeHotelLocationCard(response, index, destinationDiv) {
-    console.log(response, index)
-    const div = $('<div class="card draggable" style="width: 10rem;">')
+    const div = $('<div class="card card-clear" style="width: 10rem;">')
         .attr('data-hotel-name', response.name)
         .attr('data-hotel-id', response.id)
         .attr('origin', 'hotels')
@@ -84,8 +111,8 @@ function makeHotelLocationCard(response, index, destinationDiv) {
 };
 
 //Function to build out restaurant location cards.
-function makeRestaurantLocationCard(response, index) {
-    const div = $('<div class="card draggable" style="width: 10rem;">')
+function makeRestaurantLocationCard(response, index, destinationDiv) {
+    const div = $('<div class="card card-clear" style="width: 10rem;">')
         .attr('data-restaurant-name', response.name)
         .attr('data-restaurant-id', response.id)
         .attr('origin', 'restaurants')
@@ -96,12 +123,12 @@ function makeRestaurantLocationCard(response, index) {
     div.append(image).append(card).append(button).append(removeButton)
     const p = $('<p class="card-text">').text(response.name)
     card.append(p)
-    $('#restaurants').append(div)
+    $(destinationDiv).append(div)
 };
 
 //Function to build out activity location cards.
-function makeActivityLocationCard(response) {
-    const div = $('<div class="card draggable" style="width: 10rem;">')
+function makeActivityLocationCard(response, index, destinationDiv) {
+    const div = $('<div class="card card-clear" style="width: 10rem;">')
         .attr('data-activity-name', response.name)
         .attr('data-activity-id', response.id)
         .attr('origin', 'activities')
@@ -112,7 +139,7 @@ function makeActivityLocationCard(response) {
     div.append(image).append(card).append(button).append(removeButton)
     const p = $('<p class="card-text">').text(response.name)
     card.append(p)
-    $('#activities').append(div)
+    $(destinationDiv).append(div)
 };
 
 // Add locationCard to #selectedCards div
@@ -121,11 +148,11 @@ $(document).on('click', '.add-to-trip', function () {
 })
 
 $(document).on('click', '.remove-card', function () {
-    console.log('remove')
     $('#' + $(this).parent().attr('origin')).append($(this).parent())
 })
 
 $('#save-itinerary').click(function () {
+    // deleteAllLocationCardsForUser();
     const locationCard = {
         city: cityLocation,
         hotels: [],
@@ -156,7 +183,6 @@ $('#save-itinerary').click(function () {
             })
         }
     })
-    console.log(locationCard)
     _addLocationCardToDB(locationCard)
 });
 
@@ -166,9 +192,7 @@ function _displayLoggedInUI() {
     $('.logged-out').hide();
 
     $("#startup").hide();
-    $("#questionnaire").show();
     $('#chat').show();
-    console.log('_displayLoggedInUI')
 }
 
 // Displays only .logged-out elements to logged out users. Automatically called on logout
@@ -176,7 +200,6 @@ function _displayLoggedOutUI() {
     $('.logged-in').hide();
     $('.logged-out').show();
     $('#chat').hide();
-    console.log('_displayLoggedOutUI')
 }
 
 // Adds new chat messages to DOM. Automatically called after submitting message
@@ -211,16 +234,29 @@ function updateProfile(profileObj) {
 }
 
 // Retrieves all location cards for user and displays them. Automatically called on login
-function _showLocationCards(locationCards) {
+function _showLocationCards(locationCard) {
     // Create hotel calls from data saved in DB
-    locationCards.hotels.forEach((index, obj) => {
-        makeHotelLocationCard(index, obj, '#selectedCards')
-    })
+    if (locationCard) {
+        if (locationCard.hotels) {
+            locationCard.hotels.forEach((obj, index) => {
+                makeHotelLocationCard(obj, index, '#selectedCards')
+            })
+        }
+        if (locationCard.restaurants) {
+            locationCard.restaurants.forEach((obj, index) => {
+                makeRestaurantLocationCard(obj, index, '#selectedCards')
+            })
+        }
+        if (locationCard.venues) {
+            locationCard.venues.forEach((obj, index) => {
+                makeActivityLocationCard(obj, index, '#selectedCards')
+            })
+        }
+    }
 }
 
 // Create locationCard and send it to DB from client
 function saveLocationCard() {
-    deleteAllLocationCardsForUser();
     // locationCard must be in this shape for DB to accept
     // {
     //     city: 'Seattle',
@@ -252,13 +288,6 @@ function deleteAllLocationCardsForUser() {
     _deleteAllLocationCardsForUser();
 }
 
-// Show initial decision (I know where I want to go / No idea) div
-function _showDecisionDiv() {
-    console.log('Showing decision div')
-    $('#knowDestination').show();
-
-}
-
 // Show questionnaire div
 function _showQuestionnaire() {
     $("#questionnaire").show();
@@ -271,7 +300,7 @@ function _showQuestionnaire() {
 function _showItinerary() {
     $("#questionnaire").hide();
     $("#landing").show();
-    
+
 }
 
 function switchDecisionToUndecided() {
