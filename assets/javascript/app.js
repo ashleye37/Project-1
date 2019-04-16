@@ -23,16 +23,89 @@ $("#logout").click(function () {
     _signOutUser();
 });
 
-$("#submit-questions").click(function(){
-    $("#questionnaire").hide();
-    location = $("#location").val().trim();
-
+$("#submit-questions").click(function (event) {
+    event.preventDefault()
+    // $("#questionnaire").hide();
+    const location = $("#location").val().trim();
+    const tripDuration = $("input[name='trip-length']:checked").val();  // short-trip, long-trip
+    buildLocationCards(location, tripDuration)
     $("#landing").show();
 });
 
-$("#save").click(function(){
+function makeHotelLocationCard(response) {
+    const div = $('<div class="card draggable" style="width: 10rem;">')
+        .attr('data-restaurant-name', response.name)
+        .attr('data-restaurant-id', response.id)
+    const image = $('<img src="assets/images/1.jpg" class="card-img-top" id="hotel1Pic">')
+    const card = $('<div class="card-body">')
+    div.append(image).append(card)
+    const p = $('<p class="card-text">').text(response.name)
+    card.append(p)
+    $('#hotels').append(div)
+};
+
+$("#save").click(function () {
     $("#suggestion").hide();
 });
+
+$('#save-itinerary').click(function () {
+    let cityName = 'asdf';
+    const locationCard = {
+        city: cityName,
+        hotels: [],
+        restaurants: [],
+        venues: []
+    };
+
+    $('.selected-card').each(function (index) {
+        // Add hotel info if any
+        const hotelName = $(this).attr('data-hotel-name')
+        const activityName = $(this).attr('data-activity-name')
+        const restaurantName = $(this).attr('data-restaurant-name')
+        if (hotelName) {
+            locationCard.hotels.push({
+                name: hotelName,
+                id: $(this).attr('data-hotel-id')
+            })
+        } else if (activityName) { // Add activity info if any
+            locationCard.venues.push({
+                name: activityName,
+                id: $(this).attr('data-activity-id')
+            })
+        } else if (restaurantName) {
+            locationCard.restaurants.push({
+                name: restaurant,
+                id: $(this).attr('data-restaurant-id')
+            })
+        }
+    })
+    console.log(locationCard)
+    _addLocationCardToDB(locationCard)
+});
+
+// $('.draggable').draggable({
+//     containment: '#landing',
+//     cursor: 'move',
+//     snap: '#selectedCards',
+// });
+// $('#suggestions').droppable({
+//     drop: removeClassOnDrop
+// });
+// $('#selectedCards').droppable({
+//     drop: addClassOnDrop
+// });
+
+// function removeClassOnDrop(event, ui) {
+//     var draggable = ui.draggable;
+//     draggable.removeClass('selected-card')
+// }
+// function addClassOnDrop(event, ui) {
+//     var draggable = ui.draggable;
+//     draggable.addClass('selected-card')
+//     // console.log($(this).attr('id'))
+//     // console.log('The square with ID "' + draggable.attr('id') + '" was dropped onto me!');
+// }
+
 
 // Displays only .logged-in elements to logged in users. Automatically called on login
 function _displayLoggedInUI() {
@@ -134,7 +207,7 @@ function _showDecisionDiv() {
 // Show questionnaire div
 function _showQuestionnaire() {
 
-   console.log('Showing questionnaire')
+    console.log('Showing questionnaire')
 
 };
 
