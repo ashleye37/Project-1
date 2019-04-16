@@ -178,6 +178,26 @@ a{
     font-size: 20px;
 }
 
+#radio{
+    margin-right: 2px;
+}
+
+#radioHotelY{
+    margin-right: 2px;
+}
+
+#radioHotelN{
+    margin-right: 2px;
+}
+
+#radioRestaurantY{
+    margin-right: 2px;
+}
+
+#radioRestaurantN{
+    margin-right: 2px;
+}
+
 /* Landing Page */
 #landing {
     height: 1000px;
