@@ -215,6 +215,10 @@ a{
     height: 250px;
 }
 
+#restaurants {
+    height: 250px;
+}
+
 #selectedCards {
     height: 400px;
 }

@@ -27,10 +27,6 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only"></span></a>
-                    </li>
-
-                    <li class="nav-item active">
                         <button id="login" class="nav-link logged-out" href="#">Log in</button>
                         <button id="logout" class="nav-link logged-in" href="#">Log out</button>
                     </li>
@@ -57,6 +53,9 @@
                     <div id="location-empty" class="alert alert-warning" role="alert" style="display: none">
                                 Location input empty. Please enter the city you would like to travel to!
                     </div>
+                    <div id="location-invalid" class="alert alert-warning" role="alert" style="display: none">
+                                The location you entered is not a city. Please update your travel location.
+                </div>
                     <p id="qs">Which city would you like to travel to?</p>
                     <div class='input-group mb-3'>
                         <input id="location" type='text' class='form-control' placeholder='City' aria-label='city'
@@ -81,8 +80,12 @@
     </div>
 
     <!--Page with trip suggestions where user can select-->
-    <div class="container" id="landing">
+    <div class="container logged-in" id="landing">
 
+        <!--Display selected City-->
+            <div id="selectedCity">
+                <div></div>
+            </div>
         <!--recommended cards-->
 
         <div id="suggestions">
@@ -109,6 +112,7 @@
 
             <!--Save Button-->
             <button type="button" class="btn btn-info" id="save-itinerary">Save</button>
+            <button type="button" class="btn btn-dark" id="reset-trip">Start a new trip!</button>
         </div>
     </div>
 
