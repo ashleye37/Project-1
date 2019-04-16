@@ -178,6 +178,27 @@ a{
     font-size: 20px;
 }
 
+/* Landing Page */
+#landing {
+    height: 1000px;
+}
+
+#suggestions {
+    height: 500px;
+}
+
+#hotels {
+    height: 250px;
+}
+
+#activities {
+    height: 250px;
+}
+
+#selectedCards {
+    height: 400px;
+}
+
 #radio{
     margin-right: 3px;
 }
