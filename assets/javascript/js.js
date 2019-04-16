@@ -28,10 +28,15 @@ $(document).ready(function () {
       method: "GET"
     }).then(function (response) {
       //Entire object pulled.
-      console.log(response);
+
+      // console.log(response);
+
       //Pulling location to be added to location on trip card.
-      console.log(response.response.geocode.feature.displayName);
+
+      // console.log(response.response.geocode.feature.displayName);
+
       //Pulling hotel IDs for getting pictures for cards.
+
       var hotel1 = response.response.venues[0].id;
       var hotel2 = response.response.venues[1].id;
       var hotel3 = response.response.venues[2].id;
@@ -44,9 +49,9 @@ $(document).ready(function () {
 
       getHotelPic();
 
-      console.log ("Hotel 1 ID: " + response.response.venues[0].id);
-      console.log("Hotel 2 ID: " + response.response.venues[1].id);
-      console.log("Hotel 3 ID: " + response.response.venues[2].id);
+      // console.log ("Hotel 1 ID: " + response.response.venues[0].id);
+      // console.log("Hotel 2 ID: " + response.response.venues[1].id);
+      // console.log("Hotel 3 ID: " + response.response.venues[2].id);
 
       //Adding information to hotel suggestion cards.
       //Adding Hotel 1.
@@ -80,9 +85,9 @@ $(document).ready(function () {
 
       getRestaurantPic();
 
-      console.log ("Restaurant 1 ID: " + response.response.venues[0].id);
-      console.log("Restaurant 2 ID: " + response.response.venues[1].id);
-      console.log("Restaurant 3 ID: " + response.response.venues[2].id);
+      // console.log ("Restaurant 1 ID: " + response.response.venues[0].id);
+      // console.log("Restaurant 2 ID: " + response.response.venues[1].id);
+      // console.log("Restaurant 3 ID: " + response.response.venues[2].id);
 
       //Adding information to hotel suggestion cards.
       //Adding Hotel 1.
@@ -106,9 +111,9 @@ $(document).ready(function () {
           method: "GET"
       }).then(function (response) {
         //Pulls photo for location card from object.
-        console.log(response.response.venue.photos.groups[1].items[0].prefix + "200x200" + response.response.venue.photos.groups[1].items[0].suffix);
+        // console.log(response.response.venue.photos.groups[1].items[0].prefix + "200x200" + response.response.venue.photos.groups[1].items[0].suffix);
         var hotelSrc = response.response.venue.photos.groups[1].items[0].prefix + "200x200" + response.response.venue.photos.groups[1].items[0].suffix;
-        console.log(hotelSrc);
+        // console.log(hotelSrc);
         //$("#hotel1Pic").append()
       });
     };
@@ -123,7 +128,8 @@ $(document).ready(function () {
           method: "GET"
       }).then(function (response) {
         //Pulls photo for location card from object.
-        console.log(response.response.venue.photos.groups[1].items[0].prefix + "200x200" + response.response.venue.photos.groups[1].items[0].suffix);
+
+        // console.log(response.response.venue.photos.groups[1].items[0].prefix + "200x200" + response.response.venue.photos.groups[1].items[0].suffix);
       });
     };
   };

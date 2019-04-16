@@ -294,6 +294,7 @@
             const locationCard = {
                 city: cityName,
                 hotels: [],
+                restaurants: [],
                 venues: []
             };
 
@@ -301,6 +302,7 @@
                 // Add hotel info if any
                 const hotelName = $(this).attr('data-hotel-name')
                 const activityName = $(this).attr('data-activity-name')
+                const restaurantName = $(this).attr('data-restaurant-name')
                 if (hotelName) {
                     locationCard.hotels.push({
                         name: hotelName,
@@ -310,6 +312,11 @@
                     locationCard.venues.push({
                         name: activityName,
                         id: $(this).attr('data-activity-id')
+                    })
+                } else if (restaurantName) {
+                    locationCard.restaurants.push({
+                        name: restaurant,
+                        id: $(this).attr('data-restaurant-id')
                     })
                 }
             })
