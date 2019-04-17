@@ -115,19 +115,19 @@ $('#reset-trip').click(function () {
 
 
 //Function to build out hotel location cards.
-function makeLocationCard(response, index, destinationDiv, origin) {
+function makeLocationCard(response, index, destination, origin, dataName, imageArray) {
     const div = $('<div class="card card-clear" style="width: 10rem;">')
-        .attr('data-hotel-name', response.name)
-        .attr('data-hotel-id', response.id)
-        .attr('origin', origin)
-    const image = $('<img src=' + hotelImgs[index] + ' class="card-img-top">')
+        .attr('data-' + dataName + '-name', response.name)
+        .attr('data-' + dataName + '-id', response.id)
+        .attr('origin', '#' + origin)
+    const image = $('<img src=' + imageArray[index] + ' class="card-img-top">')
     const card = $('<div class="card-body">')
     const button = $('<button class="btn btn-info add-to-trip" type="button">').text('Add')
     const removeButton = $('<button class="remove-card" type="button">').text('X');
     div.append(image).append(card).append(button).append(removeButton)
     const p = $('<p class="card-text">').text(response.name)
     card.append(p)
-    $(destinationDiv).append(div)
+    $('#' + destination).append(div)
 };
 
 // Append locationCard to #selectedCards div
@@ -226,24 +226,23 @@ function updateProfile(profileObj) {
 function _showLocationCards(locationCard) {
     // Create hotel calls from data saved in DB
 
-
     if (locationCard) {
         cityLocation = locationCard.city
         $('#selected-city').show();
         $("#city-name").text(locationCard.city)
         if (locationCard.hotels) {
             locationCard.hotels.forEach((obj, index) => {
-                makeLocationCard(obj, index, '#selectedCards', '#hotels')
+                makeLocationCard(obj, index, 'selectedCards', 'hotels', 'hotel', hotelImgs)
             })
         }
         if (locationCard.restaurants) {
             locationCard.restaurants.forEach((obj, index) => {
-                makeLocationCard(obj, index, '#selectedCards', '#restaurants')
+                makeLocationCard(obj, index, 'selectedCards', 'restaurants', 'restaurant', restaurantImgs)
             })
         }
         if (locationCard.venues) {
             locationCard.venues.forEach((obj, index) => {
-                makeLocationCard(obj, index, '#selectedCards', '#activities')
+                makeLocationCard(obj, index, 'selectedCards', 'activities', 'activity', activityImgs)
             })
         }
     }

@@ -36,7 +36,7 @@ function getLocationInformation(location, tripDuration) {
       if (i >= hotels.length) {
         break;
       }
-      makeLocationCard(hotels[i], i, '#hotels', '#hotels')
+      makeLocationCard(hotels[i], i, 'hotels', 'hotels', 'hotel', hotelImgs)
     }
   });
 
@@ -52,7 +52,7 @@ function getLocationInformation(location, tripDuration) {
       if (i >= restaurants.length) {
         break;
       }
-      makeLocationCard(restaurants[i], i, '#restaurants', '#restaurants');
+      makeLocationCard(restaurants[i], i, 'restaurants', 'restaurants', 'restaurant', restaurantImgs);
     }
   });
 
@@ -68,7 +68,7 @@ function getLocationInformation(location, tripDuration) {
       if (i >= activities.length) {
         break;
       }
-      makeLocationCard(activities[i], i, '#activities', '#activities');
+      makeLocationCard(activities[i], i, 'activities', 'activities', 'activity', activityImgs);
     }
   });
 };
