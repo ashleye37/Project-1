@@ -121,7 +121,6 @@ a{
 .card{   
     margin:15px;
     float:left;
-    height:200px;
     position: relative;
     background-color:white;
 }
@@ -148,6 +147,13 @@ a{
     color:white;
     padding:8px;
     clear:both;
+}
+
+#selected-city{
+    background-color: rgb(66, 66, 66, 0.5);
+    color:white;
+    padding:8px;
+    border-radius: 7px 7px 0 0;
 }
 
 #save-itinerary{
