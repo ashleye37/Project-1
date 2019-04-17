@@ -37,7 +37,6 @@ $('#chat').hide();
 $('#selected-city').hide();
 
 
-
 // // Login
 $("#login").click(function () {
     _signInWithGoogle();
@@ -87,7 +86,8 @@ $("#submit-questions").click(function (event) {
         $('#location-empty').hide();
 
         cityLocation = location;
-        buildLocationCards(location, tripDuration)
+        getLocationInformation(location, tripDuration)
+        
         $("#tripLength-empty").hide();
         $("#landing").show();
         $("#questionnaire").hide();
@@ -108,7 +108,7 @@ $('#reset-trip').click(function () {
     $('.card-clear').remove();
     $('#location').val("");
     $('#city-name').text('');
-    $('#selected-city').show();
+    $('#selected-city').hide();
     _showQuestionnaire()
     switchDecisionToQuestionnaire();
 })
@@ -130,18 +130,19 @@ function makeLocationCard(response, index, destinationDiv, origin) {
     $(destinationDiv).append(div)
 };
 
-// Add locationCard to #selectedCards div
+// Append locationCard to #selectedCards div
 $(document).on('click', '.add-to-trip', function () {
     $('#selectedCards').append($(this).parent())
 })
 
+// Removes chosen location card and returns it to its origin div
 $(document).on('click', '.remove-card', function () {
     const parent = $(this).parent()
     $(parent.attr('origin')).append(parent)
 })
 
+// Handle #save-itinerary on click. Saves currenly chosen locationCards into DB
 $('#save-itinerary').click(function () {
-    // deleteAllLocationCardsForUser();
     const locationCard = {
         city: cityLocation,
         hotels: [],
@@ -285,9 +286,7 @@ function deleteAllLocationCardsForUser() {
 function _showQuestionnaire() {
     $("#questionnaire").show();
     $("#landing").hide();
-
 };
-
 
 // Show itinerary div
 function _showItinerary() {

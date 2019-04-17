@@ -1,3 +1,5 @@
+// FourSquare API calls
+
 var ashleyClientId = "T1KSAH00ROFWYZ4BOX100RYZHDRKPO1W3THOQRQLGPC5FOF0"
 var ashleyClientSecret = "5FKKM5UQM4HNNSDWE3GAJBXYWYIJUFYJNULALZAC0VDAH3YV&v=20190411"
 
@@ -13,10 +15,11 @@ const TristansAuth = "client_id=" + TristansId + "&client_secret=" + TristansSec
 
 const currentAuth = TristansAuth;
 
-function buildLocationCards(location, tripDuration) {
+function getLocationInformation(location, tripDuration) {
   var hotelQueryURL = "https://api.foursquare.com/v2/venues/search?client_id=" + TristansId + "&client_secret=" + TristansSecret + "&near=" + location + "&query=hotel&v=20190415"
 
   let numVenues;
+  // Determine number of venues to display
   if (tripDuration === 'short-trip') {
     numVenues = 3
   } else {
@@ -33,7 +36,6 @@ function buildLocationCards(location, tripDuration) {
       if (i >= hotels.length) {
         break;
       }
-      // makeHotelLocationCard(hotels[i], i, '#hotels');
       makeLocationCard(hotels[i], i, '#hotels', '#hotels')
     }
   });
@@ -45,7 +47,6 @@ function buildLocationCards(location, tripDuration) {
     url: restaurantQueryURL,
     method: "GET"
   }).then(function (response) {
-
     const restaurants = response.response.venues;
     for (var i = 0; i < numVenues; i++) {
       if (i >= restaurants.length) {
