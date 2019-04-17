@@ -121,7 +121,6 @@ a{
 .card{   
     margin:15px;
     float:left;
-    height:200px;
     position: relative;
     background-color:white;
 }
@@ -183,7 +182,10 @@ a{
 }
 
 .add-to-trip{
-    float:right;
+    margin-left:55%;
+    width:70px;
+    border-radius:10px;
+    opacity:0.8;
 }
 
 #submit-questions{

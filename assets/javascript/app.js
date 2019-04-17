@@ -191,7 +191,9 @@ function _displayLoggedInUI() {
     $('.logged-in').show();
     $('.logged-out').hide();
 
+
     $("#startup").hide();
+    $("#questionnaire").show();
     $('#chat').show();
 }
 
