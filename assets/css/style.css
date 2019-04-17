@@ -182,6 +182,10 @@ a{
     width:20px;
 }
 
+.add-to-trip{
+    float:right;
+}
+
 #submit-questions{
     position: absolute;
     bottom:10px;

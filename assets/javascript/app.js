@@ -102,8 +102,8 @@ function makeHotelLocationCard(response, index, destinationDiv) {
         .attr('origin', 'hotels')
     const image = $('<img src=' + hotelImgs[index] + ' class="card-img-top">')
     const card = $('<div class="card-body">')
-    const button = $('<button class="btn btn-dark add-to-trip" type="button">').text('Add to trip')
-    const removeButton = $('<button class="remove-card" type="button">').text('✘');
+    const button = $('<button class="btn btn-info add-to-trip" type="button">').text('Add')
+    const removeButton = $('<button class="remove-card" type="button">').text('X');
     div.append(image).append(card).append(button).append(removeButton)
     const p = $('<p class="card-text">').text(response.name)
     card.append(p)
@@ -118,8 +118,8 @@ function makeRestaurantLocationCard(response, index, destinationDiv) {
         .attr('origin', 'restaurants')
     const image = $('<img src=' + restaurantImgs[index] + ' class="card-img-top">')
     const card = $('<div class="card-body">')
-    const button = $('<button class="btn btn-dark add-to-trip" type="button">').text('Add to trip')
-    const removeButton = $('<button class="remove-card" type="button">').text('✘');
+    const button = $('<button class="btn btn-info add-to-trip" type="button">').text('Add')
+    const removeButton = $('<button class="remove-card" type="button">').text('X');
     div.append(image).append(card).append(button).append(removeButton)
     const p = $('<p class="card-text">').text(response.name)
     card.append(p)
@@ -134,8 +134,8 @@ function makeActivityLocationCard(response, index, destinationDiv) {
         .attr('origin', 'activities')
     const image = $('<img src="assets/images/activity1.jpg" class="card-img-top">')
     const card = $('<div class="card-body">')
-    const button = $('<button class="btn btn-dark add-to-trip" type="button">').text('Add to trip')
-    const removeButton = $('<button class="remove-card" type="button">').text('✘');
+    const button = $('<button class="btn btn-info add-to-trip" type="button">').text('Add')
+    const removeButton = $('<button class="remove-card" type="button">').text('X');
     div.append(image).append(card).append(button).append(removeButton)
     const p = $('<p class="card-text">').text(response.name)
     card.append(p)
