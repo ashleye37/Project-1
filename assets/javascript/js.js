@@ -12,9 +12,6 @@ const TristansId = 'VZJ2VR0WXOHFHHYGCBCE5L1XMY2KG5G0OS3UK4PDYHAJ2CM1';
 const TristansAuth = "client_id=" + TristansId + "&client_secret=" + TristansSecret + '&v=20190411'
 
 const currentAuth = TristansAuth;
-var location;
-
-// $(document).ready(function () {
 
 function buildLocationCards(location, tripDuration) {
   var hotelQueryURL = "https://api.foursquare.com/v2/venues/search?client_id=" + TristansId + "&client_secret=" + TristansSecret + "&near=" + location + "&query=hotel&v=20190415"
@@ -36,7 +33,8 @@ function buildLocationCards(location, tripDuration) {
       if (i >= hotels.length) {
         break;
       }
-      makeHotelLocationCard(hotels[i], i, '#hotels');
+      // makeHotelLocationCard(hotels[i], i, '#hotels');
+      makeLocationCard(hotels[i], i, '#hotels', '#hotels')
     }
   });
 
@@ -53,7 +51,7 @@ function buildLocationCards(location, tripDuration) {
       if (i >= restaurants.length) {
         break;
       }
-      makeRestaurantLocationCard(restaurants[i], i,  '#restaurants');
+      makeLocationCard(restaurants[i], i, '#restaurants', '#restaurants');
     }
   });
 
@@ -69,7 +67,7 @@ function buildLocationCards(location, tripDuration) {
       if (i >= activities.length) {
         break;
       }
-      makeActivityLocationCard(activities[i], i, '#activities');
+      makeLocationCard(activities[i], i, '#activities', '#activities');
     }
   });
 };

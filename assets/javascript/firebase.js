@@ -117,12 +117,7 @@ function _updateProfileInDB(payload) {
 function _addLocationCardToDB(payload) {
     payload['name'] = auth.currentUser.displayName;
     payload['userId'] = auth.currentUser.uid
-    locationCards.push(
-        payload
-        , function (error) {
-            console.log(error);
-        }
-    );
+    locationCards.push(payload);
 }
 
 function _getLocationCards() {

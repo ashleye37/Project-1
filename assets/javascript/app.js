@@ -38,7 +38,6 @@ $('#selected-city').hide();
 
 
 
-
 // // Login
 $("#login").click(function () {
     _signInWithGoogle();
@@ -47,6 +46,12 @@ $("#login").click(function () {
 // Logout
 $("#logout").click(function () {
     _signOutUser();
+    $('#chat').hide();
+    $("#city-name").text('')
+    $('#selected-city').hide();
+    $("#questionnaire").hide()
+    $("#landing").hide();
+    $('.card-clear').remove();
 });
 
 //Click event that will submit the questionnaire and build out the location cards for them to then be able to select.
@@ -58,50 +63,44 @@ $("#submit-questions").click(function (event) {
 
     // Validate city 
     var hotelQueryURL = "https://api.foursquare.com/v2/venues/search?client_id=" + TristansId + "&client_secret=" + TristansSecret + "&near=" + location + "&query=hotel&v=20190415"
-    let incorrectCity = false;
+
     $.ajax({
         url: hotelQueryURL,
         method: "GET"
     }).then(function (response) {
         // City is valid
+        if (!location.length) { // Handle empty message
+            $('#location-empty').show();
+            event.stopPropagation();
+            return;
+        }
+        $('#location-empty').hide();
+
+        const tripDuration = $("input[name='trip-length']:checked").val();  // short-trip, long-trip
+        if (!tripDuration) {
+            $('#tripLength-empty').show();
+            event.stopPropagation();
+            return;
+        }
+        $('#location-invalid').hide();
+        $('#tripLength-empty').hide();
+        $('#location-empty').hide();
+
+        cityLocation = location;
+        buildLocationCards(location, tripDuration)
+        $("#tripLength-empty").hide();
+        $("#landing").show();
+        $("#questionnaire").hide();
+        switchDecisionToItinerary()
+        $("#city-name").text(location)
+        $('#selected-city').show();
 
     }).catch(error => {
-        console.log(error)
         // Invalid city name
         $('#location-invalid').show();
         $("#tripLength-empty").hide();
         event.stopPropagation();
-        incorrectCity = true
     })
-    if (incorrectCity) {
-        return;
-    }
-    console.log('bypass')
-    if (!location.length) { // Handle empty message
-        $('#location-empty').show();
-        event.stopPropagation();
-        return;
-    }
-    $('#location-empty').hide();
-    
-    const tripDuration = $("input[name='trip-length']:checked").val();  // short-trip, long-trip
-    if (!tripDuration) {
-        $('#tripLength-empty').show();
-        event.stopPropagation();
-        return;
-    }
-    $('#location-invalid').hide();
-    $('#tripLength-empty').hide();
-    $('#location-empty').hide();
-
-    cityLocation = location;
-    buildLocationCards(location, tripDuration)
-    $("#tripLength-empty").hide();
-    $("#landing").show();
-    $("#questionnaire").hide();
-    switchDecisionToItinerary()
-    $("#city-name").text(location)
-    $('#selected-city').hide();
 });
 
 $('#reset-trip').click(function () {
@@ -109,18 +108,18 @@ $('#reset-trip').click(function () {
     $('.card-clear').remove();
     $('#location').val("");
     $('#city-name').text('');
+    $('#selected-city').show();
     _showQuestionnaire()
     switchDecisionToQuestionnaire();
-
 })
 
 
 //Function to build out hotel location cards.
-function makeHotelLocationCard(response, index, destinationDiv) {
+function makeLocationCard(response, index, destinationDiv, origin) {
     const div = $('<div class="card card-clear" style="width: 10rem;">')
         .attr('data-hotel-name', response.name)
         .attr('data-hotel-id', response.id)
-        .attr('origin', 'hotels')
+        .attr('origin', origin)
     const image = $('<img src=' + hotelImgs[index] + ' class="card-img-top">')
     const card = $('<div class="card-body">')
     const button = $('<button class="btn btn-dark add-to-trip" type="button">').text('Add to trip')
@@ -131,37 +130,52 @@ function makeHotelLocationCard(response, index, destinationDiv) {
     $(destinationDiv).append(div)
 };
 
-//Function to build out restaurant location cards.
-function makeRestaurantLocationCard(response, index, destinationDiv) {
-    const div = $('<div class="card card-clear" style="width: 10rem;">')
-        .attr('data-restaurant-name', response.name)
-        .attr('data-restaurant-id', response.id)
-        .attr('origin', 'restaurants')
-    const image = $('<img src=' + restaurantImgs[index] + ' class="card-img-top">')
-    const card = $('<div class="card-body">')
-    const button = $('<button class="btn btn-dark add-to-trip" type="button">').text('Add to trip')
-    const removeButton = $('<button class="remove-card" type="button">').text('✘');
-    div.append(image).append(card).append(button).append(removeButton)
-    const p = $('<p class="card-text">').text(response.name)
-    card.append(p)
-    $(destinationDiv).append(div)
-};
+// function makeHotelLocationCard(response, index, destinationDiv) {
+//     const div = $('<div class="card card-clear" style="width: 10rem;">')
+//         .attr('data-hotel-name', response.name)
+//         .attr('data-hotel-id', response.id)
+//         .attr('origin', 'hotels')
+//     const image = $('<img src=' + hotelImgs[index] + ' class="card-img-top">')
+//     const card = $('<div class="card-body">')
+//     const button = $('<button class="btn btn-dark add-to-trip" type="button">').text('Add to trip')
+//     const removeButton = $('<button class="remove-card" type="button">').text('✘');
+//     div.append(image).append(card).append(button).append(removeButton)
+//     const p = $('<p class="card-text">').text(response.name)
+//     card.append(p)
+//     $(destinationDiv).append(div)
+// };
 
-//Function to build out activity location cards.
-function makeActivityLocationCard(response, index, destinationDiv) {
-    const div = $('<div class="card card-clear" style="width: 10rem;">')
-        .attr('data-activity-name', response.name)
-        .attr('data-activity-id', response.id)
-        .attr('origin', 'activities')
-    const image = $('<img src="assets/images/activity1.jpg" class="card-img-top">')
-    const card = $('<div class="card-body">')
-    const button = $('<button class="btn btn-dark add-to-trip" type="button">').text('Add to trip')
-    const removeButton = $('<button class="remove-card" type="button">').text('✘');
-    div.append(image).append(card).append(button).append(removeButton)
-    const p = $('<p class="card-text">').text(response.name)
-    card.append(p)
-    $(destinationDiv).append(div)
-};
+// //Function to build out restaurant location cards.
+// function makeRestaurantLocationCard(response, index, destinationDiv) {
+//     const div = $('<div class="card card-clear" style="width: 10rem;">')
+//         .attr('data-restaurant-name', response.name)
+//         .attr('data-restaurant-id', response.id)
+//         .attr('origin', 'restaurants')
+//     const image = $('<img src=' + restaurantImgs[index] + ' class="card-img-top">')
+//     const card = $('<div class="card-body">')
+//     const button = $('<button class="btn btn-dark add-to-trip" type="button">').text('Add to trip')
+//     const removeButton = $('<button class="remove-card" type="button">').text('✘');
+//     div.append(image).append(card).append(button).append(removeButton)
+//     const p = $('<p class="card-text">').text(response.name)
+//     card.append(p)
+//     $(destinationDiv).append(div)
+// };
+
+// //Function to build out activity location cards.
+// function makeActivityLocationCard(response, index, destinationDiv) {
+//     const div = $('<div class="card card-clear" style="width: 10rem;">')
+//         .attr('data-activity-name', response.name)
+//         .attr('data-activity-id', response.id)
+//         .attr('origin', 'activities')
+//     const image = $('<img src="assets/images/activity1.jpg" class="card-img-top">')
+//     const card = $('<div class="card-body">')
+//     const button = $('<button class="btn btn-dark add-to-trip" type="button">').text('Add to trip')
+//     const removeButton = $('<button class="remove-card" type="button">').text('✘');
+//     div.append(image).append(card).append(button).append(removeButton)
+//     const p = $('<p class="card-text">').text(response.name)
+//     card.append(p)
+//     $(destinationDiv).append(div)
+// };
 
 // Add locationCard to #selectedCards div
 $(document).on('click', '.add-to-trip', function () {
@@ -169,7 +183,8 @@ $(document).on('click', '.add-to-trip', function () {
 })
 
 $(document).on('click', '.remove-card', function () {
-    $('#' + $(this).parent().attr('origin')).append($(this).parent())
+    const parent = $(this).parent()
+    $(parent.attr('origin')).append(parent)
 })
 
 $('#save-itinerary').click(function () {
@@ -256,24 +271,25 @@ function updateProfile(profileObj) {
 // Retrieves all location cards for user and displays them. Automatically called on login
 function _showLocationCards(locationCard) {
     // Create hotel calls from data saved in DB
-    
-    
+
+
     if (locationCard) {
         cityLocation = locationCard.city
+        $('#selected-city').show();
         $("#city-name").text(locationCard.city)
         if (locationCard.hotels) {
             locationCard.hotels.forEach((obj, index) => {
-                makeHotelLocationCard(obj, index, '#selectedCards')
+                makeLocationCard(obj, index, '#selectedCards', '#hotels')
             })
         }
         if (locationCard.restaurants) {
             locationCard.restaurants.forEach((obj, index) => {
-                makeRestaurantLocationCard(obj, index, '#selectedCards')
+                makeLocationCard(obj, index, '#selectedCards', '#restaurants')
             })
         }
         if (locationCard.venues) {
             locationCard.venues.forEach((obj, index) => {
-                makeActivityLocationCard(obj, index, '#selectedCards')
+                makeLocationCard(obj, index, '#selectedCards', '#activities')
             })
         }
     }
