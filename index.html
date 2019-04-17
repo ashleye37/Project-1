@@ -79,6 +79,8 @@
         </div>
     </div>
 
+    <div id='selected-city'><h2>Your city is: </h2><h2 id="city-name"></h2></div>
+
     <!--Page with trip suggestions where user can select-->
     <div class="container logged-in" id="landing">
 
@@ -104,16 +106,17 @@
             <div id="activities">
                 <div class="title">Suggested Activities</div>
             </div>
+            </div>
 
             <!--Choices-->
             <div id="selectedCards">
                 <div class="title">Your Choices</div>
-            </div>
+            
 
             <!--Save Button-->
             <button type="button" class="btn btn-info" id="save-itinerary">Save</button>
-            <button type="button" class="btn btn-dark" id="reset-trip">Start a new trip!</button>
-        </div>
+            <button type="button" class="btn btn-dark" id="reset-trip">New trip!</button>
+            </div>
     </div>
 
     <!-- Chat-->
@@ -130,7 +133,7 @@
                         <input id="message-input" type='text' name='message' class="form-control"
                             placeholder="Your message will be seen by everyone.">
                         <div class='input-group-append'>
-                            <button id="send-message" class='btn btn-primary'>Send</button>
+                            <button id="send-message" class="btn btn-info">Send</button>
                         </div>
                     </div>
                 </form>
@@ -167,6 +170,7 @@
     <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase-auth.js"></script>
 
     <!-- Source JS -->
+    
     <script src="./assets/javascript/app.js"></script>
     <script src="./assets/javascript/firebase.js"></script>
     <script src="./assets/javascript/js.js"></script>

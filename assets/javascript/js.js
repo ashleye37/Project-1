@@ -1,3 +1,5 @@
+// FourSquare API calls
+
 var ashleyClientId = "T1KSAH00ROFWYZ4BOX100RYZHDRKPO1W3THOQRQLGPC5FOF0"
 var ashleyClientSecret = "5FKKM5UQM4HNNSDWE3GAJBXYWYIJUFYJNULALZAC0VDAH3YV&v=20190411"
 
@@ -12,14 +14,12 @@ const TristansId = 'VZJ2VR0WXOHFHHYGCBCE5L1XMY2KG5G0OS3UK4PDYHAJ2CM1';
 const TristansAuth = "client_id=" + TristansId + "&client_secret=" + TristansSecret + '&v=20190411'
 
 const currentAuth = TristansAuth;
-var location;
 
-// $(document).ready(function () {
-
-function buildLocationCards(location, tripDuration) {
+function getLocationInformation(location, tripDuration) {
   var hotelQueryURL = "https://api.foursquare.com/v2/venues/search?client_id=" + TristansId + "&client_secret=" + TristansSecret + "&near=" + location + "&query=hotel&v=20190415"
 
   let numVenues;
+  // Determine number of venues to display
   if (tripDuration === 'short-trip') {
     numVenues = 3
   } else {
@@ -33,7 +33,10 @@ function buildLocationCards(location, tripDuration) {
   }).then(function (response) {
     const hotels = response.response.venues;
     for (var i = 0; i < numVenues; i++) {
-      makeHotelLocationCard(hotels[i], i, '#hotels');
+      if (i >= hotels.length) {
+        break;
+      }
+      makeLocationCard(hotels[i], i, '#hotels', '#hotels')
     }
   });
 
@@ -44,10 +47,12 @@ function buildLocationCards(location, tripDuration) {
     url: restaurantQueryURL,
     method: "GET"
   }).then(function (response) {
-
     const restaurants = response.response.venues;
     for (var i = 0; i < numVenues; i++) {
-      makeRestaurantLocationCard(restaurants[i], i,  '#restaurants');
+      if (i >= restaurants.length) {
+        break;
+      }
+      makeLocationCard(restaurants[i], i, '#restaurants', '#restaurants');
     }
   });
 
@@ -58,10 +63,12 @@ function buildLocationCards(location, tripDuration) {
     url: activityQueryURL,
     method: "GET"
   }).then(function (response) {
-
     const activities = response.response.venues;
     for (var i = 0; i < numVenues; i++) {
-      makeActivityLocationCard(activities[i], i, '#activities');
+      if (i >= activities.length) {
+        break;
+      }
+      makeLocationCard(activities[i], i, '#activities', '#activities');
     }
   });
 };

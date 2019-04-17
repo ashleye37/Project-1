@@ -14,26 +14,30 @@ var hotelImgs = [
     "assets/images/hotel2.jpg",
     "assets/images/hotel3.jpg",
     "assets/images/hotel4.jpg",
-    "assets/images/hotel5.jpg"
-];
+    "assets/images/hotel5.jpg",
+]
 
 var restaurantImgs = [
     "assets/images/restaurant1.jpg",
     "assets/images/restaurant2.jpg",
     "assets/images/restaurant3.jpg",
     "assets/images/restaurant4.jpg",
-    "assets/images/restaurant5.jpg"
-];
+    "assets/images/restaurant5.jpg",
+]
 
 const activityImgs = [
     '.assets/images/activity1.jpg',
 ]
 
-$("#questionnaire").hide();
+$('#login').hide();
+$('#logout').hide();
+$("#questionnaire").hide()
 $("#landing").hide();
+$('#chat').hide();
+$('#selected-city').hide();
 
 
-// Login
+// // Login
 $("#login").click(function () {
     _signInWithGoogle();
 });
@@ -41,125 +45,110 @@ $("#login").click(function () {
 // Logout
 $("#logout").click(function () {
     _signOutUser();
+    $('#chat').hide();
+    $("#city-name").text('')
+    $('#selected-city').hide();
+    $("#questionnaire").hide()
+    $("#landing").hide();
+    $('.card-clear').remove();
 });
 
 //Click event that will submit the questionnaire and build out the location cards for them to then be able to select.
 $("#submit-questions").click(function (event) {
     event.preventDefault()
 
-
+    // Selected city
     const location = $('#location').val().trim();
+
+    // Validate city 
     var hotelQueryURL = "https://api.foursquare.com/v2/venues/search?client_id=" + TristansId + "&client_secret=" + TristansSecret + "&near=" + location + "&query=hotel&v=20190415"
+
     $.ajax({
         url: hotelQueryURL,
         method: "GET"
     }).then(function (response) {
+        // City is valid
+        if (!location.length) { // Handle empty message
+            $('#location-empty').show();
+            event.stopPropagation();
+            return;
+        }
+        $('#location-empty').hide();
+
+        const tripDuration = $("input[name='trip-length']:checked").val();  // short-trip, long-trip
+        if (!tripDuration) {
+            $('#tripLength-empty').show();
+            event.stopPropagation();
+            return;
+        }
+        $('#location-invalid').hide();
+        $('#tripLength-empty').hide();
+        $('#location-empty').hide();
+
+        cityLocation = location;
+        getLocationInformation(location, tripDuration)
+        
+        $("#tripLength-empty").hide();
+        $("#landing").show();
+        $("#questionnaire").hide();
+        switchDecisionToItinerary()
+        $("#city-name").text(location)
+        $('#selected-city').show();
 
     }).catch(error => {
+        // Invalid city name
         $('#location-invalid').show();
         $("#tripLength-empty").hide();
         event.stopPropagation();
-        return;
     })
-    if (!location.length) { // Handle empty message
-        $('#location-empty').show();
-        event.stopPropagation();
-        return;
-    }
-    $('#location-empty').hide();
-    cityLocation = location;
-    const tripDuration = $("input[name='trip-length']:checked").val();  // short-trip, long-trip
-    if (!tripDuration) {
-        $('#tripLength-empty').show();
-        event.stopPropagation();
-        return;
-    }
-    $('#location-invalid').hide();
-    $('#tripLength-empty').hide();
-    $('#location-empty').hide();
-
-    buildLocationCards(location, tripDuration)
-    $("#tripLength-empty").hide();
-    $("#landing").show();
-    $("#questionnaire").hide();
-    switchDecisionToItinerary()
 });
 
-$('#reset-trip').click(function() {
+$('#reset-trip').click(function () {
     deleteAllLocationCardsForUser()
     $('.card-clear').remove();
     $('#location').val("");
+    $('#city-name').text('');
+    $('#selected-city').hide();
     _showQuestionnaire()
-
+    switchDecisionToQuestionnaire();
 })
 
 
 //Function to build out hotel location cards.
-function makeHotelLocationCard(response, index, destinationDiv) {
+function makeLocationCard(response, index, destinationDiv, origin) {
     const div = $('<div class="card card-clear" style="width: 10rem;">')
         .attr('data-hotel-name', response.name)
         .attr('data-hotel-id', response.id)
-        .attr('origin', 'hotels')
+        .attr('origin', origin)
     const image = $('<img src=' + hotelImgs[index] + ' class="card-img-top">')
     const card = $('<div class="card-body">')
-    const button = $('<button class="btn btn-dark add-to-trip" type="button">').text('Add to trip')
-    const removeButton = $('<button class="remove-card" type="button">').text('✘');
+    const button = $('<button class="btn btn-info add-to-trip" type="button">').text('Add')
+    const removeButton = $('<button class="remove-card" type="button">').text('X');
     div.append(image).append(card).append(button).append(removeButton)
     const p = $('<p class="card-text">').text(response.name)
     card.append(p)
     $(destinationDiv).append(div)
 };
 
-//Function to build out restaurant location cards.
-function makeRestaurantLocationCard(response, index, destinationDiv) {
-    const div = $('<div class="card card-clear" style="width: 10rem;">')
-        .attr('data-restaurant-name', response.name)
-        .attr('data-restaurant-id', response.id)
-        .attr('origin', 'restaurants')
-    const image = $('<img src=' + restaurantImgs[index] + ' class="card-img-top">')
-    const card = $('<div class="card-body">')
-    const button = $('<button class="btn btn-dark add-to-trip" type="button">').text('Add to trip')
-    const removeButton = $('<button class="remove-card" type="button">').text('✘');
-    div.append(image).append(card).append(button).append(removeButton)
-    const p = $('<p class="card-text">').text(response.name)
-    card.append(p)
-    $(destinationDiv).append(div)
-};
-
-//Function to build out activity location cards.
-function makeActivityLocationCard(response, index, destinationDiv) {
-    const div = $('<div class="card card-clear" style="width: 10rem;">')
-        .attr('data-activity-name', response.name)
-        .attr('data-activity-id', response.id)
-        .attr('origin', 'activities')
-    const image = $('<img src="assets/images/activity1.jpg" class="card-img-top">')
-    const card = $('<div class="card-body">')
-    const button = $('<button class="btn btn-dark add-to-trip" type="button">').text('Add to trip')
-    const removeButton = $('<button class="remove-card" type="button">').text('✘');
-    div.append(image).append(card).append(button).append(removeButton)
-    const p = $('<p class="card-text">').text(response.name)
-    card.append(p)
-    $(destinationDiv).append(div)
-};
-
-// Add locationCard to #selectedCards div
+// Append locationCard to #selectedCards div
 $(document).on('click', '.add-to-trip', function () {
     $('#selectedCards').append($(this).parent())
 })
 
+// Removes chosen location card and returns it to its origin div
 $(document).on('click', '.remove-card', function () {
-    $('#' + $(this).parent().attr('origin')).append($(this).parent())
+    const parent = $(this).parent()
+    $(parent.attr('origin')).append(parent)
 })
 
+// Handle #save-itinerary on click. Saves currenly chosen locationCards into DB
 $('#save-itinerary').click(function () {
-    // deleteAllLocationCardsForUser();
     const locationCard = {
         city: cityLocation,
         hotels: [],
         restaurants: [],
         venues: []
     };
-    cityLocation = null;
 
     $('#selectedCards').children().each(function (index, elem) {
         // Add hotel, restaurant, activity info
@@ -183,7 +172,7 @@ $('#save-itinerary').click(function () {
             })
         }
     })
-    _addLocationCardToDB(locationCard)
+    saveLocationCard(locationCard)
 });
 
 // Displays only .logged-in elements to logged in users. Automatically called on login
@@ -236,27 +225,32 @@ function updateProfile(profileObj) {
 // Retrieves all location cards for user and displays them. Automatically called on login
 function _showLocationCards(locationCard) {
     // Create hotel calls from data saved in DB
+
+
     if (locationCard) {
+        cityLocation = locationCard.city
+        $('#selected-city').show();
+        $("#city-name").text(locationCard.city)
         if (locationCard.hotels) {
             locationCard.hotels.forEach((obj, index) => {
-                makeHotelLocationCard(obj, index, '#selectedCards')
+                makeLocationCard(obj, index, '#selectedCards', '#hotels')
             })
         }
         if (locationCard.restaurants) {
             locationCard.restaurants.forEach((obj, index) => {
-                makeRestaurantLocationCard(obj, index, '#selectedCards')
+                makeLocationCard(obj, index, '#selectedCards', '#restaurants')
             })
         }
         if (locationCard.venues) {
             locationCard.venues.forEach((obj, index) => {
-                makeActivityLocationCard(obj, index, '#selectedCards')
+                makeLocationCard(obj, index, '#selectedCards', '#activities')
             })
         }
     }
 }
 
 // Create locationCard and send it to DB from client
-function saveLocationCard() {
+function saveLocationCard(locationCard) {
     // locationCard must be in this shape for DB to accept
     // {
     //     city: 'Seattle',
@@ -292,19 +286,12 @@ function deleteAllLocationCardsForUser() {
 function _showQuestionnaire() {
     $("#questionnaire").show();
     $("#landing").hide();
-
 };
-
 
 // Show itinerary div
 function _showItinerary() {
     $("#questionnaire").hide();
     $("#landing").show();
-
-}
-
-function switchDecisionToUndecided() {
-    _switchDecisionInDB(userDecisionState.UNDECIDED)
 }
 
 function switchDecisionToQuestionnaire() {
