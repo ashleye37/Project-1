@@ -29,6 +29,7 @@ const activityImgs = [
     '.assets/images/activity1.jpg',
 ]
 
+// Hide elements on page load
 $('#login').hide();
 $('#logout').hide();
 $("#questionnaire").hide()
@@ -37,12 +38,12 @@ $('#chat').hide();
 $('#selected-city').hide();
 
 
-// // Login
+// Handle login button click
 $("#login").click(function () {
     _signInWithGoogle();
 });
 
-// Logout
+// Handle logout button click. Hide elements
 $("#logout").click(function () {
     _signOutUser();
     $('#chat').hide();
@@ -53,21 +54,22 @@ $("#logout").click(function () {
     $('.card-clear').remove();
 });
 
-//Click event that will submit the questionnaire and build out the location cards for them to then be able to select.
+// Click event that will submit the questionnaire and build out the location cards for user to then be able to select.
 $("#submit-questions").click(function (event) {
     event.preventDefault()
 
     // Selected city
     const location = $('#location').val().trim();
-
-    // Validate city 
+    
     var hotelQueryURL = "https://api.foursquare.com/v2/venues/search?client_id=" + TristansId + "&client_secret=" + TristansSecret + "&near=" + location + "&query=hotel&v=20190415"
 
+    // Validate city
     $.ajax({
         url: hotelQueryURL,
         method: "GET"
     }).then(function (response) {
         // City is valid
+
         if (!location.length) { // Handle empty message
             $('#location-empty').show();
             event.stopPropagation();
@@ -86,6 +88,7 @@ $("#submit-questions").click(function (event) {
         $('#location-empty').hide();
 
         cityLocation = location;
+        // FourSquare API call
         getLocationInformation(location, tripDuration)
         
         $("#tripLength-empty").hide();
@@ -103,6 +106,7 @@ $("#submit-questions").click(function (event) {
     })
 });
 
+// Directs user to questionnaire again. Deletes all currently selected locationCards for user 
 $('#reset-trip').click(function () {
     deleteAllLocationCardsForUser()
     $('.card-clear').remove();
@@ -113,21 +117,20 @@ $('#reset-trip').click(function () {
     switchDecisionToQuestionnaire();
 })
 
-
-//Function to build out hotel location cards.
-function makeLocationCard(response, index, destinationDiv, origin) {
+//Function to build hotel location cards.
+function makeLocationCard(response, index, destination, origin, dataName, imageArray) {
     const div = $('<div class="card card-clear" style="width: 10rem;">')
-        .attr('data-hotel-name', response.name)
-        .attr('data-hotel-id', response.id)
-        .attr('origin', origin)
-    const image = $('<img src=' + hotelImgs[index] + ' class="card-img-top">')
+        .attr('data-' + dataName + '-name', response.name)
+        .attr('data-' + dataName + '-id', response.id)
+        .attr('origin', '#' + origin)
+    const image = $('<img src=' + imageArray[index] + ' class="card-img-top">')
     const card = $('<div class="card-body">')
     const button = $('<button class="btn btn-info add-to-trip" type="button">').text('Add')
     const removeButton = $('<button class="remove-card" type="button">').text('X');
     div.append(image).append(card).append(button).append(removeButton)
     const p = $('<p class="card-text">').text(response.name)
     card.append(p)
-    $(destinationDiv).append(div)
+    $('#' + destination).append(div)
 };
 
 // Append locationCard to #selectedCards div
@@ -150,8 +153,8 @@ $('#save-itinerary').click(function () {
         venues: []
     };
 
+    // Add hotel, restaurant, activity info to cards
     $('#selectedCards').children().each(function (index, elem) {
-        // Add hotel, restaurant, activity info
         const hotelName = $(this).attr('data-hotel-name')
         const activityName = $(this).attr('data-activity-name')
         const restaurantName = $(this).attr('data-restaurant-name')
@@ -222,10 +225,9 @@ function updateProfile(profileObj) {
     _updateProfileInDB(profileObj);
 }
 
-// Retrieves all location cards for user and displays them. Automatically called on login
+// Retrieves all location cards for user from DB and displays them. Automatically called on login
 function _showLocationCards(locationCard) {
     // Create hotel calls from data saved in DB
-
 
     if (locationCard) {
         cityLocation = locationCard.city
@@ -233,17 +235,17 @@ function _showLocationCards(locationCard) {
         $("#city-name").text(locationCard.city)
         if (locationCard.hotels) {
             locationCard.hotels.forEach((obj, index) => {
-                makeLocationCard(obj, index, '#selectedCards', '#hotels')
+                makeLocationCard(obj, index, 'selectedCards', 'hotels', 'hotel', hotelImgs)
             })
         }
         if (locationCard.restaurants) {
             locationCard.restaurants.forEach((obj, index) => {
-                makeLocationCard(obj, index, '#selectedCards', '#restaurants')
+                makeLocationCard(obj, index, 'selectedCards', 'restaurants', 'restaurant', restaurantImgs)
             })
         }
         if (locationCard.venues) {
             locationCard.venues.forEach((obj, index) => {
-                makeLocationCard(obj, index, '#selectedCards', '#activities')
+                makeLocationCard(obj, index, 'selectedCards', 'activities', 'activity', activityImgs)
             })
         }
     }
