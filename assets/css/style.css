@@ -1,7 +1,7 @@
 /*Sign up/ Log in Page*/
 body {
 	width: 100%;
-	height: 90vh;
+	height: 100%;
 	color: #fff;
 	background: linear-gradient(-45deg, rgb(57, 211, 198),rgb(236, 214, 119),rgb(57, 211, 198),#23A6D5, rgb(240, 133, 174), rgb(255, 241, 110),rgb(240, 133, 174));
 	background-size: 400% 400%;
@@ -121,7 +121,6 @@ a{
 .card{   
     margin:15px;
     float:left;
-    height:200px;
     position: relative;
     background-color:white;
 }
@@ -148,6 +147,13 @@ a{
     color:white;
     padding:8px;
     clear:both;
+}
+
+#selected-city{
+    background-color: rgb(66, 66, 66, 0.5);
+    color:white;
+    padding:8px;
+    border-radius: 7px 7px 0 0;
 }
 
 #save-itinerary{
