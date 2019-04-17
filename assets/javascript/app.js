@@ -14,26 +14,32 @@ var hotelImgs = [
     "assets/images/hotel2.jpg",
     "assets/images/hotel3.jpg",
     "assets/images/hotel4.jpg",
-    "assets/images/hotel5.jpg"
-];
+    "assets/images/hotel5.jpg",
+]
 
 var restaurantImgs = [
     "assets/images/restaurant1.jpg",
     "assets/images/restaurant2.jpg",
     "assets/images/restaurant3.jpg",
     "assets/images/restaurant4.jpg",
-    "assets/images/restaurant5.jpg"
-];
+    "assets/images/restaurant5.jpg",
+]
 
 const activityImgs = [
     '.assets/images/activity1.jpg',
 ]
 
-$("#questionnaire").hide();
+$('#login').hide();
+$('#logout').hide();
+$("#questionnaire").hide()
 $("#landing").hide();
+$('#chat').hide();
+$('#selected-city').hide();
 
 
-// Login
+
+
+// // Login
 $("#login").click(function () {
     _signInWithGoogle();
 });
@@ -47,27 +53,37 @@ $("#logout").click(function () {
 $("#submit-questions").click(function (event) {
     event.preventDefault()
 
-
+    // Selected city
     const location = $('#location').val().trim();
+
+    // Validate city 
     var hotelQueryURL = "https://api.foursquare.com/v2/venues/search?client_id=" + TristansId + "&client_secret=" + TristansSecret + "&near=" + location + "&query=hotel&v=20190415"
+    let incorrectCity = false;
     $.ajax({
         url: hotelQueryURL,
         method: "GET"
     }).then(function (response) {
+        // City is valid
 
     }).catch(error => {
+        console.log(error)
+        // Invalid city name
         $('#location-invalid').show();
         $("#tripLength-empty").hide();
         event.stopPropagation();
-        return;
+        incorrectCity = true
     })
+    if (incorrectCity) {
+        return;
+    }
+    console.log('bypass')
     if (!location.length) { // Handle empty message
         $('#location-empty').show();
         event.stopPropagation();
         return;
     }
     $('#location-empty').hide();
-    cityLocation = location;
+    
     const tripDuration = $("input[name='trip-length']:checked").val();  // short-trip, long-trip
     if (!tripDuration) {
         $('#tripLength-empty').show();
@@ -78,18 +94,23 @@ $("#submit-questions").click(function (event) {
     $('#tripLength-empty').hide();
     $('#location-empty').hide();
 
+    cityLocation = location;
     buildLocationCards(location, tripDuration)
     $("#tripLength-empty").hide();
     $("#landing").show();
     $("#questionnaire").hide();
     switchDecisionToItinerary()
+    $("#city-name").text(location)
+    $('#selected-city').hide();
 });
 
-$('#reset-trip').click(function() {
+$('#reset-trip').click(function () {
     deleteAllLocationCardsForUser()
     $('.card-clear').remove();
     $('#location').val("");
+    $('#city-name').text('');
     _showQuestionnaire()
+    switchDecisionToQuestionnaire();
 
 })
 
@@ -159,7 +180,6 @@ $('#save-itinerary').click(function () {
         restaurants: [],
         venues: []
     };
-    cityLocation = null;
 
     $('#selectedCards').children().each(function (index, elem) {
         // Add hotel, restaurant, activity info
@@ -183,7 +203,7 @@ $('#save-itinerary').click(function () {
             })
         }
     })
-    _addLocationCardToDB(locationCard)
+    saveLocationCard(locationCard)
 });
 
 // Displays only .logged-in elements to logged in users. Automatically called on login
@@ -236,7 +256,11 @@ function updateProfile(profileObj) {
 // Retrieves all location cards for user and displays them. Automatically called on login
 function _showLocationCards(locationCard) {
     // Create hotel calls from data saved in DB
+    
+    
     if (locationCard) {
+        cityLocation = locationCard.city
+        $("#city-name").text(locationCard.city)
         if (locationCard.hotels) {
             locationCard.hotels.forEach((obj, index) => {
                 makeHotelLocationCard(obj, index, '#selectedCards')
@@ -256,7 +280,7 @@ function _showLocationCards(locationCard) {
 }
 
 // Create locationCard and send it to DB from client
-function saveLocationCard() {
+function saveLocationCard(locationCard) {
     // locationCard must be in this shape for DB to accept
     // {
     //     city: 'Seattle',
@@ -300,11 +324,6 @@ function _showQuestionnaire() {
 function _showItinerary() {
     $("#questionnaire").hide();
     $("#landing").show();
-
-}
-
-function switchDecisionToUndecided() {
-    _switchDecisionInDB(userDecisionState.UNDECIDED)
 }
 
 function switchDecisionToQuestionnaire() {

@@ -25,7 +25,6 @@ provider.setCustomParameters({
 });
 
 const userDecisionState = {
-    UNDECIDED: 'UNDECIDED',
     QUESTIONNAIRE: "QUESTIONNAIRE",
     ITINERARY: 'ITINERARY'
 }

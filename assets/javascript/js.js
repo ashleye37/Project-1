@@ -33,6 +33,9 @@ function buildLocationCards(location, tripDuration) {
   }).then(function (response) {
     const hotels = response.response.venues;
     for (var i = 0; i < numVenues; i++) {
+      if (i >= hotels.length) {
+        break;
+      }
       makeHotelLocationCard(hotels[i], i, '#hotels');
     }
   });
@@ -47,6 +50,9 @@ function buildLocationCards(location, tripDuration) {
 
     const restaurants = response.response.venues;
     for (var i = 0; i < numVenues; i++) {
+      if (i >= restaurants.length) {
+        break;
+      }
       makeRestaurantLocationCard(restaurants[i], i,  '#restaurants');
     }
   });
@@ -58,9 +64,11 @@ function buildLocationCards(location, tripDuration) {
     url: activityQueryURL,
     method: "GET"
   }).then(function (response) {
-
     const activities = response.response.venues;
     for (var i = 0; i < numVenues; i++) {
+      if (i >= activities.length) {
+        break;
+      }
       makeActivityLocationCard(activities[i], i, '#activities');
     }
   });
