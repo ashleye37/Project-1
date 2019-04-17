@@ -122,8 +122,8 @@ function makeLocationCard(response, index, destinationDiv, origin) {
         .attr('origin', origin)
     const image = $('<img src=' + hotelImgs[index] + ' class="card-img-top">')
     const card = $('<div class="card-body">')
-    const button = $('<button class="btn btn-dark add-to-trip" type="button">').text('Add to trip')
-    const removeButton = $('<button class="remove-card" type="button">').text('✘');
+    const button = $('<button class="btn btn-info add-to-trip" type="button">').text('Add')
+    const removeButton = $('<button class="remove-card" type="button">').text('X');
     div.append(image).append(card).append(button).append(removeButton)
     const p = $('<p class="card-text">').text(response.name)
     card.append(p)
