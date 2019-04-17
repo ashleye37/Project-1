@@ -130,53 +130,6 @@ function makeLocationCard(response, index, destinationDiv, origin) {
     $(destinationDiv).append(div)
 };
 
-// function makeHotelLocationCard(response, index, destinationDiv) {
-//     const div = $('<div class="card card-clear" style="width: 10rem;">')
-//         .attr('data-hotel-name', response.name)
-//         .attr('data-hotel-id', response.id)
-//         .attr('origin', 'hotels')
-//     const image = $('<img src=' + hotelImgs[index] + ' class="card-img-top">')
-//     const card = $('<div class="card-body">')
-//     const button = $('<button class="btn btn-dark add-to-trip" type="button">').text('Add to trip')
-//     const removeButton = $('<button class="remove-card" type="button">').text('✘');
-//     div.append(image).append(card).append(button).append(removeButton)
-//     const p = $('<p class="card-text">').text(response.name)
-//     card.append(p)
-//     $(destinationDiv).append(div)
-// };
-
-// //Function to build out restaurant location cards.
-// function makeRestaurantLocationCard(response, index, destinationDiv) {
-//     const div = $('<div class="card card-clear" style="width: 10rem;">')
-//         .attr('data-restaurant-name', response.name)
-//         .attr('data-restaurant-id', response.id)
-//         .attr('origin', 'restaurants')
-//     const image = $('<img src=' + restaurantImgs[index] + ' class="card-img-top">')
-//     const card = $('<div class="card-body">')
-//     const button = $('<button class="btn btn-dark add-to-trip" type="button">').text('Add to trip')
-//     const removeButton = $('<button class="remove-card" type="button">').text('✘');
-//     div.append(image).append(card).append(button).append(removeButton)
-//     const p = $('<p class="card-text">').text(response.name)
-//     card.append(p)
-//     $(destinationDiv).append(div)
-// };
-
-// //Function to build out activity location cards.
-// function makeActivityLocationCard(response, index, destinationDiv) {
-//     const div = $('<div class="card card-clear" style="width: 10rem;">')
-//         .attr('data-activity-name', response.name)
-//         .attr('data-activity-id', response.id)
-//         .attr('origin', 'activities')
-//     const image = $('<img src="assets/images/activity1.jpg" class="card-img-top">')
-//     const card = $('<div class="card-body">')
-//     const button = $('<button class="btn btn-dark add-to-trip" type="button">').text('Add to trip')
-//     const removeButton = $('<button class="remove-card" type="button">').text('✘');
-//     div.append(image).append(card).append(button).append(removeButton)
-//     const p = $('<p class="card-text">').text(response.name)
-//     card.append(p)
-//     $(destinationDiv).append(div)
-// };
-
 // Add locationCard to #selectedCards div
 $(document).on('click', '.add-to-trip', function () {
     $('#selectedCards').append($(this).parent())
