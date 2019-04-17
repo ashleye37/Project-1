@@ -26,7 +26,7 @@ var restaurantImgs = [
 ]
 
 const activityImgs = [
-    '.assets/images/activity1.jpg',
+    'assets/images/activity1.jpg',
 ]
 
 // Hide elements on page load
@@ -80,6 +80,8 @@ $("#submit-questions").click(function (event) {
         const tripDuration = $("input[name='trip-length']:checked").val();  // short-trip, long-trip
         if (!tripDuration) {
             $('#tripLength-empty').show();
+            $('#location-invalid').hide();
+            $('#location-empty').hide();
             event.stopPropagation();
             return;
         }
