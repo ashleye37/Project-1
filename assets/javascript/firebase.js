@@ -33,28 +33,39 @@ const userDecisionState = {
 auth.onAuthStateChanged(function (user) {
     if (user) {
         // User is signed in.
-        console.log('user logged in');
 
-        _displayLoggedInUI();
-        _monitorChat();
-        _getLocationCards();
-
-        // Displays content based on user decision state
+        // If no profile exists for user, create one
         users.child(auth.currentUser.uid).once('value', function (snap) {
-            const userInfo = snap.val();
-
-            if (userInfo.decision === userDecisionState.QUESTIONNAIRE) {
-
-                _showQuestionnaire();
-            } else if (userInfo.decision === userDecisionState.ITINERARY) {
-                _showItinerary();
-            } else {
-                console.log("User does not have a decision. Problem in user profile. Check Firebase")
+            if (!snap.val()) {
+                users.child(auth.currentUser.uid).update({
+                    name: auth.currentUser.displayName,
+                    id: auth.currentUser.uid,
+                    decision: userDecisionState.QUESTIONNAIRE,
+                });
             }
+        }).then(function () {
+            // Profile has been created or already exists. Continue displaying user info and app display
+
+            _displayLoggedInUI();
+            _monitorChat();
+            _getLocationCards();
+
+            // Displays content based on user decision state
+            users.child(auth.currentUser.uid).once('value', function (snap) {
+                const userInfo = snap.val();
+
+                if (userInfo.decision === userDecisionState.QUESTIONNAIRE) {
+
+                    _showQuestionnaire();
+                } else if (userInfo.decision === userDecisionState.ITINERARY) {
+                    _showItinerary();
+                } else {
+                    console.log("User does not have a decision. Problem in user profile. Check Firebase")
+                }
+            });
         });
     } else {
         // No user is signed in.
-        console.log('user logged out');
         _displayLoggedOutUI();
     }
 });
@@ -65,7 +76,6 @@ function _signInWithGoogle() {
         const token = result.credential.accessToken;
         // The signed-in user info.
         // console.log(result.user)
-        _createProfile();
 
     }).catch(function (error) {
         console.log('error', error)
@@ -86,19 +96,6 @@ function _signOutUser() {
     }).catch(function (error) {
         console.log(error);
         // An error happened.
-    });
-}
-
-// Internal function to create user profile
-function _createProfile() {
-    users.child(auth.currentUser.uid).once('value', function (snap) {
-        if (!snap.val) {
-            users.child(auth.currentUser.uid).update({
-                name: auth.currentUser.displayName,
-                id: auth.currentUser.uid,
-                decision: userDecisionState.UNDECIDED,
-            });
-        }
     });
 }
 
