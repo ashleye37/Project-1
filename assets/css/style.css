@@ -61,8 +61,6 @@ h1{
     font-size:3.3em;
 }
 .btn{
-    width:120px;
-    margin-right:30px;
     opacity:0.9; 
 }
 
@@ -154,6 +152,7 @@ a{
     color:white;
     padding:8px;
     border-radius: 7px 7px 0 0;
+    font-size: 2em;
 }
 
 #save-itinerary{
@@ -162,6 +161,8 @@ a{
     right:140px;
     clear:both;
     float: right;
+    width: 120px;
+    margin-right: 30px;
 }
 
 #reset-trip{
@@ -170,6 +171,8 @@ a{
     right:0;
     clear:both;
     float:right;
+    width: 120px;
+    margin-right: 30px;
 }
 
 #saveDiv{
@@ -189,7 +192,7 @@ a{
 }
 
 .add-to-trip{
-    float:right;
+    align-content: center;
 }
 
 #submit-questions{
@@ -208,27 +211,6 @@ a{
 
 #radio{
     margin-right: 2px;
-}
-
-#radioHotelY{
-    margin-right: 2px;
-}
-
-#radioHotelN{
-    margin-right: 2px;
-}
-
-#radioRestaurantY{
-    margin-right: 2px;
-}
-
-#radioRestaurantN{
-    margin-right: 2px;
-}
-
-/* Landing Page */
-#landing {
-    height: 1500px;
 }
 
 #hotels {
@@ -250,7 +232,6 @@ a{
 #radio{
     margin-right: 3px;
 }
-
 
 /* Messages */
 #chatbox {

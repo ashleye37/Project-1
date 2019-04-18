@@ -27,6 +27,10 @@ var restaurantImgs = [
 
 const activityImgs = [
     'assets/images/activity1.jpg',
+    'assets/images/activity2.jpg',
+    'assets/images/activity3.jpg',
+    'assets/images/activity4.jpg',
+    'assets/images/activity5.jpg',
 ]
 
 // Hide elements on page load
@@ -52,6 +56,7 @@ $("#logout").click(function () {
     $("#questionnaire").hide()
     $("#landing").hide();
     $('.card-clear').remove();
+    $('#messages').empty();
 });
 
 // Click event that will submit the questionnaire and build out the location cards for user to then be able to select.
@@ -99,7 +104,9 @@ $("#submit-questions").click(function (event) {
         switchDecisionToItinerary()
         $("#city-name").text(location)
         $('#selected-city').show();
-
+        $('#hotels').show();
+        $('#restaurants').show();
+        $('#activities').show();
     }).catch(error => {
         // Invalid city name
         $('#location-invalid').show();
@@ -295,6 +302,9 @@ function _showQuestionnaire() {
 // Show itinerary div
 function _showItinerary() {
     $("#questionnaire").hide();
+    $('#hotels').hide();
+    $('#restaurants').hide();
+    $('#activities').hide();
     $("#landing").show();
 }
 
