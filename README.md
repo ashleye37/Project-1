@@ -10,6 +10,4 @@ TripBot is an interactive app that utilizes a questionnaire to help facilitate h
 * Users can dynamically select the hotel and restaurants of their choice and move them to their dashboard section, via draggable cards. 
 * Once in their dashboard section these hotel and restaurant suggestions are saved as their itinerary. 
 
-### A Look At The App
-
 
